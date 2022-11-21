@@ -72,7 +72,6 @@ enum R {
         }
     }
         
-        
         //MARK: - All common files in app
         enum Common {
             static let downArrow = UIImage(named: "DownArrow")
