@@ -28,7 +28,7 @@ class BaseController: UIViewController {
     func setupViews(){}
     func constraintViews(){}
     func configureAppereance(){
-        view.backgroundColor = R.Color.background
+//        view.backgroundColor = .clear
     }
     //    for a job test
     func navBarLeftButtonHandler(){
@@ -44,11 +44,13 @@ class BaseController: UIViewController {
 
 //MARK: - Create add Nav Buttons
 extension BaseController {
-    func addNavButton(at position: NavBarPosition, with title: String){
+    func addNavButton(at position: NavBarPosition, with title: String?, image: UIImage?){
         let button = UIButton(type: .system)
         button.setTitle(title, for: .normal)
-        button.setTitleColor(.red, for: .normal)
-        button.setTitleColor(.red, for: .disabled)
+        button.setTitleColor(.white, for: .normal)
+        button.setTitleColor(.white, for: .disabled)
+        button.setImage(image, for: .normal)
+        button.tintColor = R.Color.inactive
         button.titleLabel?.font = R.Fonts.helvelticaRegular(with: 16)
         
         switch position {

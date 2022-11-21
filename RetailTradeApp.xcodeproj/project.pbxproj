@@ -14,6 +14,8 @@
 		5BF24F1A292B6B7E00BEE9AB /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BF24F19292B6B7E00BEE9AB /* BaseViewController.swift */; };
 		5BF24F1C292B701800BEE9AB /* AllDataViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BF24F1B292B701800BEE9AB /* AllDataViewController.swift */; };
 		5BF24F1E292B705400BEE9AB /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BF24F1D292B705400BEE9AB /* SettingViewController.swift */; };
+		5BF24F20292C117900BEE9AB /* UIView + Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BF24F1F292C117900BEE9AB /* UIView + Ext.swift */; };
+		5BF24F23292C123100BEE9AB /* ProfitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BF24F22292C123100BEE9AB /* ProfitView.swift */; };
 		5BFD8AA6292A6DF4007A45A2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BFD8AA5292A6DF4007A45A2 /* AppDelegate.swift */; };
 		5BFD8AA8292A6DF4007A45A2 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BFD8AA7292A6DF4007A45A2 /* SceneDelegate.swift */; };
 		5BFD8AAA292A6DF4007A45A2 /* OverviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BFD8AA9292A6DF4007A45A2 /* OverviewViewController.swift */; };
@@ -29,6 +31,8 @@
 		5BF24F19292B6B7E00BEE9AB /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		5BF24F1B292B701800BEE9AB /* AllDataViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllDataViewController.swift; sourceTree = "<group>"; };
 		5BF24F1D292B705400BEE9AB /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
+		5BF24F1F292C117900BEE9AB /* UIView + Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView + Ext.swift"; sourceTree = "<group>"; };
+		5BF24F22292C123100BEE9AB /* ProfitView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfitView.swift; sourceTree = "<group>"; };
 		5BFD8AA2292A6DF4007A45A2 /* RetailTradeApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RetailTradeApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5BFD8AA5292A6DF4007A45A2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5BFD8AA7292A6DF4007A45A2 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -72,6 +76,7 @@
 		5BF24F0A292AA60200BEE9AB /* OverviewViewController */ = {
 			isa = PBXGroup;
 			children = (
+				5BF24F21292C11FF00BEE9AB /* View */,
 				5BFD8AA9292A6DF4007A45A2 /* OverviewViewController.swift */,
 			);
 			path = OverviewViewController;
@@ -124,8 +129,17 @@
 			isa = PBXGroup;
 			children = (
 				5BF24F15292B667900BEE9AB /* UIColor + Ext.swift */,
+				5BF24F1F292C117900BEE9AB /* UIView + Ext.swift */,
 			);
 			path = Extansion;
+			sourceTree = "<group>";
+		};
+		5BF24F21292C11FF00BEE9AB /* View */ = {
+			isa = PBXGroup;
+			children = (
+				5BF24F22292C123100BEE9AB /* ProfitView.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		5BFD8A99292A6DF4007A45A2 = {
@@ -229,7 +243,9 @@
 			files = (
 				5BFD8AAA292A6DF4007A45A2 /* OverviewViewController.swift in Sources */,
 				5BF24F16292B667900BEE9AB /* UIColor + Ext.swift in Sources */,
+				5BF24F23292C123100BEE9AB /* ProfitView.swift in Sources */,
 				5BF24F11292B645600BEE9AB /* TabBarController.swift in Sources */,
+				5BF24F20292C117900BEE9AB /* UIView + Ext.swift in Sources */,
 				5BF24F1C292B701800BEE9AB /* AllDataViewController.swift in Sources */,
 				5BF24F18292B6A6300BEE9AB /* NavBarController.swift in Sources */,
 				5BF24F1E292B705400BEE9AB /* SettingViewController.swift in Sources */,
