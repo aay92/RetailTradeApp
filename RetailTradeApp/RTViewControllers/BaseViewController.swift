@@ -30,12 +30,12 @@ class BaseController: UIViewController {
     func configureAppereance(){
 //        view.backgroundColor = .clear
     }
-    //    for a job test
+    //    for a job test LEFT Button
     func navBarLeftButtonHandler(){
         print("nav Bar LEFT Button Handler")
     }
     
-    //    for a job test
+    //    for a job test RIGHT Button
     func navBarRightButtonHandler(){
         print("nav Bar RIGHT Button Handler")
         

@@ -16,6 +16,8 @@ extension AllDataViewController {
     override func configureAppereance() {
         super.configureAppereance()
         view.backgroundColor = .systemCyan
+        
+
 
     }
 
