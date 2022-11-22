@@ -88,7 +88,7 @@ class ProfitCell: UICollectionViewCell {
         stack.addArrangedSubview(priceLbl)
     }
     
-    func setUp(category: ProfitItem){
+    func setUp(category: ProfitItemInCollectionView){
         nameLbl.text = category.name
         priceLbl.text = String("\(category.sum) ₽")
 //        image.image = UIImage(named: "\(String(describing: category.image))")
@@ -103,10 +103,10 @@ class ProfitCell: UICollectionViewCell {
                 viewProfit.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 0),
                 viewProfit.bottomAnchor.constraint(equalTo: bottomAnchor, constant: 0),
             
-                stack.topAnchor.constraint(equalTo: topAnchor, constant: 20),
-                stack.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10),
-                stack.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10),
-                stack.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -20)
+                stack.topAnchor.constraint(equalTo: topAnchor, constant:35),
+                stack.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
+                stack.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20),
+                stack.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -35)
             ])
     }
     

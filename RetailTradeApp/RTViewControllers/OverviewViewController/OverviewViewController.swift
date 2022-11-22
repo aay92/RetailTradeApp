@@ -7,14 +7,9 @@
 
 import UIKit
 
-struct ProfitItem {
-    let name: String
-    let sum: Int
-}
-
 class OverviewViewController: BaseController {
     
-    let collectionSection: [ProfitItem] = [
+    let collectionSection: [ProfitItemInCollectionView] = [
         .init(name: "Прибль",
               sum: 1230103),
         .init(name: "Доход",
@@ -40,13 +35,6 @@ extension OverviewViewController {
         setCollectionView()
         view.addViewWithoutTAMIC(profitCollectionView)
     }
-    
-    private func setDelegates(){
-        self.profitCollectionView.delegate = self
-        self.profitCollectionView.dataSource = self
-    }
-    
-   
     
     override func constraintViews(){
         super.constraintViews()
@@ -81,11 +69,12 @@ extension OverviewViewController {
 //MARK: - UICollectionViewDelegate, UICollectionViewDataSource
 extension OverviewViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     
+    private func setDelegates(){
+        self.profitCollectionView.delegate = self
+        self.profitCollectionView.dataSource = self
+    }
     
-//    func numberOfSections(in collectionView: UICollectionView) -> Int {
-//        return collectionSection.count
-//        
-//    }
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return collectionSection.count
     }
@@ -142,7 +131,7 @@ extension OverviewViewController {
         let item = NSCollectionLayoutItem(layoutSize:
                 .init(widthDimension: .fractionalWidth(0.80),
                       heightDimension: .absolute(150)))
-        item.contentInsets.trailing = 13
+        item.contentInsets.leading = 10
 //        item.contentInsets.bottom = 9
         let group = NSCollectionLayoutGroup.horizontal(layoutSize:
                 .init(widthDimension: .fractionalWidth(1),
@@ -152,7 +141,7 @@ extension OverviewViewController {
         
         let section = settingCollectionLayoutSection(group: group,
                                                      behavior: .continuous,
-                                                     intetGroupSpacing: -40,
+                                                     intetGroupSpacing: -50,
                                                      supplementaryItems: [],
                                                      contentInsets: false)
         //        section.contentInsets = .init(top: 0, leading: 10, bottom: 0, trailing: 10)
