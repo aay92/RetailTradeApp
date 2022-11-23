@@ -60,10 +60,18 @@ extension OverviewViewController {
         addNavButton(at: .right, with: "", image: UIImage(systemName: "plus"))
     }
     
-    override func navBarRightButtonHandler(){
-        super.navBarRightButtonHandler()
-    }
     
+    
+}
+
+//MARK: - add Segue On DetailVC
+extension OverviewViewController {
+    
+    override func navBarRightButtonHandler(){
+        let detailVC = DetailVC()
+        navigationController?.present(detailVC, animated: true)
+    }
+
 }
 
 //MARK: - UICollectionViewDelegate, UICollectionViewDataSource

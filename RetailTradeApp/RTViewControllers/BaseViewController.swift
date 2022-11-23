@@ -44,6 +44,7 @@ class BaseController: UIViewController {
 
 //MARK: - Create add Nav Buttons
 extension BaseController {
+    
     func addNavButton(at position: NavBarPosition, with title: String?, image: UIImage?){
         let button = UIButton(type: .system)
         button.setTitle(title, for: .normal)

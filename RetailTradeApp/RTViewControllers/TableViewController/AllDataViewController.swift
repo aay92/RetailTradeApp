@@ -11,7 +11,7 @@ class AllDataViewController: BaseController {
     
     let tableViewProducts : UITableView = {
         let table = UITableView()
-//        table.register(self, forCellReuseIdentifier: "cell")
+        table.register(TableViewCell.self, forCellReuseIdentifier: TableViewCell.identifier)
         return table
     }()
 }
@@ -26,6 +26,12 @@ extension AllDataViewController {
     
     override func constraintViews() {
         super.constraintViews()
+        NSLayoutConstraint.activate([
+            tableViewProducts.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            tableViewProducts.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            tableViewProducts.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            tableViewProducts.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+        ])
     }
     
     override func configureAppereance() {
@@ -36,7 +42,7 @@ extension AllDataViewController {
         var nav = self.navigationController?.navigationBar
         nav?.barStyle = UIBarStyle.black
         nav?.tintColor = UIColor.white
-        tableViewProducts.backgroundColor = .red
+        tableViewProducts.backgroundColor = .clear
 
     }
 
@@ -55,8 +61,9 @@ extension AllDataViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableViewProducts.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-        cell.textLabel?.text = "TEST"
+        let cell = tableViewProducts.dequeueReusableCell(withIdentifier: TableViewCell.identifier, for: indexPath) as! TableViewCell
+        cell.textLabel!.text = "TEST"
+        
         return cell
     }
 

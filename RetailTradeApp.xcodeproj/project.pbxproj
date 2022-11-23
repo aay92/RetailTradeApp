@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5B8E94EB292D5BAD00E0EB49 /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B8E94EA292D5BAD00E0EB49 /* TableViewCell.swift */; };
+		5B8E94ED292E117500E0EB49 /* DetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B8E94EC292E117500E0EB49 /* DetailVC.swift */; };
 		5BF24F11292B645600BEE9AB /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BF24F10292B645600BEE9AB /* TabBarController.swift */; };
 		5BF24F13292B663900BEE9AB /* Resources.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BF24F12292B663900BEE9AB /* Resources.swift */; };
 		5BF24F16292B667900BEE9AB /* UIColor + Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BF24F15292B667900BEE9AB /* UIColor + Ext.swift */; };
@@ -25,6 +27,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		5B8E94EA292D5BAD00E0EB49 /* TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
+		5B8E94EC292E117500E0EB49 /* DetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailVC.swift; sourceTree = "<group>"; };
 		5BF24F10292B645600BEE9AB /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		5BF24F12292B663900BEE9AB /* Resources.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Resources.swift; sourceTree = "<group>"; };
 		5BF24F15292B667900BEE9AB /* UIColor + Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor + Ext.swift"; sourceTree = "<group>"; };
@@ -55,6 +59,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5B8E94E9292D5B8C00E0EB49 /* TableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				5B8E94EA292D5BAD00E0EB49 /* TableViewCell.swift */,
+			);
+			path = TableViewCell;
+			sourceTree = "<group>";
+		};
 		5BF24F08292AA4CF00BEE9AB /* Resources */ = {
 			isa = PBXGroup;
 			children = (
@@ -71,6 +83,7 @@
 				5BF24F0B292AA60E00BEE9AB /* TableViewController */,
 				5BF24F0C292AA63700BEE9AB /* UserViewController */,
 				5BF24F19292B6B7E00BEE9AB /* BaseViewController.swift */,
+				5B8E94EC292E117500E0EB49 /* DetailVC.swift */,
 			);
 			path = RTViewControllers;
 			sourceTree = "<group>";
@@ -87,6 +100,7 @@
 		5BF24F0B292AA60E00BEE9AB /* TableViewController */ = {
 			isa = PBXGroup;
 			children = (
+				5B8E94E9292D5B8C00E0EB49 /* TableViewCell */,
 				5BF24F1B292B701800BEE9AB /* AllDataViewController.swift */,
 			);
 			path = TableViewController;
@@ -257,6 +271,8 @@
 				5BF24F23292C123100BEE9AB /* ProfitCell.swift in Sources */,
 				5BF24F11292B645600BEE9AB /* TabBarController.swift in Sources */,
 				5BF24F26292D0BAE00BEE9AB /* ProfitModel.swift in Sources */,
+				5B8E94ED292E117500E0EB49 /* DetailVC.swift in Sources */,
+				5B8E94EB292D5BAD00E0EB49 /* TableViewCell.swift in Sources */,
 				5BF24F20292C117900BEE9AB /* UIView + Ext.swift in Sources */,
 				5BF24F1C292B701800BEE9AB /* AllDataViewController.swift in Sources */,
 				5BF24F18292B6A6300BEE9AB /* NavBarController.swift in Sources */,

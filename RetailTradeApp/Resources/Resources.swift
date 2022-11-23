@@ -15,7 +15,7 @@ enum R {
         static let inactive = UIColor(hexString: "#FFFFFE")
         static let separator = UIColor(hexString: "#48494E")
         static let tabBatColor = UIColor(hexString: "#12141A")
-        //        static let textGray = UIColor(hexString: "#545C77")
+        static let backgroundDetailVC = UIColor(hexString: "#9462DF")
         static let background = UIColor(hexString: "#101116")
         //        static let secondary = UIColor(hexString: "#F0F3FF")
         //        static let subTitleGray = UIColor(hexString: "#9BA4B0")
