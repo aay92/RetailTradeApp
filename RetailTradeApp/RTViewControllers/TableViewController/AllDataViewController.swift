@@ -9,6 +9,8 @@ import UIKit
 
 class AllDataViewController: BaseController {
     
+    let productData = DataFlow.getData()
+
     let tableViewProducts : UITableView = {
         let table = UITableView()
         table.register(TableViewCell.self, forCellReuseIdentifier: TableViewCell.identifier)
@@ -17,7 +19,7 @@ class AllDataViewController: BaseController {
 }
 
 extension AllDataViewController {
-    
+
     override func setupViews() {
         super.setupViews()
         setDelegate()
@@ -56,13 +58,16 @@ extension AllDataViewController: UITableViewDelegate, UITableViewDataSource {
         self.tableViewProducts.dataSource = self
     }
     
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 80
+    }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
+        return productData.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableViewProducts.dequeueReusableCell(withIdentifier: TableViewCell.identifier, for: indexPath) as! TableViewCell
-        cell.textLabel!.text = "TEST"
+        cell.configure(with: productData[indexPath.row])
         
         return cell
     }

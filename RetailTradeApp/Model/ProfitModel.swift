@@ -14,6 +14,21 @@ struct ProfitModelItem {
     let image: String?
 }
 
+class DataFlow {
+    
+    private init(){}
+    
+  static func getData()-> [ProfitModelItem] {
+        let itemProducts: [ProfitModelItem] = [
+            .init(name: "AppleWatch", price: 20000, image: "gear"),
+            .init(name: "Michell Kors", price: 4900, image: ""),
+            .init(name: "Gucci", price: 1690, image: ""),
+            .init(name: "Prado", price: 2590, image: ""),
+        ]
+        return itemProducts
+    }
+}
+
 //MARK: - Model in collection view
 struct ProfitItemInCollectionView {
     let name: String
