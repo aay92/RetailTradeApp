@@ -51,7 +51,8 @@ class TabBarController: UITabBarController {
     private func getController(for tab: Tabs) -> BaseController {
         switch tab {
         case .overview:
-            return OverviewViewController()
+//            //    Экземпляр базы данных через сингл тон
+            return OverviewViewController(managerData: DataLouder.shared)
         case .allData:
             return AllDataViewController()
         case .setting:

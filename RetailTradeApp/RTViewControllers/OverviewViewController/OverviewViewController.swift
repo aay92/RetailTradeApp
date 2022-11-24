@@ -9,6 +9,27 @@ import UIKit
 
 class OverviewViewController: BaseController {
     
+//    Экземпляр базы данных
+    let managerData: DataLouder
+    
+    init(managerData: DataLouder){
+        self.managerData = managerData
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+//    Пробное сохранение
+    func creatItem(){
+        let product = ProductEntity(context: managerData.context)
+        product.name = "Часы"
+        
+        managerData.save()
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    
     let collectionSection: [ProfitItemInCollectionView] = [
         .init(name: "Прибль",
               sum: 1230103),
@@ -34,6 +55,8 @@ extension OverviewViewController {
         setDelegates()
         setCollectionView()
         view.addViewWithoutTAMIC(profitCollectionView)
+        
+        creatItem()
     }
     
     override func constraintViews(){
