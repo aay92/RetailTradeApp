@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		5B8E94EB292D5BAD00E0EB49 /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B8E94EA292D5BAD00E0EB49 /* TableViewCell.swift */; };
 		5B8E94ED292E117500E0EB49 /* DetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B8E94EC292E117500E0EB49 /* DetailVC.swift */; };
+		5BB91FFE292F657800FCF34E /* DataLouder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB91FFD292F657800FCF34E /* DataLouder.swift */; };
 		5BF24F11292B645600BEE9AB /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BF24F10292B645600BEE9AB /* TabBarController.swift */; };
 		5BF24F13292B663900BEE9AB /* Resources.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BF24F12292B663900BEE9AB /* Resources.swift */; };
 		5BF24F16292B667900BEE9AB /* UIColor + Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BF24F15292B667900BEE9AB /* UIColor + Ext.swift */; };
@@ -29,6 +30,7 @@
 /* Begin PBXFileReference section */
 		5B8E94EA292D5BAD00E0EB49 /* TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
 		5B8E94EC292E117500E0EB49 /* DetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailVC.swift; sourceTree = "<group>"; };
+		5BB91FFD292F657800FCF34E /* DataLouder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataLouder.swift; sourceTree = "<group>"; };
 		5BF24F10292B645600BEE9AB /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		5BF24F12292B663900BEE9AB /* Resources.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Resources.swift; sourceTree = "<group>"; };
 		5BF24F15292B667900BEE9AB /* UIColor + Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor + Ext.swift"; sourceTree = "<group>"; };
@@ -65,6 +67,14 @@
 				5B8E94EA292D5BAD00E0EB49 /* TableViewCell.swift */,
 			);
 			path = TableViewCell;
+			sourceTree = "<group>";
+		};
+		5BB91FFC292F655900FCF34E /* DataFlow */ = {
+			isa = PBXGroup;
+			children = (
+				5BB91FFD292F657800FCF34E /* DataLouder.swift */,
+			);
+			path = DataFlow;
 			sourceTree = "<group>";
 		};
 		5BF24F08292AA4CF00BEE9AB /* Resources */ = {
@@ -185,12 +195,13 @@
 		5BFD8AA4292A6DF4007A45A2 /* RetailTradeApp */ = {
 			isa = PBXGroup;
 			children = (
-				5BF24F24292D0B9700BEE9AB /* Model */,
 				5BF24F0D292B63C300BEE9AB /* Application */,
+				5BB91FFC292F655900FCF34E /* DataFlow */,
 				5BF24F0E292B63D900BEE9AB /* SupportingFiles */,
 				5BF24F0F292B643F00BEE9AB /* TabBar */,
 				5BF24F14292B665700BEE9AB /* Extansion */,
 				5BF24F09292AA53400BEE9AB /* RTViewControllers */,
+				5BF24F24292D0B9700BEE9AB /* Model */,
 				5BF24F08292AA4CF00BEE9AB /* Resources */,
 			);
 			path = RetailTradeApp;
@@ -266,6 +277,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5BB91FFE292F657800FCF34E /* DataLouder.swift in Sources */,
 				5BFD8AAA292A6DF4007A45A2 /* OverviewViewController.swift in Sources */,
 				5BF24F16292B667900BEE9AB /* UIColor + Ext.swift in Sources */,
 				5BF24F23292C123100BEE9AB /* ProfitCell.swift in Sources */,

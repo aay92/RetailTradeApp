@@ -51,7 +51,19 @@ class TableViewCell: UITableViewCell {
         return label
     }()
     
-    private var priceLbl: UILabel = {
+    private var priceLblGross: UILabel = {
+        let label = UILabel()
+        label.text = "Стоимость"
+        label.font = UIFont(name: "Ariel", size: 20)
+        label.font = UIFont.boldSystemFont(ofSize: 20)
+        label.textColor = .white
+        label.textAlignment = .left
+        label.numberOfLines = 0
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    private var priceLblProfit: UILabel = {
         let label = UILabel()
         label.text = "Стоимость"
         label.font = UIFont(name: "Ariel", size: 20)
@@ -75,7 +87,8 @@ class TableViewCell: UITableViewCell {
         addSubview(imageViewMain)
         addSubview(stack)
         stack.addArrangedSubview(nameLbl)
-        stack.addArrangedSubview(priceLbl)
+        stack.addArrangedSubview(priceLblGross)
+        stack.addArrangedSubview(priceLblProfit)
         constraintViews()
         configureAppereance()
     }
@@ -86,7 +99,8 @@ class TableViewCell: UITableViewCell {
     
     func configure(with item: ProfitModelItem){
         nameLbl.text = item.name
-        priceLbl.text = String(item.price) + " ₽"
+        priceLblGross.text = String(item.priceGross) + " ₽"
+        priceLblProfit.text = String(item.priceProfit) + " ₽"
         guard let image = item.image else { return }
         imageViewMain.image = UIImage(named: "\(image)")
     }
@@ -111,7 +125,7 @@ class TableViewCell: UITableViewCell {
             
             stack.topAnchor.constraint(equalTo: topAnchor, constant: 15),
             stack.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 15),
-            stack.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -145),
+            stack.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -90),
             stack.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -15),
         ])
     }
