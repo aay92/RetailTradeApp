@@ -20,9 +20,14 @@ class OverviewViewController: BaseController {
 //    Пробное сохранение
     func creatItem(){
         let product = ProductEntity(context: managerData.context)
-        product.name = "Часы"
-        
+//        product.name = "Браслет"
         managerData.save()
+    }
+    
+    func getFatch() {
+        
+        let products = managerData.fetchProductData(ProductEntity.self)
+        products.forEach({ print( $0.name )})
     }
     
     required init?(coder: NSCoder) {
@@ -52,11 +57,13 @@ class OverviewViewController: BaseController {
 extension OverviewViewController {
     override func setupViews(){
         super.setupViews()
+        
         setDelegates()
         setCollectionView()
         view.addViewWithoutTAMIC(profitCollectionView)
         
-        creatItem()
+//        creatItem()
+        getFatch()
     }
     
     override func constraintViews(){
