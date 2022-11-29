@@ -33,5 +33,6 @@ class DataFlow {
 //MARK: - Model in collection view
 struct ProfitItemInCollectionView {
     let name: String
-    let sum: Int
+    var sumGross: Int
+    var sumProfit: Int
 }

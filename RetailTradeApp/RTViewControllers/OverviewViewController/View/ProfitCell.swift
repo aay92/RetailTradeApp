@@ -88,9 +88,17 @@ class ProfitCell: UICollectionViewCell {
         stack.addArrangedSubview(priceLbl)
     }
     
+    
     func setUp(category: ProfitItemInCollectionView){
-        nameLbl.text = category.name
-        priceLbl.text = String("\(category.sum) ₽")
+        
+        if category.name == "Pribl" {
+            nameLbl.text = "Прибыль"
+            priceLbl.text = String("\(category.sumGross) ₽")
+            
+        } else {
+            nameLbl.text = "Доход"
+            priceLbl.text = String("\(category.sumProfit) ₽")
+        }
 //        image.image = UIImage(named: "\(String(describing: category.image))")
         
 //        categoryImageView.kf.setImage(with: category.image?.asUrl)

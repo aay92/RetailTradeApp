@@ -13,56 +13,60 @@ class OverviewViewController: BaseController {
 //    Экземпляр базы данных
     let managerData: DataLouder
     
-    var products: [ProductEntity] = []
-    
+    var productsProfit = 0
+    var productsGross = 0
+
     init(managerData: DataLouder){
         self.managerData = managerData
         super.init(nibName: nil, bundle: nil)
     }
     
     func printsPtoductsFromData(){
-        products.forEach({ print( $0.name )})
-        products.forEach({ print( $0.priceGross )})
-        products.forEach({ print( $0.priceProfit )})
+//        productsProfit.forEach({ print( $0.name )})
+//        productsProfit.forEach({ print( $0.priceGross )})
+//        productsProfit.forEach({ print( $0.priceProfit )})
 
     }
     
-    func getFetch() {
-        let products = managerData.fetchProductData(ProductEntity.self)
-        self.products = products
-        
-        printsPtoductsFromData()
-        
-        let deadLine = DispatchTime.now() + .seconds(5)
-//        DispatchQueue.main.asyncAfter(deadline: deadLine, execute: deleteProducts)
-    }
-    
-    func updateProducts(){
-        let firstProduct = products.first!
-        firstProduct.name! += "- new data new data"
-        managerData.save()
-        
-        printsPtoductsFromData()
-    }
-    
-    func deleteProducts(){
-        let fitstProduct = products.first!
-
-        managerData.delete(fitstProduct)
-        printsPtoductsFromData()
-    }
+//    func getFetch() {
+//        let products = managerData.fetchProductData(ProductEntity.self)
+//        self.productsProfit = products
+//
+//        printsPtoductsFromData()
+//
+//        let deadLine = DispatchTime.now() + .seconds(5)
+////        DispatchQueue.main.asyncAfter(deadline: deadLine, execute: deleteProducts)
+//    }
+//
+//    func updateProducts(){
+//        let firstProduct = productsProfit.first!
+//        firstProduct.name! += "- new data new data"
+//        managerData.save()
+//
+//        printsPtoductsFromData()
+//    }
+//
+//    func deleteProducts(){
+//        let fitstProduct = products.first!
+//
+//        managerData.delete(fitstProduct)
+//        printsPtoductsFromData()
+//    }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    
-    let collectionSection: [ProfitItemInCollectionView] = [
-        .init(name: "Прибль",
-              sum: 1230103),
-        .init(name: "Доход",
-              sum: 760740),
-    ]
+    func setSum()->[ProfitItemInCollectionView]{
+        var arrayCollectionView = [ProfitItemInCollectionView]()
+        let profitItem = ProfitItemInCollectionView(name: "Pribl", sumGross: productsGross, sumProfit: productsProfit)
+        
+        let groosItem = ProfitItemInCollectionView(name: "Extra", sumGross: productsGross, sumProfit: productsProfit)
+        arrayCollectionView.append(profitItem)
+        arrayCollectionView.append(groosItem)
+        
+        return arrayCollectionView
+    }
     
     //    Main collection view
     private let profitCollectionView: UICollectionView = {
@@ -80,14 +84,26 @@ extension OverviewViewController {
     override func setupViews(){
         super.setupViews()
         
+        managerData.fetchProductData(ProductEntity.self).forEach({item in
+            productsGross = Int(item.priceGross)
+            productsProfit = Int(item.priceProfit)
+        })
+        
         setDelegates()
         setCollectionView()
         view.addViewWithoutTAMIC(profitCollectionView)
         
 //        creatItem()
-        getFetch()
+//        getFetchProduct()
 //        updateProducts()
     }
+    
+//    func getFetchProduct(){
+//        managerData.fetchProductData(ProductEntity.self).forEach({item in
+//            productsGross.append(item.priceGross)
+//            productsProfit.append(item.priceProfit)
+//        })
+//    }
     
     override func constraintViews(){
         super.constraintViews()
@@ -138,7 +154,7 @@ extension OverviewViewController: UICollectionViewDelegate, UICollectionViewData
     
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return collectionSection.count
+        return setSum().count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -148,7 +164,8 @@ extension OverviewViewController: UICollectionViewDelegate, UICollectionViewData
         else {
             return UICollectionViewCell()
         }
-        cell.setUp(category: collectionSection[indexPath.row])
+//        cell.setUpData(titel: "Прибыль", productsGross: productsGross[indexPath.row], productsProfit: productsProfit[indexPath.row])
+        cell.setUp(category: setSum()[indexPath.row])
         return cell
     }
     
