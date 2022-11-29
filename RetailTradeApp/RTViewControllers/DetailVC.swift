@@ -7,8 +7,24 @@
 
 import UIKit
 
+protocol BackMakingProduct {
+    func getProduct(item: ProfitModelItem)
+}
+
 class DetailVC: BaseController {
     
+    let managerData = DataLouder.shared
+    var delegate: BackMakingProduct? = nil
+    
+    //    var newProduct = DataLouder.shared.fetchProductData(ProductEntity.self)
+    //    Пробное сохранение
+    func creatItem(item: ProfitModelItem){
+        let product = ProductEntity(context: managerData.context)
+        product.name = item.name
+        product.priceProfit = Int32(item.priceProfit)
+        product.priceGross = Int32(item.priceGross)
+        managerData.save()
+    }
 //Title name vc
     private let labelTitleVC: UILabel = {
         let lbl = UILabel()
@@ -175,6 +191,11 @@ class DetailVC: BaseController {
 }
 
 extension DetailVC {
+    
+    @objc private func savingData(){
+        createProduct()
+    }
+    
     @objc private func closedView(){
         dismiss(animated: true)
     }
@@ -236,9 +257,42 @@ extension DetailVC {
         super.configureAppereance()
     
         buttonCensel.addTarget(self, action: #selector(closedView), for: .touchUpInside)
+        buttonSafe.addTarget(self, action: #selector(savingData), for: .touchUpInside)
         stack.backgroundColor = .clear
         view.backgroundColor = R.Color.backgroundDetailVC
     }
 
+}
+
+extension DetailVC {
+    func createProduct(){
+
+        guard let textName = nameTextField.text else {
+            return print("Нет имени") }
+        guard let textGross = priceTextFieldGross.text else {
+            return print("Нет начальной стоимости продукта")}
+        guard let textProfit = priceTextFieldProfit.text else {
+            return print("Нет Нет конечной стоимости продукта")}
+        
+        let newProduct = ProfitModelItem(name: textName,
+                                         priceGross: Int(textGross)!,
+                                         priceProfit: Int(textProfit)!)
+        
+        
+        print("Создан новый товар: Имя - \(newProduct.name)")
+        print("стоимость - \(newProduct.priceGross)")
+        print("стоимость с наценкой - \(newProduct.priceProfit)")
+        
+        creatItem(item: newProduct)
+        
+        nameTextField.text = ""
+        priceTextFieldGross.text = ""
+        priceTextFieldProfit.text = ""
+        
+//        delegate?.getProduct(item: newProduct)
+
+
+        dismiss(animated: true)
+    }
 }
 

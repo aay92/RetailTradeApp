@@ -6,11 +6,14 @@
 //
 
 import UIKit
+import CoreData
 
 class AllDataViewController: BaseController {
     
-    let productData = DataFlow.getData()
-
+    //MARK: - dataFlowFromCoreData
+    var manageObjectContext: NSManagedObjectContext!
+    var products = [ProductEntity]()
+    
     let tableViewProducts : UITableView = {
         let table = UITableView()
         table.register(TableViewCell.self, forCellReuseIdentifier: TableViewCell.identifier)
@@ -19,11 +22,34 @@ class AllDataViewController: BaseController {
 }
 
 extension AllDataViewController {
-
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.loadSaveData()
+        
+    }
+    
     override func setupViews() {
         super.setupViews()
+        manageObjectContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+           self.loadSaveData()
+        
+        
+//        products = managerData.fetchProductData(ProductEntity.self)
+        print("Количество продуктов в массиве: \(products.count)")
         setDelegate()
         view.addViewWithoutTAMIC(tableViewProducts)
+    }
+    
+    func loadSaveData()  {
+        let eventRequest: NSFetchRequest<ProductEntity> = ProductEntity.fetchRequest()
+        do{
+            products = try manageObjectContext.fetch(eventRequest)
+            self.tableViewProducts.reloadData()
+        }catch
+        {
+            print("Could not load save data: \(error.localizedDescription)")
+        }
     }
     
     override func constraintViews() {
@@ -45,10 +71,10 @@ extension AllDataViewController {
         nav?.barStyle = UIBarStyle.black
         nav?.tintColor = UIColor.white
         tableViewProducts.backgroundColor = .clear
-
     }
-
+    
 }
+
 
 //MARK: - UITableViewDelegate and UITableViewDataSource
 extension AllDataViewController: UITableViewDelegate, UITableViewDataSource {
@@ -62,13 +88,30 @@ extension AllDataViewController: UITableViewDelegate, UITableViewDataSource {
         return 80
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return productData.count
+//        return managerData.fetchProductData(ProductEntity.self).count
+        return products.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableViewProducts.dequeueReusableCell(withIdentifier: TableViewCell.identifier, for: indexPath) as! TableViewCell
-        cell.configure(with: productData[indexPath.row])
+        cell.configure(with: products[indexPath.row])
         return cell
     }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        let eventArrayItem = products[indexPath.row]
 
+           if editingStyle == .delete {
+               manageObjectContext.delete(eventArrayItem)
+
+               do {
+                   try manageObjectContext.save()
+               } catch let error as NSError {
+                   print("Error While Deleting Note: \(error.userInfo)")
+               }
+           }
+           self.loadSaveData()
+    }
 }
+
+

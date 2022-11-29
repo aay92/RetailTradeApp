@@ -54,7 +54,10 @@ class TabBarController: UITabBarController {
 //            //    Экземпляр базы данных через сингл тон
             return OverviewViewController(managerData: DataLouder.shared)
         case .allData:
-            return AllDataViewController()
+            let view = AllDataViewController()
+            view.tableViewProducts.reloadData()
+            return view
+//            return AllDataViewController(managerData: DataLouder.shared)
         case .setting:
             return SettingViewController()
 

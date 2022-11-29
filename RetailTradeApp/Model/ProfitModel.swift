@@ -9,10 +9,10 @@ import UIKit
 
 //MARK: - Model for creating item at trading
 struct ProfitModelItem {
-    let name: String
-    let priceGross: Int
-    let priceProfit: Int
-    let image: String?
+    var name: String
+    var priceGross: Int
+    var priceProfit: Int
+    var image: String?
 }
 
 class DataFlow {

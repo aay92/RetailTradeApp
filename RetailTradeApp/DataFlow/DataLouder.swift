@@ -33,7 +33,7 @@ final class DataLouder {
 
     // MARK: - Core Data Saving support
 
-    func save () {
+    func save() {
         if context.hasChanges {
             do {
                 try context.save()
@@ -56,7 +56,48 @@ final class DataLouder {
             return[T]()
         }
     }
-
+    
+    func delete(_ object: NSManagedObject){
+        context.delete(object)
+        save()
+    }
+    
+//    func safeData(with title: String){
+//        let appDelegete = UIApplication.shared.delegate as! AppDelegate
+//        let context = appDelegete.persistentContainer.viewContext
+//        
+//        guard let entity = NSEntityDescription.entity(forEntityName: "ProductEntity", in: context) else { return }
+//        let taskObject = ProductEntity(entity: entity, insertInto: context)
+////        taskObject.title = title
+//        
+//        do{
+//            try context.save()
+////            task.append(taskObject)
+////            tableView.reloadData()
+//            
+//        } catch let error as NSError {
+//            print(error.localizedDescription)
+//        }
+//    }
+//    
+//    func removeData(with title: String, forRowAt indexPath: IndexPath){
+//        
+//        let appDelegete = UIApplication.shared.delegate as! AppDelegate
+//        let context = appDelegete.persistentContainer.viewContext
+//        
+//        guard let entity = NSEntityDescription.entity(forEntityName: "ProductEntity", in: context) else { return }
+//        
+//        let taskObject = ProductEntity(entity: entity, insertInto: context)
+//        taskObject.name = title
+//        
+//        do{
+//            try context.deletedObjects
+////            array.removeAll()
+//            
+//        } catch let error as NSError {
+//            print(error.localizedDescription)
+        
+    
 }
 
  

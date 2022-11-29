@@ -17,8 +17,8 @@ extension ProductEntity {
     }
 
     @NSManaged public var name: String?
-    @NSManaged public var priceGross: Int16
-    @NSManaged public var priceProfit: Int16
+    @NSManaged public var priceGross: Int32
+    @NSManaged public var priceProfit: Int32
 
 }
 

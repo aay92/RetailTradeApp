@@ -6,28 +6,50 @@
 //
 
 import UIKit
+import CoreData
 
 class OverviewViewController: BaseController {
     
 //    Экземпляр базы данных
     let managerData: DataLouder
     
+    var products: [ProductEntity] = []
+    
     init(managerData: DataLouder){
         self.managerData = managerData
         super.init(nibName: nil, bundle: nil)
     }
     
-//    Пробное сохранение
-    func creatItem(){
-        let product = ProductEntity(context: managerData.context)
-//        product.name = "Браслет"
-        managerData.save()
+    func printsPtoductsFromData(){
+        products.forEach({ print( $0.name )})
+        products.forEach({ print( $0.priceGross )})
+        products.forEach({ print( $0.priceProfit )})
+
     }
     
-    func getFatch() {
-        
+    func getFetch() {
         let products = managerData.fetchProductData(ProductEntity.self)
-        products.forEach({ print( $0.name )})
+        self.products = products
+        
+        printsPtoductsFromData()
+        
+        let deadLine = DispatchTime.now() + .seconds(5)
+//        DispatchQueue.main.asyncAfter(deadline: deadLine, execute: deleteProducts)
+    }
+    
+    func updateProducts(){
+        let firstProduct = products.first!
+        firstProduct.name! += "- new data new data"
+        managerData.save()
+        
+        printsPtoductsFromData()
+    }
+    
+    func deleteProducts(){
+        let fitstProduct = products.first!
+
+        managerData.delete(fitstProduct)
+        printsPtoductsFromData()
     }
     
     required init?(coder: NSCoder) {
@@ -63,7 +85,8 @@ extension OverviewViewController {
         view.addViewWithoutTAMIC(profitCollectionView)
         
 //        creatItem()
-        getFatch()
+        getFetch()
+//        updateProducts()
     }
     
     override func constraintViews(){
@@ -99,6 +122,7 @@ extension OverviewViewController {
     
     override func navBarRightButtonHandler(){
         let detailVC = DetailVC()
+        detailVC.delegate = self
         navigationController?.present(detailVC, animated: true)
     }
 
@@ -185,5 +209,26 @@ extension OverviewViewController {
         //        section.contentInsets = .init(top: 0, leading: 10, bottom: 0, trailing: 10)
         return section
     }
+    
+}
+
+extension OverviewViewController: BackMakingProduct {
+    func getProduct(item: ProfitModelItem) {
+//        guard String(item.name) == nil else { return }
+//        guard item.priceGross != nil else { return }
+//        guard item.priceProfit != nil else { return }
+
+        let product = ProductEntity(context: managerData.context)
+//
+        product.name = item.name
+        product.priceGross = Int32(item.priceGross)
+        product.priceProfit = Int32(item.priceProfit)
+        managerData.save()
+
+//        products.append(product)
+        print("Продукт добавлен")
+
+    }
+    
     
 }
