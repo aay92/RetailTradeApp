@@ -7,14 +7,9 @@
 
 import UIKit
 
-protocol BackMakingProduct {
-    func getProduct(item: ProfitModelItem)
-}
-
 class DetailVC: BaseController {
     
     let managerData = DataLouder.shared
-    var delegate: BackMakingProduct? = nil
     
     //    var newProduct = DataLouder.shared.fetchProductData(ProductEntity.self)
     //    Пробное сохранение
@@ -190,6 +185,38 @@ class DetailVC: BaseController {
     
 }
 
+//MARK: - editingRowValue
+extension DetailVC {
+    func editingRowValue( product: ProductEntity){
+        
+        nameTextField.text = product.name
+        priceTextFieldGross.text = String("\(product.priceGross)")
+        priceTextFieldProfit.text = String("\(product.priceProfit)")
+        
+        if nameTextField.text == product.name && priceTextFieldGross.text == String("\(product.priceGross)") && priceTextFieldProfit.text == String("\(product.priceProfit)") {
+            dismiss(animated: true)
+        } else {
+            guard let textName = nameTextField.text else {
+                return print("Нет имени") }
+            guard let textGross = priceTextFieldGross.text else {
+                return print("Нет начальной стоимости продукта")}
+            guard let textProfit = priceTextFieldProfit.text else {
+                return print("Нет Нет конечной стоимости продукта")}
+            
+            let newProduct = ProfitModelItem(name: textName,
+                                             priceGross: Int(textGross)!,
+                                             priceProfit: Int(textProfit)!)
+            
+            
+            print("Создан новый товар: Имя - \(newProduct.name)")
+            print("стоимость - \(newProduct.priceGross)")
+            print("стоимость с наценкой - \(newProduct.priceProfit)")
+            
+            creatItem(item: newProduct)
+        }
+    }
+}
+
 extension DetailVC {
     
     @objc private func savingData(){
@@ -288,9 +315,6 @@ extension DetailVC {
         nameTextField.text = ""
         priceTextFieldGross.text = ""
         priceTextFieldProfit.text = ""
-        
-//        delegate?.getProduct(item: newProduct)
-
 
         dismiss(animated: true)
     }

@@ -9,7 +9,11 @@ import UIKit
 import CoreData
 
 class OverviewViewController: BaseController {
-    
+    var manageObjectContext: NSManagedObjectContext!
+    var nawProductsProfit = 0
+    var nawProductsGross = 0
+
+
 //    Экземпляр базы данных
     let managerData: DataLouder
     
@@ -59,9 +63,9 @@ class OverviewViewController: BaseController {
     
     func setSum()->[ProfitItemInCollectionView]{
         var arrayCollectionView = [ProfitItemInCollectionView]()
-        let profitItem = ProfitItemInCollectionView(name: "Pribl", sumGross: productsGross, sumProfit: productsProfit)
+        let profitItem = ProfitItemInCollectionView(name: "Pribl", sumGross: nawProductsGross, sumProfit: nawProductsProfit)
         
-        let groosItem = ProfitItemInCollectionView(name: "Extra", sumGross: productsGross, sumProfit: productsProfit)
+        let groosItem = ProfitItemInCollectionView(name: "Extra", sumGross: nawProductsGross, sumProfit: nawProductsProfit)
         arrayCollectionView.append(profitItem)
         arrayCollectionView.append(groosItem)
         
@@ -81,8 +85,21 @@ class OverviewViewController: BaseController {
 
 //MARK: - Set controller
 extension OverviewViewController {
+    
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        getSumGross()
+        getSumProfit()
+        profitCollectionView.reloadData()
+    }
+   
     override func setupViews(){
         super.setupViews()
+        
+        manageObjectContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+        
+           self.getSumProfit()
         
         managerData.fetchProductData(ProductEntity.self).forEach({item in
             productsGross = Int(item.priceGross)
@@ -92,18 +109,12 @@ extension OverviewViewController {
         setDelegates()
         setCollectionView()
         view.addViewWithoutTAMIC(profitCollectionView)
-        
-//        creatItem()
-//        getFetchProduct()
-//        updateProducts()
+
+//        getSumGross()
+//        getSumProfit()
+
     }
     
-//    func getFetchProduct(){
-//        managerData.fetchProductData(ProductEntity.self).forEach({item in
-//            productsGross.append(item.priceGross)
-//            productsProfit.append(item.priceProfit)
-//        })
-//    }
     
     override func constraintViews(){
         super.constraintViews()
@@ -138,7 +149,6 @@ extension OverviewViewController {
     
     override func navBarRightButtonHandler(){
         let detailVC = DetailVC()
-        detailVC.delegate = self
         navigationController?.present(detailVC, animated: true)
     }
 
@@ -164,16 +174,13 @@ extension OverviewViewController: UICollectionViewDelegate, UICollectionViewData
         else {
             return UICollectionViewCell()
         }
-//        cell.setUpData(titel: "Прибыль", productsGross: productsGross[indexPath.row], productsProfit: productsProfit[indexPath.row])
         cell.setUp(category: setSum()[indexPath.row])
         return cell
     }
-    
-    
 }
 
 
-//Set create Layout
+//MARK: - Set create Layout
 extension OverviewViewController {
     
     private func createLayout()-> UICollectionViewCompositionalLayout{
@@ -229,23 +236,37 @@ extension OverviewViewController {
     
 }
 
-extension OverviewViewController: BackMakingProduct {
-    func getProduct(item: ProfitModelItem) {
-//        guard String(item.name) == nil else { return }
-//        guard item.priceGross != nil else { return }
-//        guard item.priceProfit != nil else { return }
-
-        let product = ProductEntity(context: managerData.context)
-//
-        product.name = item.name
-        product.priceGross = Int32(item.priceGross)
-        product.priceProfit = Int32(item.priceProfit)
-        managerData.save()
-
-//        products.append(product)
-        print("Продукт добавлен")
+//MARK: - Summa in items CollectionView
+extension OverviewViewController {
+    func getSumProfit() {
+        var productsProfit = [ProductEntity]()
+        let eventRequest: NSFetchRequest<ProductEntity> = ProductEntity.fetchRequest()
+        
+        do {
+            productsProfit = try! manageObjectContext.fetch(eventRequest)
+            let sum = productsProfit.reduce(0) {$0 + ($1.priceProfit as? Int32 ?? 0)}
+            print("While iteration newSum: \(sum)")
+            self.nawProductsProfit = Int(sum)
+        } catch {
+            print("Could not load save data: \(error.localizedDescription)")
+        }
+        print("Summa: \(nawProductsProfit)")
 
     }
     
-    
+    func getSumGross() {
+        var productsGross = [ProductEntity]()
+        let eventRequest: NSFetchRequest<ProductEntity> = ProductEntity.fetchRequest()
+        
+        do {
+            productsGross = try! manageObjectContext.fetch(eventRequest)
+            let sum = productsGross.reduce(0) {$0 + ($1.priceGross as? Int32 ?? 0)}
+            print("While iteration newSum: \(sum)")
+            self.nawProductsGross = Int(sum)
+        } catch {
+            print("Could not load save data: \(error.localizedDescription)")
+        }
+        print("Summa: \(nawProductsGross)")
+
+    }
 }

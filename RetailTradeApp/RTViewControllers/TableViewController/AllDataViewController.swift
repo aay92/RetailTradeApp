@@ -26,11 +26,11 @@ extension AllDataViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.loadSaveData()
-        
     }
     
     override func setupViews() {
         super.setupViews()
+        
         manageObjectContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
            self.loadSaveData()
         
@@ -39,6 +39,7 @@ extension AllDataViewController {
         print("Количество продуктов в массиве: \(products.count)")
         setDelegate()
         view.addViewWithoutTAMIC(tableViewProducts)
+
     }
     
     func loadSaveData()  {
@@ -46,8 +47,7 @@ extension AllDataViewController {
         do{
             products = try manageObjectContext.fetch(eventRequest)
             self.tableViewProducts.reloadData()
-        }catch
-        {
+        } catch {
             print("Could not load save data: \(error.localizedDescription)")
         }
     }
@@ -98,19 +98,84 @@ extension AllDataViewController: UITableViewDelegate, UITableViewDataSource {
         return cell
     }
     
-    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+//    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+//        let eventArrayItem = products[indexPath.row]
+//
+//           if editingStyle == .delete {
+//               manageObjectContext.delete(eventArrayItem)
+//
+//               do {
+//                   try manageObjectContext.save()
+//               } catch let error as NSError {
+//                   print("Error While Deleting Note: \(error.userInfo)")
+//               }
+//           }
+//           self.loadSaveData()
+//    }
+    
+//    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+//
+//        let eventArrayItem = products[indexPath.row]
+//
+//        let editAction = UITableViewRowAction(style: .default, title: "Редактировать", handler: { (action, IndexPath) in
+//            print("Edit tapped")
+//            })
+//        editAction.backgroundColor = UIColor.systemGray
+//
+//        let deleteAction = UITableViewRowAction(style: .default, title: "Удалить", handler: { (action, IndexPath) in
+//            //print("Delete tapped")
+//            self.manageObjectContext.delete(eventArrayItem)
+//            do {
+//                try self.manageObjectContext.save()
+//
+//            } catch let error as NSError {
+//                print("Error While Deleting Note: \(error.userInfo)")
+//            }
+//            self.loadSaveData()
+//
+//            })
+//            deleteAction.backgroundColor = UIColor.red
+//        return [deleteAction, editAction]
+//    }
+    
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        
         let eventArrayItem = products[indexPath.row]
 
-           if editingStyle == .delete {
-               manageObjectContext.delete(eventArrayItem)
+        let remove = UIContextualAction(style: .destructive, title: "Удалить") { (action, view, completion) in
+            
+            self.manageObjectContext.delete(eventArrayItem)
+                        do {
+                            try self.manageObjectContext.save()
+            
+                        } catch let error as NSError {
+                            print("Error While Deleting Note: \(error.userInfo)")
+                        }
+                        self.loadSaveData()
+        completion(true)
+        }
+        let edit = UIContextualAction(style: .normal, title: "Edit") { (action, view, completion) in
+            
+            let detailVC = DetailVC()
+            detailVC.editingRowValue(product: eventArrayItem)
+            self.navigationController?.present(detailVC, animated: true)
+//            self.manageObjectContext.delete(eventArrayItem)
+//                        do {
+//                            try self.manageObjectContext.save()
+//
+//                        } catch let error as NSError {
+//                            print("Error While Deleting Note: \(error.userInfo)")
+//                        }
+//                        self.loadSaveData()
+        completion(true)
+        }
+        self.loadSaveData()
 
-               do {
-                   try manageObjectContext.save()
-               } catch let error as NSError {
-                   print("Error While Deleting Note: \(error.userInfo)")
-               }
-           }
-           self.loadSaveData()
+        let config = UISwipeActionsConfiguration(actions: [remove, edit])
+        config.performsFirstActionWithFullSwipe = false
+   
+        return config
+        
     }
 }
 
