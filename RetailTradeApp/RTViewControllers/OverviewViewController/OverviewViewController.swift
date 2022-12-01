@@ -9,9 +9,12 @@ import UIKit
 import CoreData
 
 class OverviewViewController: BaseController {
+    
     var manageObjectContext: NSManagedObjectContext!
     var nawProductsProfit = 0
     var nawProductsGross = 0
+    var nawTotalProfit = 0
+
 
 
 //    Экземпляр базы данных
@@ -19,43 +22,24 @@ class OverviewViewController: BaseController {
     
     var productsProfit = 0
     var productsGross = 0
+    
+    //    Main collection view
+    private let profitCollectionView: UICollectionView = {
+        let collectionViewLayout = UICollectionViewLayout()
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: collectionViewLayout)
+        collectionView.backgroundColor = .clear
+        collectionView.bounces = false
+        collectionView.clipsToBounds = false
+        return collectionView
+    }()
+    
+    private let viewTotalProfit = ViewTotalProfit()
+    
 
     init(managerData: DataLouder){
         self.managerData = managerData
         super.init(nibName: nil, bundle: nil)
     }
-    
-    func printsPtoductsFromData(){
-//        productsProfit.forEach({ print( $0.name )})
-//        productsProfit.forEach({ print( $0.priceGross )})
-//        productsProfit.forEach({ print( $0.priceProfit )})
-
-    }
-    
-//    func getFetch() {
-//        let products = managerData.fetchProductData(ProductEntity.self)
-//        self.productsProfit = products
-//
-//        printsPtoductsFromData()
-//
-//        let deadLine = DispatchTime.now() + .seconds(5)
-////        DispatchQueue.main.asyncAfter(deadline: deadLine, execute: deleteProducts)
-//    }
-//
-//    func updateProducts(){
-//        let firstProduct = productsProfit.first!
-//        firstProduct.name! += "- new data new data"
-//        managerData.save()
-//
-//        printsPtoductsFromData()
-//    }
-//
-//    func deleteProducts(){
-//        let fitstProduct = products.first!
-//
-//        managerData.delete(fitstProduct)
-//        printsPtoductsFromData()
-//    }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -71,35 +55,27 @@ class OverviewViewController: BaseController {
         
         return arrayCollectionView
     }
-    
-    //    Main collection view
-    private let profitCollectionView: UICollectionView = {
-        let collectionViewLayout = UICollectionViewLayout()
-        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: collectionViewLayout)
-        collectionView.backgroundColor = .clear
-        collectionView.bounces = false
-        collectionView.clipsToBounds = false
-        return collectionView
-    }()
 }
 
 //MARK: - Set controller
 extension OverviewViewController {
-    
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         getSumGross()
         getSumProfit()
         profitCollectionView.reloadData()
+        getTotalProfit()
+        viewTotalProfit.configure(num: nawTotalProfit)
     }
-   
+  
+    
     override func setupViews(){
         super.setupViews()
         
         manageObjectContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
         
-           self.getSumProfit()
+//        self.getSumProfit()
         
         managerData.fetchProductData(ProductEntity.self).forEach({item in
             productsGross = Int(item.priceGross)
@@ -109,9 +85,7 @@ extension OverviewViewController {
         setDelegates()
         setCollectionView()
         view.addViewWithoutTAMIC(profitCollectionView)
-
-//        getSumGross()
-//        getSumProfit()
+        view.addViewWithoutTAMIC(viewTotalProfit)
 
     }
     
@@ -122,7 +96,12 @@ extension OverviewViewController {
             profitCollectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor,constant: 20),
             profitCollectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
             profitCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
-            profitCollectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant:  -550)
+            profitCollectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant:  -550),
+            
+            viewTotalProfit.topAnchor.constraint(equalTo: profitCollectionView.bottomAnchor, constant: 10),
+            viewTotalProfit.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            viewTotalProfit.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+            viewTotalProfit.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant:  -450)
         ])
     }
     
@@ -136,8 +115,13 @@ extension OverviewViewController {
         nav?.tintColor = UIColor.white
         
         view.backgroundColor = R.Color.background
+        viewTotalProfit.layer.cornerRadius = 10
+        viewTotalProfit.clipsToBounds = true
 //        Bottom added item
         addNavButton(at: .right, with: "", image: UIImage(systemName: "plus"))
+        
+        
+        
     }
     
     
@@ -236,37 +220,69 @@ extension OverviewViewController {
     
 }
 
-//MARK: - Summa in items CollectionView
+//MARK: - Summa in items CollectionView and Main view
 extension OverviewViewController {
-    func getSumProfit() {
+    
+    private func getSumProfit() {
         var productsProfit = [ProductEntity]()
         let eventRequest: NSFetchRequest<ProductEntity> = ProductEntity.fetchRequest()
         
         do {
             productsProfit = try! manageObjectContext.fetch(eventRequest)
-            let sum = productsProfit.reduce(0) {$0 + ($1.priceProfit as? Int32 ?? 0)}
+            let sum = productsProfit.reduce(0) {$0 + ($1.priceProfit)}
             print("While iteration newSum: \(sum)")
             self.nawProductsProfit = Int(sum)
+            print("Value save: \(nawProductsProfit)")
+
         } catch {
             print("Could not load save data: \(error.localizedDescription)")
         }
-        print("Summa: \(nawProductsProfit)")
-
+        print("Summa nawProductsProfit: \(nawProductsProfit)")
     }
     
-    func getSumGross() {
+    private func getSumGross() {
         var productsGross = [ProductEntity]()
         let eventRequest: NSFetchRequest<ProductEntity> = ProductEntity.fetchRequest()
         
         do {
             productsGross = try! manageObjectContext.fetch(eventRequest)
-            let sum = productsGross.reduce(0) {$0 + ($1.priceGross as? Int32 ?? 0)}
+            let sum = productsGross.reduce(0) {$0 + ($1.priceGross)}
             print("While iteration newSum: \(sum)")
-            self.nawProductsGross = Int(sum)
+            nawProductsGross = Int(sum)
+            print("Value save: \(nawProductsGross)")
         } catch {
             print("Could not load save data: \(error.localizedDescription)")
         }
-        print("Summa: \(nawProductsGross)")
+        print("Summa nawProductsGross: \(nawProductsGross)")
+    }
+    
+    private func getTotalProfit(){
+        
+        var productsGross = [ProductEntity]()
+        var productsProfit = [ProductEntity]()
 
+        let eventRequest: NSFetchRequest<ProductEntity> = ProductEntity.fetchRequest()
+        
+        do {
+            productsGross = try! manageObjectContext.fetch(eventRequest)
+            let sumGross = productsGross.reduce(0) {$0 + ($1.priceGross)}
+            
+            productsProfit = try! manageObjectContext.fetch(eventRequest)
+            let sumProfit = productsProfit.reduce(0) {$0 + ($1.priceProfit)}
+            
+            print("While iteration sumGross: \(sumGross)")
+            nawProductsGross = Int(sumGross)
+            
+            print("While iteration sumProfit: \(sumProfit)")
+            nawProductsProfit = Int(sumProfit)
+            
+            nawTotalProfit = nawProductsGross - nawProductsProfit
+
+            print("Value NawTotalProfit: \(nawTotalProfit)")
+            
+            print("Value save: \(nawProductsGross)")
+        } catch {
+            print("Could not load save data: \(error.localizedDescription)")
+        }
     }
 }

@@ -92,15 +92,14 @@ class ProfitCell: UICollectionViewCell {
     func setUp(category: ProfitItemInCollectionView){
         
         if category.name == "Pribl" {
-            nameLbl.text = "Прибыль"
+            nameLbl.text = "Общая прибыль"
             priceLbl.text = String("\(category.sumGross) ₽")
             
         } else {
-            nameLbl.text = "Доход"
+            nameLbl.text = "Себестоимость"
             priceLbl.text = String("\(category.sumProfit) ₽")
         }
 //        image.image = UIImage(named: "\(String(describing: category.image))")
-        
 //        categoryImageView.kf.setImage(with: category.image?.asUrl)
     }
     
