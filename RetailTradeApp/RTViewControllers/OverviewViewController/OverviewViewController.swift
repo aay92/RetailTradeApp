@@ -14,14 +14,13 @@ class OverviewViewController: BaseController {
     var nawProductsProfit = 0
     var nawProductsGross = 0
     var nawTotalProfit = 0
-
-
+    
+//    image animation
+    var animateStart = false
+    var imageManyArr: [UIImage] = []
 
 //    Экземпляр базы данных
     let managerData: DataLouder
-    
-    var productsProfit = 0
-    var productsGross = 0
     
     //    Main collection view
     private let profitCollectionView: UICollectionView = {
@@ -35,6 +34,19 @@ class OverviewViewController: BaseController {
     
     private let viewTotalProfit = ViewTotalProfit()
     
+    private let imageDog: UIImageView = {
+        let image = UIImageView()
+        image.contentMode = .scaleAspectFit
+        image.image = UIImage(named: "dog")
+        return image
+    }()
+    
+    private let imageMany: UIImageView = {
+        let image = UIImageView()
+        image.contentMode = .scaleAspectFit
+        return image
+    }()
+
 
     init(managerData: DataLouder){
         self.managerData = managerData
@@ -67,6 +79,14 @@ extension OverviewViewController {
         profitCollectionView.reloadData()
         getTotalProfit()
         viewTotalProfit.configure(num: nawTotalProfit)
+//        animate(imageView: imageMany, images: imageManyArr)
+
+        if animateStart {
+            animate(imageView: imageMany, images: imageManyArr)
+            animateStart = false
+        }
+        
+       
     }
   
     
@@ -74,18 +94,16 @@ extension OverviewViewController {
         super.setupViews()
         
         manageObjectContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-        
-//        self.getSumProfit()
-        
-        managerData.fetchProductData(ProductEntity.self).forEach({item in
-            productsGross = Int(item.priceGross)
-            productsProfit = Int(item.priceProfit)
-        })
-        
+
+       
         setDelegates()
         setCollectionView()
         view.addViewWithoutTAMIC(profitCollectionView)
         view.addViewWithoutTAMIC(viewTotalProfit)
+//        view.addViewWithoutTAMIC(imageDog)
+        view.addViewWithoutTAMIC(imageMany)
+
+        imageManyArr = createImageArray(total: 17, imagePrefix: "AnimationMany")
 
     }
     
@@ -93,21 +111,35 @@ extension OverviewViewController {
     override func constraintViews(){
         super.constraintViews()
         NSLayoutConstraint.activate([
-            profitCollectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor,constant: 20),
-            profitCollectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
-            profitCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
-            profitCollectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant:  -550),
+//            imageDog.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant:  420),
+//            imageDog.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant:  -60),
+//            imageDog.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant:  -120),
+//            imageDog.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 10),
+//
+//
+            imageMany.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant:  220),
+            imageMany.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant:  -90),
+            imageMany.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant:  150),
+            imageMany.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -300),
+            imageMany.heightAnchor.constraint(equalToConstant: 100),
+            imageMany.widthAnchor.constraint(equalToConstant: 100),
+
+
+            viewTotalProfit.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor,constant: 20),
+            viewTotalProfit.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 30),
+            viewTotalProfit.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -30),
+            viewTotalProfit.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant:  -650),
             
-            viewTotalProfit.topAnchor.constraint(equalTo: profitCollectionView.bottomAnchor, constant: 10),
-            viewTotalProfit.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-            viewTotalProfit.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
-            viewTotalProfit.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant:  -450)
+            profitCollectionView.topAnchor.constraint(equalTo: viewTotalProfit.bottomAnchor, constant: 20),
+            profitCollectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            profitCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+            profitCollectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant:  -350)
         ])
     }
     
     override func configureAppereance() {
         super.configureAppereance()
-        title = "Черная Торговля"
+        title = "Бизнес Пёс"
         
         navigationController?.tabBarItem.title = R.TabBar.title(for: Tabs.overview)
         var nav = self.navigationController?.navigationBar
@@ -120,8 +152,6 @@ extension OverviewViewController {
 //        Bottom added item
         addNavButton(at: .right, with: "", image: UIImage(systemName: "plus"))
         
-        
-        
     }
     
     
@@ -133,7 +163,16 @@ extension OverviewViewController {
     
     override func navBarRightButtonHandler(){
         let detailVC = DetailVC()
+        detailVC.modalPresentationStyle = .fullScreen
+        detailVC.completion = {[weak self] i in
+            guard let self = self else { return }
+            print("Bool \(i)")
+            self.animateStart = i
+            
+        }
+       
         navigationController?.present(detailVC, animated: true)
+       
     }
 
 }
@@ -199,22 +238,22 @@ extension OverviewViewController {
     private func createProfitCollectionView()-> NSCollectionLayoutSection {
         
         let item = NSCollectionLayoutItem(layoutSize:
-                .init(widthDimension: .fractionalWidth(0.80),
-                      heightDimension: .absolute(150)))
-        item.contentInsets.leading = 10
-//        item.contentInsets.bottom = 9
-        let group = NSCollectionLayoutGroup.horizontal(layoutSize:
                 .init(widthDimension: .fractionalWidth(1),
+                      heightDimension: .absolute(105)))
+        item.contentInsets.leading = 10
+        item.contentInsets.trailing = 10
+        
+        let group = NSCollectionLayoutGroup.horizontal(layoutSize:
+                .init(widthDimension: .fractionalWidth(0.8),
                       heightDimension: .estimated(600)),subitems: [item])
         
         group.contentInsets = .init(top: 0, leading: 0, bottom: 0, trailing: 0)
         
         let section = settingCollectionLayoutSection(group: group,
                                                      behavior: .continuous,
-                                                     intetGroupSpacing: -50,
+                                                     intetGroupSpacing: 0,
                                                      supplementaryItems: [],
                                                      contentInsets: false)
-        //        section.contentInsets = .init(top: 0, leading: 10, bottom: 0, trailing: 10)
         return section
     }
     
@@ -284,5 +323,27 @@ extension OverviewViewController {
         } catch {
             print("Could not load save data: \(error.localizedDescription)")
         }
+    }
+}
+
+//MARK: - Animation gif after successful added item
+extension OverviewViewController {
+    
+    func createImageArray(total: Int, imagePrefix: String)-> [UIImage]{
+        var imageArr: [UIImage] = []
+        
+        for imageCont in 1..<total {
+            let imageName = "\(imageCont)"
+            let image = UIImage(named: imageName)!
+            imageArr.append(image)
+        }
+        return imageArr
+    }
+    func animate(imageView: UIImageView, images: [UIImage]){
+    
+        imageView.animationImages = images
+        imageView.animationDuration = 0.85
+        imageView.animationRepeatCount = 4
+        imageView.startAnimating()
     }
 }

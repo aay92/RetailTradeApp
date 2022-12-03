@@ -133,7 +133,7 @@ class TableViewCell: UITableViewCell {
             
             stack.topAnchor.constraint(equalTo: topAnchor, constant: 15),
             stack.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 15),
-            stack.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -90),
+            stack.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -70),
             stack.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -15),
         ])
     }

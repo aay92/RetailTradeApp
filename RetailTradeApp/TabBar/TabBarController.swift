@@ -24,7 +24,6 @@ class TabBarController: UITabBarController {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
         setTabBarAppearance()
-
         configureAppearance()
     }
     
@@ -32,7 +31,7 @@ class TabBarController: UITabBarController {
     
     private func configureAppearance(){
         tabBar.unselectedItemTintColor = R.Color.inactive
-        tabBar.tintColor = R.Color.active
+        tabBar.tintColor = R.Color.tabBatColorActive
         tabBar.barTintColor = R.Color.inactive
         tabBar.layer.masksToBounds = false
         

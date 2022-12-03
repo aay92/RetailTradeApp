@@ -52,16 +52,46 @@ class ViewTotalProfit: BaseView {
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
+    
     func configure(num: Int){
-        priceLbl.text = String(num)
+
+        endValue = Double(num)
+        priceLbl.text = String(endValue)
     }
+    
+    var startValue: Double = 0
+    var endValue: Double = 0
+    let animationDurration = 1.0
+    let animationStartData = Date()
+    
+    @objc func handlerRunLoopMode(){
+       
+        let now = Date()
+        
+        let elapsedTime = now.timeIntervalSince(animationStartData)
+        if elapsedTime > animationDurration {
+            self.priceLbl.text = "\(endValue)"
+            
+        } else {
+            let percenteg = elapsedTime / animationDurration
+            let value = startValue + percenteg * (endValue - startValue)
+            self.priceLbl.text = "\(value)"
+        }
+        
+    }
+  
     override func setupViews() {
         super.setupViews()
+        
         addSubview(viewProfit)
         addSubview(stack)
         stack.addArrangedSubview(nameLbl)
         stack.addArrangedSubview(priceLbl)
+        
+        let displayLink = CADisplayLink(target: self, selector: #selector(handlerRunLoopMode))
+        displayLink.add(to: .main, forMode: .default)
     }
+    
     override func constantViews() {
         super.constantViews()
 

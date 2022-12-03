@@ -34,8 +34,8 @@ class ProfitCell: UICollectionViewCell {
     private var nameLbl: UILabel = {
         let label = UILabel()
         label.text = "Название"
-        label.font = UIFont(name: "Ariel", size: 25)
-        label.font = UIFont.boldSystemFont(ofSize: 25)
+        label.font = UIFont(name: "Ariel", size: 20)
+        label.font = UIFont.boldSystemFont(ofSize: 20)
         label.textColor = .white.withAlphaComponent(0.8)
         label.textAlignment = .natural
         label.numberOfLines = 0
@@ -46,9 +46,9 @@ class ProfitCell: UICollectionViewCell {
     private var priceLbl: UILabel = {
         let label = UILabel()
         label.text = "Стоимость"
-        label.font = UIFont(name: "Ariel", size: 35)
+        label.font = UIFont(name: "Ariel", size: 30)
        
-        label.font = UIFont.boldSystemFont(ofSize: 35)
+        label.font = UIFont.boldSystemFont(ofSize: 30)
         label.textColor = .white
         label.textAlignment = .natural
         label.numberOfLines = 0
@@ -110,10 +110,10 @@ class ProfitCell: UICollectionViewCell {
                 viewProfit.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 0),
                 viewProfit.bottomAnchor.constraint(equalTo: bottomAnchor, constant: 0),
             
-                stack.topAnchor.constraint(equalTo: topAnchor, constant:35),
+                stack.topAnchor.constraint(equalTo: topAnchor, constant: 27),
                 stack.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
                 stack.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20),
-                stack.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -35)
+                stack.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -27)
             ])
     }
     

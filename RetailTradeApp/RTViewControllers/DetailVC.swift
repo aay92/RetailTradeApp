@@ -11,6 +11,9 @@ class DetailVC: BaseController {
     
     let managerData = DataLouder.shared
     
+    var animationApear = false
+    var completion: ((Bool)->())?
+    
     //    var newProduct = DataLouder.shared.fetchProductData(ProductEntity.self)
     //    Пробное сохранение
     func creatItem(item: ProfitModelItem){
@@ -292,6 +295,7 @@ extension DetailVC {
 }
 
 extension DetailVC {
+    
     func createProduct(){
 
         guard let textName = nameTextField.text else {
@@ -307,15 +311,19 @@ extension DetailVC {
         
         
         print("Создан новый товар: Имя - \(newProduct.name)")
-        print("стоимость - \(newProduct.priceGross)")
-        print("стоимость с наценкой - \(newProduct.priceProfit)")
+        print("Cтоимость - \(newProduct.priceGross)")
+        print("Cтоимость с наценкой - \(newProduct.priceProfit)")
         
-        creatItem(item: newProduct)
-        
-        nameTextField.text = ""
-        priceTextFieldGross.text = ""
-        priceTextFieldProfit.text = ""
-
+        if !(newProduct.name == "") {
+            creatItem(item: newProduct)
+            nameTextField.text = ""
+            priceTextFieldGross.text = ""
+            priceTextFieldProfit.text = ""
+            animationApear = true
+            completion?(animationApear)
+        } else {
+            animationApear = false
+        }
         dismiss(animated: true)
     }
 }
