@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		5B52EEAF29374EEE00E89787 /* ViewTotalProfit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B52EEAE29374EEE00E89787 /* ViewTotalProfit.swift */; };
 		5B52EEB12937511B00E89787 /* BaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B52EEB02937511B00E89787 /* BaseView.swift */; };
+		5B5F51A3293F2C7F006DD6C1 /* UIButton + Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B5F51A2293F2C7F006DD6C1 /* UIButton + Ext.swift */; };
+		5B5F51A6293F397A006DD6C1 /* ProductEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B5F51A4293F397A006DD6C1 /* ProductEntity+CoreDataClass.swift */; };
+		5B5F51A7293F397A006DD6C1 /* ProductEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B5F51A5293F397A006DD6C1 /* ProductEntity+CoreDataProperties.swift */; };
 		5B8E94EB292D5BAD00E0EB49 /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B8E94EA292D5BAD00E0EB49 /* TableViewCell.swift */; };
 		5B8E94ED292E117500E0EB49 /* DetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B8E94EC292E117500E0EB49 /* DetailVC.swift */; };
 		5BB91FFE292F657800FCF34E /* DataLouder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB91FFD292F657800FCF34E /* DataLouder.swift */; };
@@ -23,8 +26,6 @@
 		5BF24F23292C123100BEE9AB /* ProfitCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BF24F22292C123100BEE9AB /* ProfitCell.swift */; };
 		5BF24F26292D0BAE00BEE9AB /* ProfitModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BF24F25292D0BAE00BEE9AB /* ProfitModel.swift */; };
 		5BF52060292FE84800BB76B7 /* ProductModelCoreData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 5BF5205E292FE84800BB76B7 /* ProductModelCoreData.xcdatamodeld */; };
-		5BF52063292FE89300BB76B7 /* ProductEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BF52061292FE89300BB76B7 /* ProductEntity+CoreDataClass.swift */; };
-		5BF52064292FE89300BB76B7 /* ProductEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BF52062292FE89300BB76B7 /* ProductEntity+CoreDataProperties.swift */; };
 		5BFD8AA6292A6DF4007A45A2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BFD8AA5292A6DF4007A45A2 /* AppDelegate.swift */; };
 		5BFD8AA8292A6DF4007A45A2 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BFD8AA7292A6DF4007A45A2 /* SceneDelegate.swift */; };
 		5BFD8AAA292A6DF4007A45A2 /* OverviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BFD8AA9292A6DF4007A45A2 /* OverviewViewController.swift */; };
@@ -35,6 +36,9 @@
 /* Begin PBXFileReference section */
 		5B52EEAE29374EEE00E89787 /* ViewTotalProfit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewTotalProfit.swift; sourceTree = "<group>"; };
 		5B52EEB02937511B00E89787 /* BaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseView.swift; sourceTree = "<group>"; };
+		5B5F51A2293F2C7F006DD6C1 /* UIButton + Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton + Ext.swift"; sourceTree = "<group>"; };
+		5B5F51A4293F397A006DD6C1 /* ProductEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "ProductEntity+CoreDataClass.swift"; path = "RetailTradeApp/ProductEntity+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
+		5B5F51A5293F397A006DD6C1 /* ProductEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "ProductEntity+CoreDataProperties.swift"; path = "RetailTradeApp/ProductEntity+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
 		5B8E94EA292D5BAD00E0EB49 /* TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
 		5B8E94EC292E117500E0EB49 /* DetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailVC.swift; sourceTree = "<group>"; };
 		5BB91FFD292F657800FCF34E /* DataLouder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataLouder.swift; sourceTree = "<group>"; };
@@ -49,8 +53,6 @@
 		5BF24F22292C123100BEE9AB /* ProfitCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfitCell.swift; sourceTree = "<group>"; };
 		5BF24F25292D0BAE00BEE9AB /* ProfitModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfitModel.swift; sourceTree = "<group>"; };
 		5BF5205F292FE84800BB76B7 /* ProductModelCoreData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ProductModelCoreData.xcdatamodel; sourceTree = "<group>"; };
-		5BF52061292FE89300BB76B7 /* ProductEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "ProductEntity+CoreDataClass.swift"; path = "RetailTradeApp/DataFlow/ProductEntity+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
-		5BF52062292FE89300BB76B7 /* ProductEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "ProductEntity+CoreDataProperties.swift"; path = "RetailTradeApp/DataFlow/ProductEntity+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
 		5BFD8AA2292A6DF4007A45A2 /* RetailTradeApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RetailTradeApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5BFD8AA5292A6DF4007A45A2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5BFD8AA7292A6DF4007A45A2 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -82,8 +84,8 @@
 		5BB91FFC292F655900FCF34E /* DataFlow */ = {
 			isa = PBXGroup;
 			children = (
-				5BF52061292FE89300BB76B7 /* ProductEntity+CoreDataClass.swift */,
-				5BF52062292FE89300BB76B7 /* ProductEntity+CoreDataProperties.swift */,
+				5B5F51A4293F397A006DD6C1 /* ProductEntity+CoreDataClass.swift */,
+				5B5F51A5293F397A006DD6C1 /* ProductEntity+CoreDataProperties.swift */,
 				5BB91FFD292F657800FCF34E /* DataLouder.swift */,
 			);
 			path = DataFlow;
@@ -170,6 +172,7 @@
 			children = (
 				5BF24F15292B667900BEE9AB /* UIColor + Ext.swift */,
 				5BF24F1F292C117900BEE9AB /* UIView + Ext.swift */,
+				5B5F51A2293F2C7F006DD6C1 /* UIButton + Ext.swift */,
 			);
 			path = Extansion;
 			sourceTree = "<group>";
@@ -293,6 +296,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				5BB91FFE292F657800FCF34E /* DataLouder.swift in Sources */,
+				5B5F51A3293F2C7F006DD6C1 /* UIButton + Ext.swift in Sources */,
+				5B5F51A7293F397A006DD6C1 /* ProductEntity+CoreDataProperties.swift in Sources */,
 				5BFD8AAA292A6DF4007A45A2 /* OverviewViewController.swift in Sources */,
 				5BF24F16292B667900BEE9AB /* UIColor + Ext.swift in Sources */,
 				5BF24F23292C123100BEE9AB /* ProfitCell.swift in Sources */,
@@ -305,12 +310,11 @@
 				5BF24F1C292B701800BEE9AB /* AllDataViewController.swift in Sources */,
 				5B52EEAF29374EEE00E89787 /* ViewTotalProfit.swift in Sources */,
 				5BF24F18292B6A6300BEE9AB /* NavBarController.swift in Sources */,
-				5BF52064292FE89300BB76B7 /* ProductEntity+CoreDataProperties.swift in Sources */,
 				5BF24F1E292B705400BEE9AB /* SettingViewController.swift in Sources */,
 				5BFD8AA6292A6DF4007A45A2 /* AppDelegate.swift in Sources */,
-				5BF52063292FE89300BB76B7 /* ProductEntity+CoreDataClass.swift in Sources */,
 				5BF24F1A292B6B7E00BEE9AB /* BaseViewController.swift in Sources */,
 				5B52EEB12937511B00E89787 /* BaseView.swift in Sources */,
+				5B5F51A6293F397A006DD6C1 /* ProductEntity+CoreDataClass.swift in Sources */,
 				5BF24F13292B663900BEE9AB /* Resources.swift in Sources */,
 				5BFD8AA8292A6DF4007A45A2 /* SceneDelegate.swift in Sources */,
 			);
@@ -380,6 +384,8 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_KEY_NSCameraUsageDescription = "Please gime me camera";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "Plaese alow access";
 				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
@@ -434,6 +440,8 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_KEY_NSCameraUsageDescription = "Please gime me camera";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "Plaese alow access";
 				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
@@ -456,8 +464,8 @@
 				INFOPLIST_FILE = RetailTradeApp/Resources/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -486,8 +494,8 @@
 				INFOPLIST_FILE = RetailTradeApp/Resources/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

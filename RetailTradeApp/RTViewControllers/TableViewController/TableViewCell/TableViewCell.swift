@@ -101,17 +101,10 @@ class TableViewCell: UITableViewCell {
         nameLbl.text = item.name
         priceLblGross.text = String(item.priceGross) + " ₽"
         priceLblProfit.text = String(item.priceProfit) + " ₽"
-//        guard let image = item.image else { return }
-//        imageViewMain.image = UIImage(named: "\(image)")
+        guard let image = item.image else { return }
+        imageViewMain.image = UIImage(data: image) ?? UIImage(systemName: "photo")
     }
     
-//    func configure(with item: ProfitModelItem){
-//        nameLbl.text = item.name
-//        priceLblGross.text = String(item.priceGross) + " ₽"
-//        priceLblProfit.text = String(item.priceProfit) + " ₽"
-//        guard let image = item.image else { return }
-//        imageViewMain.image = UIImage(named: "\(image)")
-//    }
     
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)

@@ -76,6 +76,12 @@ class ProfitCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+    var endValue: Double = 0
+    var startValue: Double = 0
+    let animationDurration = 1.0
+    let animationStartData = Date()
+    
+    
     private func setView(){
         layer.cornerRadius = 10
         viewProfit.backgroundColor = R.Color.active
@@ -86,6 +92,9 @@ class ProfitCell: UICollectionViewCell {
         addSubview(stack)
         stack.addArrangedSubview(nameLbl)
         stack.addArrangedSubview(priceLbl)
+        
+        let displayLink = CADisplayLink(target: self, selector: #selector(handlerRunLoopMode))
+        displayLink.add(to: .main, forMode: .default)
     }
     
     
@@ -93,14 +102,32 @@ class ProfitCell: UICollectionViewCell {
         
         if category.name == "Pribl" {
             nameLbl.text = "Общая прибыль"
-            priceLbl.text = String("\(category.sumGross) ₽")
+            endValue = Double(category.sumGross)
+            priceLbl.text = String("\(endValue) ₽")
             
         } else {
             nameLbl.text = "Себестоимость"
-            priceLbl.text = String("\(category.sumProfit) ₽")
+            endValue = Double(category.sumProfit)
+            priceLbl.text = String("\(endValue) ₽")
         }
 //        image.image = UIImage(named: "\(String(describing: category.image))")
 //        categoryImageView.kf.setImage(with: category.image?.asUrl)
+    }
+    
+//    Animation numbers
+    @objc func handlerRunLoopMode(){
+       
+        let now = Date()
+        
+        let elapsedTime = now.timeIntervalSince(animationStartData)
+        if elapsedTime > animationDurration {
+            self.priceLbl.text = String(format: "%.0f", endValue)
+        } else {
+            let percenteg = elapsedTime / animationDurration
+            let value = startValue + percenteg * (endValue - startValue)
+            self.priceLbl.text = String(format: "%.0f", value)
+        }
+        
     }
     
     private func setConsrtaints(){

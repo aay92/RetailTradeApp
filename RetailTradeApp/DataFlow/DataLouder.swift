@@ -45,6 +45,15 @@ final class DataLouder {
         }
     }
     
+//    let entityName =  NSEntityDescription.entity(forEntityName: 'Your Entity Name', in: managedContext)!
+//    let image = NSManagedObject(entity: entityName, insertInto: managedContext)
+//    image.setValue(jpegData, forKeyPath: 'Your Attribute Name')
+//    do {
+//      try managedContext.save()
+//    } catch let error as NSError {
+//      print("Could not save. \(error), \(error.userInfo)")
+//    }
+    
     func fetchProductData<T: NSManagedObject>(_ objectType: T.Type) -> [T] {
         let entityName = String(describing: objectType)
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: entityName)

@@ -14,15 +14,16 @@ class DetailVC: BaseController {
     var animationApear = false
     var completion: ((Bool)->())?
     
-    //    var newProduct = DataLouder.shared.fetchProductData(ProductEntity.self)
     //    Пробное сохранение
     func creatItem(item: ProfitModelItem){
         let product = ProductEntity(context: managerData.context)
         product.name = item.name
         product.priceProfit = Int32(item.priceProfit)
         product.priceGross = Int32(item.priceGross)
+        product.image = item.image
         managerData.save()
     }
+    
 //Title name vc
     private let labelTitleVC: UILabel = {
         let lbl = UILabel()
@@ -30,6 +31,7 @@ class DetailVC: BaseController {
         lbl.font = UIFont.boldSystemFont(ofSize: 19)
         lbl.textColor = .white
         lbl.textAlignment = .center
+        lbl.backgroundColor = .clear
         lbl.text = "Введите новую продажу"
         return lbl
     }()
@@ -135,7 +137,6 @@ class DetailVC: BaseController {
         return stackView
     }()
     
-    
     private var priceLblGross: UILabel = {
         let label = UILabel()
         label.text = "Введите конечную стоимость"
@@ -182,41 +183,98 @@ class DetailVC: BaseController {
         label.tintColor = R.Color.backgroundDetailVC
         label.backgroundColor = .white
         label.layer.cornerRadius = 10
-        
         return label
+    }()
+    
+//    Стек, картинка и кнопка для загрузки картинки из библиотеки
+    private let stackForImage: UIStackView = {
+        let stack = UIStackView()
+        stack.clipsToBounds = false
+        stack.axis = .vertical
+        stack.spacing = 10
+        stack.distribution  = .fillProportionally
+        stack.backgroundColor = .systemBlue.withAlphaComponent(0.1)
+        stack.layer.cornerRadius = 20
+//        stack.layer.borderColor = UIColor.white.cgColor
+//        stack.layer.borderWidth = 1
+        return stack
+    }()
+    
+    private var imageFromLibrary: UIImageView = {
+        let image = UIImageView()
+        image.image = UIImage(systemName: "photo")
+        image.contentMode = .scaleAspectFit
+        image.tintColor = .white
+        image.layer.cornerRadius = image.frame.height / 2.0
+        image.layer.masksToBounds = true
+        return image
+    }()
+    
+    private let buttonSafeImage: UIButton = {
+        let button = UIButton()
+        button.layer.cornerRadius = 10
+        button.setImage(UIImage(systemName: "photo"), for: .normal)
+        button.setImageTintColor(.white)
+        button.setTitle("Добавить картинку", for: .normal)
+        button.setTitleColor(.white, for: .normal)
+        button.backgroundColor = .systemRed.withAlphaComponent(0.7)
+        button.layer.cornerRadius = 10
+        button.clipsToBounds = false
+        button.layer.borderColor = UIColor.white.cgColor
+        button.layer.borderWidth = 2
+        return button
+    }()
+    private let buttonSafeAndMakingPhoto: UIButton = {
+        let button = UIButton()
+        button.layer.cornerRadius = 10
+        button.setImage(UIImage(systemName: "camera"), for: .normal)
+        button.setImageTintColor(.white)
+        button.setTitle("Сделать фото", for: .normal)
+        button.setTitleColor(.white, for: .normal)
+        button.backgroundColor = .systemRed.withAlphaComponent(0.7)
+        button.layer.cornerRadius = 10
+        button.clipsToBounds = false
+        button.layer.borderColor = UIColor.white.cgColor
+        button.layer.borderWidth = 2
+        return button
     }()
     
 }
 
-//MARK: - editingRowValue
+//MARK: - Used camera and library for added image
 extension DetailVC {
-    func editingRowValue( product: ProductEntity){
-        
-        nameTextField.text = product.name
-        priceTextFieldGross.text = String("\(product.priceGross)")
-        priceTextFieldProfit.text = String("\(product.priceProfit)")
-        
-        if nameTextField.text == product.name && priceTextFieldGross.text == String("\(product.priceGross)") && priceTextFieldProfit.text == String("\(product.priceProfit)") {
-            dismiss(animated: true)
-        } else {
-            guard let textName = nameTextField.text else {
-                return print("Нет имени") }
-            guard let textGross = priceTextFieldGross.text else {
-                return print("Нет начальной стоимости продукта")}
-            guard let textProfit = priceTextFieldProfit.text else {
-                return print("Нет Нет конечной стоимости продукта")}
-            
-            let newProduct = ProfitModelItem(name: textName,
-                                             priceGross: Int(textGross)!,
-                                             priceProfit: Int(textProfit)!)
-            
-            
-            print("Создан новый товар: Имя - \(newProduct.name)")
-            print("стоимость - \(newProduct.priceGross)")
-            print("стоимость с наценкой - \(newProduct.priceProfit)")
-            
-            creatItem(item: newProduct)
+    
+    @objc private func getImageFromLibrary(){
+        let vc = UIImagePickerController()
+        vc.sourceType = .photoLibrary
+        vc.delegate = self
+        vc.allowsEditing = true
+        present(vc, animated: true)
+    }
+    
+    @objc private func getImageFromPhoneCamera(){
+        let vc = UIImagePickerController()
+        vc.sourceType = .camera
+        vc.delegate = self
+//        vc.allowsEditing = true
+        present(vc, animated: true)
+    }
+}
+
+//MARK: - UIImagePickerControllerDelegate, UINavigationControllerDelegate
+extension DetailVC: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+//        print("\(info)")
+        if let image = info[UIImagePickerController.InfoKey(rawValue:"UIImagePickerControllerEditedImage")] as? UIImage {
+            imageFromLibrary.image = image
         }
+        picker.dismiss(animated: true)
+
+    }
+    
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        picker.dismiss(animated: true)
     }
 }
 
@@ -236,6 +294,11 @@ extension DetailVC {
         super.setupViews()
         view.addViewWithoutTAMIC(labelTitleVC)
         view.addViewWithoutTAMIC(stack)
+        view.addViewWithoutTAMIC(stackForImage)
+        
+        stackForImage.addArrangedSubview(imageFromLibrary)
+        stackForImage.addArrangedSubview(buttonSafeImage)
+        stackForImage.addArrangedSubview(buttonSafeAndMakingPhoto)
         
         stack.addArrangedSubview(nameLbl)
         stack.addArrangedSubview(nameTextField)
@@ -260,16 +323,32 @@ extension DetailVC {
         super.constraintViews()
         NSLayoutConstraint.activate([
             
+            
             nameTextField.heightAnchor.constraint(equalToConstant: 40),
             priceTextFieldGross.heightAnchor.constraint(equalToConstant: 40),
             priceTextFieldProfit.heightAnchor.constraint(equalToConstant: 40),
+            buttonSafeImage.heightAnchor.constraint(equalToConstant: 40),
+            buttonSafeAndMakingPhoto.heightAnchor.constraint(equalToConstant: 40),
+            imageFromLibrary.heightAnchor.constraint(equalToConstant: 200),
             
-            labelTitleVC.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            labelTitleVC.topAnchor.constraint(equalTo:view.safeAreaLayoutGuide.topAnchor, constant: 20),
             labelTitleVC.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             labelTitleVC.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
-            labelTitleVC.bottomAnchor.constraint(equalTo: stack.topAnchor, constant:  -350),
-                        
-            stack.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 400),
+            labelTitleVC.bottomAnchor.constraint(equalTo: stackForImage.topAnchor,constant:  -30),
+            
+          
+            stackForImage.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            stackForImage.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant:  -20),
+            stackForImage.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -400),
+            
+            buttonSafeImage.leadingAnchor.constraint(equalTo: stackForImage.leadingAnchor, constant: 20),
+            buttonSafeImage.trailingAnchor.constraint(equalTo: stackForImage.trailingAnchor, constant: -20),
+            
+            buttonSafeAndMakingPhoto.leadingAnchor.constraint(equalTo: stackForImage.leadingAnchor, constant: 20),
+            buttonSafeAndMakingPhoto.trailingAnchor.constraint(equalTo: stackForImage.trailingAnchor, constant: -20),
+            buttonSafeAndMakingPhoto.bottomAnchor.constraint(equalTo: stackForImage.bottomAnchor, constant:  -50),
+    
+            stack.topAnchor.constraint(equalTo: stackForImage.bottomAnchor,constant:  50),
             stack.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             stack.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
             stack.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant:  -180),
@@ -277,9 +356,7 @@ extension DetailVC {
             stackForButton.topAnchor.constraint(equalTo: stack.bottomAnchor, constant: 25),
             stackForButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 50),
             stackForButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -50),
-            stackForButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant:  -view.bounds.height / 7.5),
-
-
+            stackForButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant:  -view.bounds.height / 7.7)
         ])
     }
     
@@ -290,6 +367,10 @@ extension DetailVC {
         buttonSafe.addTarget(self, action: #selector(savingData), for: .touchUpInside)
         stack.backgroundColor = .clear
         view.backgroundColor = R.Color.backgroundDetailVC
+        
+        buttonSafeImage.addTarget(self, action: #selector(getImageFromLibrary), for: .touchUpInside)
+        buttonSafeAndMakingPhoto.addTarget(self, action: #selector(getImageFromPhoneCamera), for: .touchUpInside)
+       
     }
 
 }
@@ -304,27 +385,90 @@ extension DetailVC {
             return print("Нет начальной стоимости продукта")}
         guard let textProfit = priceTextFieldProfit.text else {
             return print("Нет Нет конечной стоимости продукта")}
+       
+        guard let image = imageFromLibrary.image else {
+            return print("Нет картинки")
+        }
+        let saveImage = image.pngData()
         
+        if textName.isEmpty || textGross.isEmpty && textProfit.isEmpty {
+            print("Введите данные")
+            return
+        }
         let newProduct = ProfitModelItem(name: textName,
                                          priceGross: Int(textGross)!,
-                                         priceProfit: Int(textProfit)!)
+                                         priceProfit: Int(textProfit)!,
+                                         image: saveImage
+        )
         
         
         print("Создан новый товар: Имя - \(newProduct.name)")
         print("Cтоимость - \(newProduct.priceGross)")
         print("Cтоимость с наценкой - \(newProduct.priceProfit)")
+        print("Картинка - \(String(describing: saveImage?.description))")
         
         if !(newProduct.name == "") {
             creatItem(item: newProduct)
             nameTextField.text = ""
             priceTextFieldGross.text = ""
             priceTextFieldProfit.text = ""
+            imageFromLibrary.image = UIImage(systemName:"photo")
             animationApear = true
             completion?(animationApear)
+            dismiss(animated: true)
         } else {
             animationApear = false
+            dismiss(animated: true)
+
         }
-        dismiss(animated: true)
     }
 }
+
+//MARK: - editingRowValue
+extension DetailVC {
+    func editingRowValue( product: ProductEntity){
+        
+        nameTextField.text = product.name
+        priceTextFieldGross.text = String("\(product.priceGross)")
+        priceTextFieldProfit.text = String("\(product.priceProfit)")
+        
+        guard let image = product.image else {
+            return print("Ошибка в редактирование ячейки и сохранение фото")}
+        imageFromLibrary.image = UIImage(data: image)
+        
+        if nameTextField.text == product.name && priceTextFieldGross.text == String("\(product.priceGross)") && priceTextFieldProfit.text == String("\(product.priceProfit)") {
+            dismiss(animated: true)
+        } else {
+            guard let textName = nameTextField.text else {
+                return print("Нет имени") }
+            guard let textGross = priceTextFieldGross.text else {
+                return print("Нет начальной стоимости продукта")}
+            guard let textProfit = priceTextFieldProfit.text else {
+                return print("Нет Нет конечной стоимости продукта")}
+            guard let image = imageFromLibrary.image else {
+                return print("Нет Нет конечной стоимости продукта")}
+            let saveImage = image.pngData()
+            
+            if textName.isEmpty && textGross.isEmpty && textProfit.isEmpty {
+                print("Введите данные")
+                return
+            }
+
+            let newProduct = ProfitModelItem(name: textName,
+                                             priceGross: Int(textGross)!,
+                                             priceProfit: Int(textProfit)!,
+                                             image: saveImage)
+            
+            
+            
+            print("Создан новый товар: Имя - \(newProduct.name)")
+            print("стоимость - \(newProduct.priceGross)")
+            print("стоимость с наценкой - \(newProduct.priceProfit)")
+            print("Картинка изменина")
+
+            creatItem(item: newProduct)
+        }
+    }
+}
+
 

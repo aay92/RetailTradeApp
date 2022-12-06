@@ -11,6 +11,11 @@ class ViewTotalProfit: BaseView {
     
     static let identifier = "ViewTotalProfit"
     
+    var endValue: Double = 0
+    var startValue: Double = 0
+    let animationDurration = 1.0
+    let animationStartData = Date()
+    
     private let viewProfit: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -54,15 +59,9 @@ class ViewTotalProfit: BaseView {
     }()
     
     func configure(num: Int){
-
         endValue = Double(num)
         priceLbl.text = String(endValue)
     }
-    
-    var startValue: Double = 0
-    var endValue: Double = 0
-    let animationDurration = 1.0
-    let animationStartData = Date()
     
     @objc func handlerRunLoopMode(){
        
@@ -70,16 +69,16 @@ class ViewTotalProfit: BaseView {
         
         let elapsedTime = now.timeIntervalSince(animationStartData)
         if elapsedTime > animationDurration {
-            self.priceLbl.text = "\(endValue)"
-            
+            self.priceLbl.text = String(format: "%.0f", endValue)
         } else {
             let percenteg = elapsedTime / animationDurration
             let value = startValue + percenteg * (endValue - startValue)
-            self.priceLbl.text = "\(value)"
+            self.priceLbl.text = String(format: "%.0f", value)
         }
         
     }
   
+    
     override func setupViews() {
         super.setupViews()
         
@@ -87,9 +86,7 @@ class ViewTotalProfit: BaseView {
         addSubview(stack)
         stack.addArrangedSubview(nameLbl)
         stack.addArrangedSubview(priceLbl)
-        
-        let displayLink = CADisplayLink(target: self, selector: #selector(handlerRunLoopMode))
-        displayLink.add(to: .main, forMode: .default)
+
     }
     
     override func constantViews() {
@@ -109,7 +106,8 @@ class ViewTotalProfit: BaseView {
     }
     override func configureAppearance() {
         super.configureAppearance()
+        
+        let displayLink = CADisplayLink(target: self, selector: #selector(handlerRunLoopMode))
+        displayLink.add(to: .main, forMode: .default)
     }
-
-    
 }

@@ -14,6 +14,7 @@ class OverviewViewController: BaseController {
     var nawProductsProfit = 0
     var nawProductsGross = 0
     var nawTotalProfit = 0
+   
     
 //    image animation
     var animateStart = false
@@ -43,10 +44,10 @@ class OverviewViewController: BaseController {
     
     private let imageMany: UIImageView = {
         let image = UIImageView()
+        image.alpha = 0
         image.contentMode = .scaleAspectFit
         return image
     }()
-
 
     init(managerData: DataLouder){
         self.managerData = managerData
@@ -79,14 +80,17 @@ extension OverviewViewController {
         profitCollectionView.reloadData()
         getTotalProfit()
         viewTotalProfit.configure(num: nawTotalProfit)
-//        animate(imageView: imageMany, images: imageManyArr)
-
+        
         if animateStart {
+            UIView.animate(withDuration: 1, delay: 1) {
+                self.imageMany.alpha = 1
+            }
             animate(imageView: imageMany, images: imageManyArr)
             animateStart = false
+            UIView.animate(withDuration: 0.9, delay: 0.9) {
+                self.imageMany.alpha = 0
+            }
         }
-        
-       
     }
   
     
@@ -94,17 +98,16 @@ extension OverviewViewController {
         super.setupViews()
         
         manageObjectContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-
-       
+        
         setDelegates()
         setCollectionView()
         view.addViewWithoutTAMIC(profitCollectionView)
         view.addViewWithoutTAMIC(viewTotalProfit)
-//        view.addViewWithoutTAMIC(imageDog)
+        //        view.addViewWithoutTAMIC(imageDog)
         view.addViewWithoutTAMIC(imageMany)
-
-        imageManyArr = createImageArray(total: 17, imagePrefix: "AnimationMany")
-
+        
+        imageManyArr = createImageArray(total: 30, imagePrefix: "AnimationMany")
+        
     }
     
     
@@ -117,23 +120,21 @@ extension OverviewViewController {
 //            imageDog.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 10),
 //
 //
-            imageMany.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant:  220),
-            imageMany.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant:  -90),
-            imageMany.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant:  150),
-            imageMany.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -300),
-            imageMany.heightAnchor.constraint(equalToConstant: 100),
-            imageMany.widthAnchor.constraint(equalToConstant: 100),
-
+            imageMany.heightAnchor.constraint(equalToConstant: 200),
+            imageMany.widthAnchor.constraint(equalToConstant: 200),
+            imageMany.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            imageMany.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            
 
             viewTotalProfit.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor,constant: 20),
             viewTotalProfit.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 30),
             viewTotalProfit.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -30),
-            viewTotalProfit.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant:  -650),
+            viewTotalProfit.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant:  -view.bounds.height / 1.32),
             
             profitCollectionView.topAnchor.constraint(equalTo: viewTotalProfit.bottomAnchor, constant: 20),
             profitCollectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             profitCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
-            profitCollectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant:  -350)
+            profitCollectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -view.bounds.height / 1.6)
         ])
     }
     
@@ -149,6 +150,7 @@ extension OverviewViewController {
         view.backgroundColor = R.Color.background
         viewTotalProfit.layer.cornerRadius = 10
         viewTotalProfit.clipsToBounds = true
+        
 //        Bottom added item
         addNavButton(at: .right, with: "", image: UIImage(systemName: "plus"))
         
@@ -343,7 +345,7 @@ extension OverviewViewController {
     
         imageView.animationImages = images
         imageView.animationDuration = 0.85
-        imageView.animationRepeatCount = 4
+        imageView.animationRepeatCount = 5
         imageView.startAnimating()
     }
 }
