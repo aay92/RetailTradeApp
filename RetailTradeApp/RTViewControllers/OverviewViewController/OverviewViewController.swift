@@ -37,7 +37,8 @@ class OverviewViewController: BaseController {
     
     private let imageDog: UIImageView = {
         let image = UIImageView()
-        image.contentMode = .scaleAspectFit
+        image.contentMode = .scaleAspectFill
+        image.clipsToBounds = true
         image.image = UIImage(named: "dog")
         return image
     }()
@@ -124,7 +125,7 @@ extension OverviewViewController {
             imageMany.widthAnchor.constraint(equalToConstant: 200),
             imageMany.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             imageMany.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-            
+
 
             viewTotalProfit.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor,constant: 20),
             viewTotalProfit.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 30),

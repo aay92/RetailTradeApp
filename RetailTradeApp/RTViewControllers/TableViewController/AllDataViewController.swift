@@ -9,7 +9,7 @@ import UIKit
 import CoreData
 
 class AllDataViewController: BaseController {
-    
+    let sectionHeaderTitles = ["2022,03,12","2022,03,13","2022,03,14"]
     //MARK: - dataFlowFromCoreData
     var manageObjectContext: NSManagedObjectContext!
     var products = [ProductEntity]()
@@ -85,8 +85,11 @@ extension AllDataViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 80
+        return 75
     }
+    
+  
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 //        return managerData.fetchProductData(ProductEntity.self).count
         return products.count
@@ -96,6 +99,10 @@ extension AllDataViewController: UITableViewDelegate, UITableViewDataSource {
         let cell = tableViewProducts.dequeueReusableCell(withIdentifier: TableViewCell.identifier, for: indexPath) as! TableViewCell
         cell.configure(with: products[indexPath.row])
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        print("Нажали на ячейку")
     }
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
@@ -129,6 +136,34 @@ extension AllDataViewController: UITableViewDelegate, UITableViewDataSource {
         return config
         
     }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        
+        let sectionHeaderBackgroundColor = UIColor(hue: 0.921, saturation: 0.34, brightness: 0.94, alpha: 0.4)
+        
+        let sectionHeaderLabelView = UIView()
+        sectionHeaderLabelView.backgroundColor = sectionHeaderBackgroundColor
+        sectionHeaderLabelView.layer.cornerRadius = 10
+        //let sectionHeaderImage = UIImage(named: sectionHeaderTitles[section])
+        //           let sectionHeaderImage = UIImage(named: "QueryDueDate")
+        //           let sectionHeaderImageView = UIImageView(image: sectionHeaderImage)
+        //           sectionHeaderImageView.frame = CGRect(x: 3, y: 10, width: 30, height: 30)
+        //           sectionHeaderLabelView.addSubview(sectionHeaderImageView)
+        //
+        let sectionHeaderLabel = UILabel()
+        sectionHeaderLabel.text = sectionHeaderTitles[section]
+        sectionHeaderLabel.textColor = .white.withAlphaComponent(0.5)
+        sectionHeaderLabel.font = UIFont.boldSystemFont(ofSize: 20.0)
+        sectionHeaderLabel.frame = CGRect(x: 40, y: -5, width: 250, height: 40)
+        sectionHeaderLabelView.addSubview(sectionHeaderLabel)
+        
+        return sectionHeaderLabelView
+           
+       }
+    
+//     func numberOfSections(in tableView: UITableView) -> Int {
+//            return sectionHeaderTitles.count
+//        }
 }
 
 

@@ -23,7 +23,9 @@ class TableViewCell: UITableViewCell {
         let view = UIImageView()
         view.clipsToBounds = false
         view.layer.cornerRadius = 10
-        view.contentMode = .scaleAspectFit
+        view.contentMode = .scaleAspectFill
+        view.layer.masksToBounds = true
+        view.clipsToBounds = true
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
@@ -32,30 +34,41 @@ class TableViewCell: UITableViewCell {
         let stackView = UIStackView()
         stackView.clipsToBounds = false
         stackView.axis = .horizontal
-        stackView.distribution  = .fillProportionally
+        stackView.distribution  = .fill
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.backgroundColor = .clear
+        stackView.spacing = 10
         return stackView
     }()
-    
     
     private var nameLbl: UILabel = {
         let label = UILabel()
         label.text = "Название"
         label.font = UIFont(name: "Ariel", size: 15)
         label.font = UIFont.boldSystemFont(ofSize: 15)
-        label.textColor = .black
-        label.textAlignment = .left
+        label.textColor = .white
+        label.textAlignment = .center
         label.numberOfLines = 0
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
+    }()
+    
+    
+    private let stackLblGross: UIStackView = {
+        let stackView = UIStackView()
+        stackView.clipsToBounds = false
+        stackView.axis = .vertical
+        stackView.distribution  = .fillProportionally
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.backgroundColor = .clear
+        return stackView
     }()
     
     private var priceLblGross: UILabel = {
         let label = UILabel()
         label.text = "Стоимость"
-        label.font = UIFont(name: "Ariel", size: 20)
-        label.font = UIFont.boldSystemFont(ofSize: 20)
+        label.font = UIFont(name: "Ariel", size: 18)
+        label.font = UIFont.boldSystemFont(ofSize: 18)
         label.textColor = .white
         label.textAlignment = .left
         label.numberOfLines = 0
@@ -63,12 +76,46 @@ class TableViewCell: UITableViewCell {
         return label
     }()
     
+    private var priceLblGrossDescription: UILabel = {
+        let label = UILabel()
+        label.text = "Стоимость с наценкой"
+        label.font = UIFont(name: "Ariel", size: 13)
+        label.font = UIFont.boldSystemFont(ofSize: 13)
+        label.textColor = .white.withAlphaComponent(0.6)
+        label.textAlignment = .left
+        label.numberOfLines = 0
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    private let stackLblProfit: UIStackView = {
+        let stackView = UIStackView()
+        stackView.clipsToBounds = false
+        stackView.axis = .vertical
+        stackView.distribution  = .fillProportionally
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.backgroundColor = .clear
+        return stackView
+    }()
+    
     private var priceLblProfit: UILabel = {
         let label = UILabel()
         label.text = "Стоимость"
-        label.font = UIFont(name: "Ariel", size: 20)
-        label.font = UIFont.boldSystemFont(ofSize: 20)
+        label.font = UIFont(name: "Ariel", size: 18)
+        label.font = UIFont.boldSystemFont(ofSize: 18)
         label.textColor = .white
+        label.textAlignment = .left
+        label.numberOfLines = 0
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    private var priceLblProfitDescription: UILabel = {
+        let label = UILabel()
+        label.text = "Себeстоимость"
+        label.font = UIFont(name: "Ariel", size: 13)
+        label.font = UIFont.boldSystemFont(ofSize: 13)
+        label.textColor = .white.withAlphaComponent(0.6)
         label.textAlignment = .left
         label.numberOfLines = 0
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -87,8 +134,13 @@ class TableViewCell: UITableViewCell {
         addSubview(imageViewMain)
         addSubview(stack)
         stack.addArrangedSubview(nameLbl)
-        stack.addArrangedSubview(priceLblGross)
-        stack.addArrangedSubview(priceLblProfit)
+        stack.addArrangedSubview(stackLblGross)
+        stack.addArrangedSubview(stackLblProfit)
+        stackLblGross.addArrangedSubview(priceLblGross)
+        stackLblGross.addArrangedSubview(priceLblGrossDescription)
+        stackLblProfit.addArrangedSubview(priceLblProfit)
+        stackLblProfit.addArrangedSubview(priceLblProfitDescription)
+
         constraintViews()
         configureAppereance()
     }
@@ -119,15 +171,15 @@ class TableViewCell: UITableViewCell {
             viewProfit.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -5),
             viewProfit.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -5),
 
-            imageViewMain.topAnchor.constraint(equalTo: topAnchor, constant: 5),
-            imageViewMain.leadingAnchor.constraint(equalTo: stack.trailingAnchor, constant: -20),
-            imageViewMain.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -15),
-            imageViewMain.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -5),
+            imageViewMain.topAnchor.constraint(equalTo: stack.topAnchor),
+            imageViewMain.leadingAnchor.constraint(equalTo: stack.trailingAnchor, constant: 10),
+            imageViewMain.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10),
+            imageViewMain.bottomAnchor.constraint(equalTo: stack.bottomAnchor),
             
-            stack.topAnchor.constraint(equalTo: topAnchor, constant: 15),
-            stack.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 15),
-            stack.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -70),
-            stack.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -15),
+            stack.topAnchor.constraint(equalTo: topAnchor, constant: 10),
+            stack.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10),
+            stack.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -110),
+            stack.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -10),
         ])
     }
     
@@ -135,6 +187,7 @@ class TableViewCell: UITableViewCell {
         backgroundColor = .clear
         stack.backgroundColor = .clear
         viewProfit.backgroundColor = R.Color.backgroundDetailVC
+  
     }
 
 }

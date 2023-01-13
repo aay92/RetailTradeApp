@@ -14,12 +14,13 @@
 		5B5F51A7293F397A006DD6C1 /* ProductEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B5F51A5293F397A006DD6C1 /* ProductEntity+CoreDataProperties.swift */; };
 		5B8E94EB292D5BAD00E0EB49 /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B8E94EA292D5BAD00E0EB49 /* TableViewCell.swift */; };
 		5B8E94ED292E117500E0EB49 /* DetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B8E94EC292E117500E0EB49 /* DetailVC.swift */; };
+		5BB2EC242971E94A002A6A20 /* AlertsChoisCamareOrLibrary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB2EC232971E94A002A6A20 /* AlertsChoisCamareOrLibrary.swift */; };
 		5BB91FFE292F657800FCF34E /* DataLouder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB91FFD292F657800FCF34E /* DataLouder.swift */; };
 		5BF24F11292B645600BEE9AB /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BF24F10292B645600BEE9AB /* TabBarController.swift */; };
 		5BF24F13292B663900BEE9AB /* Resources.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BF24F12292B663900BEE9AB /* Resources.swift */; };
 		5BF24F16292B667900BEE9AB /* UIColor + Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BF24F15292B667900BEE9AB /* UIColor + Ext.swift */; };
 		5BF24F18292B6A6300BEE9AB /* NavBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BF24F17292B6A6300BEE9AB /* NavBarController.swift */; };
-		5BF24F1A292B6B7E00BEE9AB /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BF24F19292B6B7E00BEE9AB /* BaseViewController.swift */; };
+		5BF24F1A292B6B7E00BEE9AB /* BaseController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BF24F19292B6B7E00BEE9AB /* BaseController.swift */; };
 		5BF24F1C292B701800BEE9AB /* AllDataViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BF24F1B292B701800BEE9AB /* AllDataViewController.swift */; };
 		5BF24F1E292B705400BEE9AB /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BF24F1D292B705400BEE9AB /* SettingViewController.swift */; };
 		5BF24F20292C117900BEE9AB /* UIView + Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BF24F1F292C117900BEE9AB /* UIView + Ext.swift */; };
@@ -41,12 +42,13 @@
 		5B5F51A5293F397A006DD6C1 /* ProductEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "ProductEntity+CoreDataProperties.swift"; path = "RetailTradeApp/ProductEntity+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
 		5B8E94EA292D5BAD00E0EB49 /* TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
 		5B8E94EC292E117500E0EB49 /* DetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailVC.swift; sourceTree = "<group>"; };
+		5BB2EC232971E94A002A6A20 /* AlertsChoisCamareOrLibrary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertsChoisCamareOrLibrary.swift; sourceTree = "<group>"; };
 		5BB91FFD292F657800FCF34E /* DataLouder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataLouder.swift; sourceTree = "<group>"; };
 		5BF24F10292B645600BEE9AB /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		5BF24F12292B663900BEE9AB /* Resources.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Resources.swift; sourceTree = "<group>"; };
 		5BF24F15292B667900BEE9AB /* UIColor + Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor + Ext.swift"; sourceTree = "<group>"; };
 		5BF24F17292B6A6300BEE9AB /* NavBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavBarController.swift; sourceTree = "<group>"; };
-		5BF24F19292B6B7E00BEE9AB /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
+		5BF24F19292B6B7E00BEE9AB /* BaseController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseController.swift; sourceTree = "<group>"; };
 		5BF24F1B292B701800BEE9AB /* AllDataViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllDataViewController.swift; sourceTree = "<group>"; };
 		5BF24F1D292B705400BEE9AB /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
 		5BF24F1F292C117900BEE9AB /* UIView + Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView + Ext.swift"; sourceTree = "<group>"; };
@@ -81,6 +83,14 @@
 			path = TableViewCell;
 			sourceTree = "<group>";
 		};
+		5BB2EC222971E918002A6A20 /* Alerts */ = {
+			isa = PBXGroup;
+			children = (
+				5BB2EC232971E94A002A6A20 /* AlertsChoisCamareOrLibrary.swift */,
+			);
+			path = Alerts;
+			sourceTree = "<group>";
+		};
 		5BB91FFC292F655900FCF34E /* DataFlow */ = {
 			isa = PBXGroup;
 			children = (
@@ -107,8 +117,7 @@
 				5BF24F0A292AA60200BEE9AB /* OverviewViewController */,
 				5BF24F0B292AA60E00BEE9AB /* TableViewController */,
 				5BF24F0C292AA63700BEE9AB /* UserViewController */,
-				5BF24F19292B6B7E00BEE9AB /* BaseViewController.swift */,
-				5B8E94EC292E117500E0EB49 /* DetailVC.swift */,
+				5BF24F19292B6B7E00BEE9AB /* BaseController.swift */,
 			);
 			path = RTViewControllers;
 			sourceTree = "<group>";
@@ -118,6 +127,7 @@
 			children = (
 				5BF24F21292C11FF00BEE9AB /* View */,
 				5BFD8AA9292A6DF4007A45A2 /* OverviewViewController.swift */,
+				5B8E94EC292E117500E0EB49 /* DetailVC.swift */,
 			);
 			path = OverviewViewController;
 			sourceTree = "<group>";
@@ -189,6 +199,7 @@
 		5BF24F24292D0B9700BEE9AB /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				5BB2EC222971E918002A6A20 /* Alerts */,
 				5BF24F25292D0BAE00BEE9AB /* ProfitModel.swift */,
 			);
 			path = Model;
@@ -295,6 +306,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5BB2EC242971E94A002A6A20 /* AlertsChoisCamareOrLibrary.swift in Sources */,
 				5BB91FFE292F657800FCF34E /* DataLouder.swift in Sources */,
 				5B5F51A3293F2C7F006DD6C1 /* UIButton + Ext.swift in Sources */,
 				5B5F51A7293F397A006DD6C1 /* ProductEntity+CoreDataProperties.swift in Sources */,
@@ -312,7 +324,7 @@
 				5BF24F18292B6A6300BEE9AB /* NavBarController.swift in Sources */,
 				5BF24F1E292B705400BEE9AB /* SettingViewController.swift in Sources */,
 				5BFD8AA6292A6DF4007A45A2 /* AppDelegate.swift in Sources */,
-				5BF24F1A292B6B7E00BEE9AB /* BaseViewController.swift in Sources */,
+				5BF24F1A292B6B7E00BEE9AB /* BaseController.swift in Sources */,
 				5B52EEB12937511B00E89787 /* BaseView.swift in Sources */,
 				5B5F51A6293F397A006DD6C1 /* ProductEntity+CoreDataClass.swift in Sources */,
 				5BF24F13292B663900BEE9AB /* Resources.swift in Sources */,

@@ -192,11 +192,9 @@ class DetailVC: BaseController {
         stack.clipsToBounds = false
         stack.axis = .vertical
         stack.spacing = 10
-        stack.distribution  = .fillProportionally
+        stack.distribution  = .fillEqually
         stack.backgroundColor = .systemBlue.withAlphaComponent(0.1)
         stack.layer.cornerRadius = 20
-//        stack.layer.borderColor = UIColor.white.cgColor
-//        stack.layer.borderWidth = 1
         return stack
     }()
     
@@ -204,9 +202,13 @@ class DetailVC: BaseController {
         let image = UIImageView()
         image.image = UIImage(systemName: "photo")
         image.contentMode = .scaleAspectFit
+        image.clipsToBounds = true
+        image.layer.masksToBounds = true
+
+//      image.isUserInteractionEnabled - добавляет возможность взаимодействовать с картинкой
+        image.isUserInteractionEnabled = true
         image.tintColor = .white
         image.layer.cornerRadius = image.frame.height / 2.0
-        image.layer.masksToBounds = true
         return image
     }()
     
@@ -259,13 +261,31 @@ extension DetailVC {
 //        vc.allowsEditing = true
         present(vc, animated: true)
     }
+//    Нажатие на картинку
+    @objc private func didTapImageView(){
+        alertPhotoOrCamera { [self] source in
+            chooseImagePicker(source: source)
+        }
+
+    }
 }
+
+
 
 //MARK: - UIImagePickerControllerDelegate, UINavigationControllerDelegate
 extension DetailVC: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
+    func chooseImagePicker(source: UIImagePickerController.SourceType){
+        if UIImagePickerController.isSourceTypeAvailable(source) {
+            let imagePicker = UIImagePickerController()
+            imagePicker.delegate = self
+            imagePicker.allowsEditing = true
+            imagePicker.sourceType = source
+            present(imagePicker, animated: true)
+        }
+    }
+    
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-//        print("\(info)")
         if let image = info[UIImagePickerController.InfoKey(rawValue:"UIImagePickerControllerEditedImage")] as? UIImage {
             imageFromLibrary.image = image
         }
@@ -279,7 +299,7 @@ extension DetailVC: UIImagePickerControllerDelegate, UINavigationControllerDeleg
 }
 
 extension DetailVC {
-    
+//    Сохранить новый item
     @objc private func savingData(){
         createProduct()
     }
@@ -292,11 +312,17 @@ extension DetailVC {
 extension DetailVC {
     override func setupViews() {
         super.setupViews()
+//
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(didTapImageView))
+        imageFromLibrary.addGestureRecognizer(tapGestureRecognizer)
+
         view.addViewWithoutTAMIC(labelTitleVC)
         view.addViewWithoutTAMIC(stack)
         view.addViewWithoutTAMIC(stackForImage)
+        view.addViewWithoutTAMIC(imageFromLibrary)
         
-        stackForImage.addArrangedSubview(imageFromLibrary)
+//        stackForImage.addArrangedSubview(imageFromLibrary)
+        
         stackForImage.addArrangedSubview(buttonSafeImage)
         stackForImage.addArrangedSubview(buttonSafeAndMakingPhoto)
         
@@ -330,17 +356,25 @@ extension DetailVC {
             buttonSafeImage.heightAnchor.constraint(equalToConstant: 40),
             buttonSafeAndMakingPhoto.heightAnchor.constraint(equalToConstant: 40),
             imageFromLibrary.heightAnchor.constraint(equalToConstant: 200),
+
             
-            labelTitleVC.topAnchor.constraint(equalTo:view.safeAreaLayoutGuide.topAnchor, constant: 20),
+            labelTitleVC.topAnchor.constraint(equalTo:view.safeAreaLayoutGuide.topAnchor),
             labelTitleVC.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             labelTitleVC.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
-            labelTitleVC.bottomAnchor.constraint(equalTo: stackForImage.topAnchor,constant:  -30),
+            labelTitleVC.bottomAnchor.constraint(equalTo: imageFromLibrary.topAnchor,constant:  -10),
             
-          
+            imageFromLibrary.topAnchor.constraint(equalTo: labelTitleVC.bottomAnchor,constant:  0),
+            imageFromLibrary.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            imageFromLibrary.bottomAnchor.constraint(equalTo: stackForImage.topAnchor,constant: -20),
+            
+            buttonSafeImage.trailingAnchor.constraint(equalTo: imageFromLibrary.trailingAnchor, constant:  view.bounds.width * 0.14),
+            buttonSafeAndMakingPhoto.trailingAnchor.constraint(equalTo: imageFromLibrary.trailingAnchor, constant:  view.bounds.width * 0.14),
+            
             stackForImage.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             stackForImage.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant:  -20),
             stackForImage.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -400),
             
+                        
             buttonSafeImage.leadingAnchor.constraint(equalTo: stackForImage.leadingAnchor, constant: 20),
             buttonSafeImage.trailingAnchor.constraint(equalTo: stackForImage.trailingAnchor, constant: -20),
             
