@@ -10,7 +10,10 @@ import UIKit
 class DetailVC: BaseController {
     
     let managerData = DataLouder.shared
-    
+//    var timeDate: Date? = nil
+
+    var timeDate = Date()
+
     var animationApear = false
     var completion: ((Bool)->())?
     
@@ -78,6 +81,23 @@ class DetailVC: BaseController {
         stackView.distribution  = .fillProportionally
         stackView.backgroundColor = .clear
         return stackView
+    }()
+    
+    private let stackForName: UIStackView = {
+        let stackView = UIStackView()
+        stackView.clipsToBounds = false
+        stackView.axis = .horizontal
+        stackView.backgroundColor = .clear
+        return stackView
+    }()
+    
+    private var chooseDate: UILabel = {
+        let label = UILabel()
+        label.text = "Выбирите дату"
+        label.font = UIFont(name: "Ariel", size: 15)
+        label.textAlignment = .right
+        label.font = UIFont.boldSystemFont(ofSize: 15)
+        return label
     }()
     
     private var nameLbl: UILabel = {
@@ -266,8 +286,14 @@ extension DetailVC {
         alertPhotoOrCamera { [self] source in
             chooseImagePicker(source: source)
         }
-
     }
+    
+    //    Нажатие на дату
+        @objc private func didTapDate(){
+            alertDate(label: chooseDate) {[self] int , date in
+                timeDate = date
+            }
+        }
 }
 
 
@@ -307,6 +333,7 @@ extension DetailVC {
     @objc private func closedView(){
         dismiss(animated: true)
     }
+       
 }
 
 extension DetailVC {
@@ -315,7 +342,12 @@ extension DetailVC {
 //
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(didTapImageView))
         imageFromLibrary.addGestureRecognizer(tapGestureRecognizer)
+        
+        let tapGestureDate = UITapGestureRecognizer(target: self, action: #selector(didTapDate))
+        chooseDate.isUserInteractionEnabled = true
+        chooseDate.addGestureRecognizer(tapGestureDate)
 
+        
         view.addViewWithoutTAMIC(labelTitleVC)
         view.addViewWithoutTAMIC(stack)
         view.addViewWithoutTAMIC(stackForImage)
@@ -326,7 +358,10 @@ extension DetailVC {
         stackForImage.addArrangedSubview(buttonSafeImage)
         stackForImage.addArrangedSubview(buttonSafeAndMakingPhoto)
         
-        stack.addArrangedSubview(nameLbl)
+        stackForName.addArrangedSubview(nameLbl)
+        stackForName.addArrangedSubview(chooseDate)
+
+        stack.addArrangedSubview(stackForName)
         stack.addArrangedSubview(nameTextField)
         stack.addArrangedSubview(stackForTextFieldsPrices)
         
@@ -385,12 +420,12 @@ extension DetailVC {
             stack.topAnchor.constraint(equalTo: stackForImage.bottomAnchor,constant:  50),
             stack.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             stack.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
-            stack.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant:  -180),
+            stack.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant:  -165),
 
-            stackForButton.topAnchor.constraint(equalTo: stack.bottomAnchor, constant: 25),
+            stackForButton.topAnchor.constraint(equalTo: stack.bottomAnchor, constant: 15),
             stackForButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 50),
             stackForButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -50),
-            stackForButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant:  -view.bounds.height / 7.7)
+            stackForButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant:  -view.bounds.height / 9)
         ])
     }
     
@@ -429,10 +464,14 @@ extension DetailVC {
             print("Введите данные")
             return
         }
+        
+        print("MARK:- \(timeDate)")
+        
         let newProduct = ProfitModelItem(name: textName,
                                          priceGross: Int(textGross)!,
                                          priceProfit: Int(textProfit)!,
-                                         image: saveImage
+                                         image: saveImage,
+                                         date: timeDate
         )
         
         
@@ -440,6 +479,8 @@ extension DetailVC {
         print("Cтоимость - \(newProduct.priceGross)")
         print("Cтоимость с наценкой - \(newProduct.priceProfit)")
         print("Картинка - \(String(describing: saveImage?.description))")
+        print("Дата создани - \(timeDate)")
+
         
         if !(newProduct.name == "") {
             creatItem(item: newProduct)
@@ -465,6 +506,7 @@ extension DetailVC {
         nameTextField.text = product.name
         priceTextFieldGross.text = String("\(product.priceGross)")
         priceTextFieldProfit.text = String("\(product.priceProfit)")
+        chooseDate.text = String("\(product.value(forKey: "data"))")
         
         guard let image = product.image else {
             return print("Ошибка в редактирование ячейки и сохранение фото")}
@@ -491,7 +533,8 @@ extension DetailVC {
             let newProduct = ProfitModelItem(name: textName,
                                              priceGross: Int(textGross)!,
                                              priceProfit: Int(textProfit)!,
-                                             image: saveImage)
+                                             image: saveImage,
+                                             date: timeDate)
             
             
             

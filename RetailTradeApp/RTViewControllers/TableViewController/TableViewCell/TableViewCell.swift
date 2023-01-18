@@ -19,6 +19,26 @@ class TableViewCell: UITableViewCell {
         return view
     }()
     
+    private let viewDate: UIView = {
+        let view = UIView()
+        view.clipsToBounds = false
+        //        view.backgroundColor = .systemGray
+        view.layer.cornerRadius = 10
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
+    private var LblData: UILabel = {
+        let label = UILabel()
+        label.text = "Дата"
+        label.font = UIFont(name: "Ariel", size: 11)
+        label.font = UIFont.boldSystemFont(ofSize: 11)
+        label.textColor = .white
+        label.textAlignment = .left
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
     private let imageViewMain: UIImageView = {
         let view = UIImageView()
         view.clipsToBounds = false
@@ -122,14 +142,31 @@ class TableViewCell: UITableViewCell {
         return label
     }()
     
-
+    private var priceLblData: UILabel = {
+        let label = UILabel()
+        label.text = ""
+        label.font = UIFont(name: "Ariel", size: 10)
+        label.font = UIFont.boldSystemFont(ofSize: 10)
+        label.textColor = .white.withAlphaComponent(0.6)
+        label.textAlignment = .left
+        label.numberOfLines = 0
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    
     override func awakeFromNib() {
         super.awakeFromNib()
-
+        
     }
-
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
+        
+        
+        
+        addSubview(viewDate)
+        addSubview(LblData)
         addSubview(viewProfit)
         addSubview(imageViewMain)
         addSubview(stack)
@@ -140,7 +177,7 @@ class TableViewCell: UITableViewCell {
         stackLblGross.addArrangedSubview(priceLblGrossDescription)
         stackLblProfit.addArrangedSubview(priceLblProfit)
         stackLblProfit.addArrangedSubview(priceLblProfitDescription)
-
+        
         constraintViews()
         configureAppereance()
     }
@@ -155,6 +192,17 @@ class TableViewCell: UITableViewCell {
         priceLblProfit.text = String(item.priceProfit) + " ₽"
         guard let image = item.image else { return }
         imageViewMain.image = UIImage(data: image) ?? UIImage(systemName: "photo")
+        
+        var dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "dd/MM/yyyy"
+        
+        print("MARK:- \(item.data)")
+        guard let realDate = item.data else { return }
+
+        let dateString = dateFormatter.string(from: realDate)
+        
+        
+        LblData.text = String("\(dateString)")
     }
     
     
@@ -166,17 +214,29 @@ class TableViewCell: UITableViewCell {
     func constraintViews(){
         NSLayoutConstraint.activate([
             
-            viewProfit.topAnchor.constraint(equalTo: topAnchor, constant: 5),
+            viewDate.topAnchor.constraint(equalTo: topAnchor),
+            viewDate.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 5),
+            viewDate.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -5),
+            viewDate.bottomAnchor.constraint(equalTo: bottomAnchor, constant: frame.height / -10.5),
+            
+            
+            LblData.topAnchor.constraint(equalTo: topAnchor),
+            LblData.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 15),
+            LblData.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -5),
+            LblData.bottomAnchor.constraint(equalTo: viewProfit.topAnchor, constant: 0),
+            
+            
+            viewProfit.topAnchor.constraint(equalTo: topAnchor, constant: 13),
             viewProfit.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 5),
             viewProfit.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -5),
             viewProfit.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -5),
-
-            imageViewMain.topAnchor.constraint(equalTo: stack.topAnchor),
+            
+            imageViewMain.topAnchor.constraint(equalTo: stack.topAnchor, constant: 0),
             imageViewMain.leadingAnchor.constraint(equalTo: stack.trailingAnchor, constant: 10),
             imageViewMain.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10),
-            imageViewMain.bottomAnchor.constraint(equalTo: stack.bottomAnchor),
+            imageViewMain.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -10),
             
-            stack.topAnchor.constraint(equalTo: topAnchor, constant: 10),
+            stack.topAnchor.constraint(equalTo: topAnchor, constant: 15),
             stack.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10),
             stack.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -110),
             stack.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -10),
@@ -184,10 +244,11 @@ class TableViewCell: UITableViewCell {
     }
     
     func configureAppereance(){
+        
         backgroundColor = .clear
         stack.backgroundColor = .clear
         viewProfit.backgroundColor = R.Color.backgroundDetailVC
-  
+        
     }
-
+    
 }
