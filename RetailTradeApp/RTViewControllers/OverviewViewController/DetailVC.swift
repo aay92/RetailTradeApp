@@ -10,9 +10,9 @@ import UIKit
 class DetailVC: BaseController {
     
     let managerData = DataLouder.shared
-//    var timeDate: Date? = nil
+    var timeDate = ""
 
-    var timeDate = Date()
+//    var timeDate = Date()
 
     var animationApear = false
     var completion: ((Bool)->())?
@@ -291,7 +291,10 @@ extension DetailVC {
     //    Нажатие на дату
         @objc private func didTapDate(){
             alertDate(label: chooseDate) {[self] int , date in
-                timeDate = date
+                let format = DateFormatter()
+                format.timeStyle = .none
+                format.dateStyle = .long
+                timeDate = format.string(from: date)
             }
         }
 }
@@ -465,7 +468,7 @@ extension DetailVC {
             return
         }
         
-        print("MARK:- \(timeDate)")
+        print("MARK сохранаяем:- \(timeDate)")
         
         let newProduct = ProfitModelItem(name: textName,
                                          priceGross: Int(textGross)!,
@@ -475,11 +478,12 @@ extension DetailVC {
         )
         
         
+        
         print("Создан новый товар: Имя - \(newProduct.name)")
         print("Cтоимость - \(newProduct.priceGross)")
         print("Cтоимость с наценкой - \(newProduct.priceProfit)")
         print("Картинка - \(String(describing: saveImage?.description))")
-        print("Дата создани - \(timeDate)")
+        print("Дата создания - \(timeDate)")
 
         
         if !(newProduct.name == "") {
@@ -529,12 +533,13 @@ extension DetailVC {
                 print("Введите данные")
                 return
             }
-
+            
             let newProduct = ProfitModelItem(name: textName,
                                              priceGross: Int(textGross)!,
                                              priceProfit: Int(textProfit)!,
                                              image: saveImage,
-                                             date: timeDate)
+                                             date: timeDate
+            )
             
             
             

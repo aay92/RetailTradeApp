@@ -28,7 +28,7 @@ class TableViewCell: UITableViewCell {
         return view
     }()
     
-    private var LblData: UILabel = {
+     var lblData: UILabel = {
         let label = UILabel()
         label.text = "Дата"
         label.font = UIFont(name: "Ariel", size: 11)
@@ -166,7 +166,7 @@ class TableViewCell: UITableViewCell {
         
         
         addSubview(viewDate)
-        addSubview(LblData)
+        addSubview(lblData)
         addSubview(viewProfit)
         addSubview(imageViewMain)
         addSubview(stack)
@@ -193,16 +193,8 @@ class TableViewCell: UITableViewCell {
         guard let image = item.image else { return }
         imageViewMain.image = UIImage(data: image) ?? UIImage(systemName: "photo")
         
-        var dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "dd/MM/yyyy"
-        
-        print("MARK:- \(item.data)")
-        guard let realDate = item.data else { return }
-
-        let dateString = dateFormatter.string(from: realDate)
-        
-        
-        LblData.text = String("\(dateString)")
+        print("MARK в ячейке:- \(String(describing: item.data))")
+        lblData.text = item.data
     }
     
     
@@ -220,10 +212,10 @@ class TableViewCell: UITableViewCell {
             viewDate.bottomAnchor.constraint(equalTo: bottomAnchor, constant: frame.height / -10.5),
             
             
-            LblData.topAnchor.constraint(equalTo: topAnchor),
-            LblData.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 15),
-            LblData.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -5),
-            LblData.bottomAnchor.constraint(equalTo: viewProfit.topAnchor, constant: 0),
+            lblData.topAnchor.constraint(equalTo: topAnchor),
+            lblData.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 15),
+            lblData.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -5),
+            lblData.bottomAnchor.constraint(equalTo: viewProfit.topAnchor, constant: 0),
             
             
             viewProfit.topAnchor.constraint(equalTo: topAnchor, constant: 13),

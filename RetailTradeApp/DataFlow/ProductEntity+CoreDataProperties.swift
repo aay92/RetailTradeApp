@@ -2,7 +2,7 @@
 //  ProductEntity+CoreDataProperties.swift
 //  RetailTradeApp
 //
-//  Created by Aleksey Alyonin on 06.12.2022.
+//  Created by Aleksey Alyonin on 20.01.2023.
 //
 //
 
@@ -16,11 +16,11 @@ extension ProductEntity {
         return NSFetchRequest<ProductEntity>(entityName: "ProductEntity")
     }
 
+    @NSManaged public var data: String?
+    @NSManaged public var image: Data?
     @NSManaged public var name: String?
     @NSManaged public var priceGross: Int32
     @NSManaged public var priceProfit: Int32
-    @NSManaged public var image: Data?
-    @NSManaged public var data: String?
 
 }
 

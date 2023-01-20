@@ -13,7 +13,7 @@ struct ProfitModelItem {
     var priceGross: Int
     var priceProfit: Int
     var image: Data?
-    var date: Date?
+    var date: String?
 }
 
 //class DataFlow {
