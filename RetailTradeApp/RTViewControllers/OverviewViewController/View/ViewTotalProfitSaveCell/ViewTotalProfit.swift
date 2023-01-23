@@ -20,8 +20,13 @@ class ViewTotalProfit: BaseView {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
         view.backgroundColor = .systemRed
+        view.clipsToBounds = true
+//        view.layer.masksToBounds = true
+        view.layer.cornerRadius = 10
         return view
     }()
+    
+    private var viewCloseTheMonth = ViewTotalProfitSaveCell()
     
     private let stack: UIStackView = {
         let stackView = UIStackView()
@@ -58,6 +63,8 @@ class ViewTotalProfit: BaseView {
         return label
     }()
     
+    
+    
     func configure(num: Int){
         endValue = Double(num)
         priceLbl.text = String(endValue)
@@ -83,6 +90,8 @@ class ViewTotalProfit: BaseView {
         super.setupViews()
         
         addSubview(viewProfit)
+        addSubview(viewCloseTheMonth)
+        
         addSubview(stack)
         stack.addArrangedSubview(nameLbl)
         stack.addArrangedSubview(priceLbl)
@@ -92,12 +101,19 @@ class ViewTotalProfit: BaseView {
     override func constantViews() {
         super.constantViews()
 
+        
         NSLayoutConstraint.activate([
             viewProfit.topAnchor.constraint(equalTo: topAnchor, constant: 0),
             viewProfit.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 0),
-            viewProfit.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 0),
+            viewProfit.trailingAnchor.constraint(equalTo:trailingAnchor, constant:  -110),
             viewProfit.bottomAnchor.constraint(equalTo: bottomAnchor, constant: 0),
-        
+            
+            viewCloseTheMonth.topAnchor.constraint(equalTo: topAnchor, constant: 0),
+            viewCloseTheMonth.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 240),
+            viewCloseTheMonth.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 0),
+            viewCloseTheMonth.bottomAnchor.constraint(equalTo: bottomAnchor, constant: 0),
+
+            
             stack.topAnchor.constraint(equalTo: topAnchor, constant:15),
             stack.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
             stack.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20),
@@ -106,7 +122,13 @@ class ViewTotalProfit: BaseView {
     }
     override func configureAppearance() {
         super.configureAppearance()
+       
+        backgroundColor = .clear
+        viewCloseTheMonth.layer.masksToBounds =  true
+        viewCloseTheMonth.clipsToBounds = true
         
+   
+
         let displayLink = CADisplayLink(target: self, selector: #selector(handlerRunLoopMode))
         displayLink.add(to: .main, forMode: .default)
     }

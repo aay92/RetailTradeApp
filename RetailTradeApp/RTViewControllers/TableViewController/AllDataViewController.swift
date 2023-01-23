@@ -26,6 +26,7 @@ extension AllDataViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        manageObjectContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
         self.loadSaveData()
     }
     

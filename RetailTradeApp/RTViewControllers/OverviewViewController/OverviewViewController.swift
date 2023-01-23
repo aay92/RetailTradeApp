@@ -129,7 +129,7 @@ extension OverviewViewController {
 
             viewTotalProfit.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor,constant: 20),
             viewTotalProfit.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 30),
-            viewTotalProfit.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -30),
+            viewTotalProfit.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20 ),
             viewTotalProfit.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant:  -view.bounds.height / 1.32),
             
             profitCollectionView.topAnchor.constraint(equalTo: viewTotalProfit.bottomAnchor, constant: 20),

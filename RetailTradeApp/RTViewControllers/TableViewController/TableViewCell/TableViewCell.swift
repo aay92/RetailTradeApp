@@ -194,7 +194,7 @@ class TableViewCell: UITableViewCell {
         imageViewMain.image = UIImage(data: image) ?? UIImage(systemName: "photo")
         
         print("MARK в ячейке:- \(String(describing: item.data))")
-        lblData.text = item.data
+        lblData.text = item.value(forKey: "data") as? String
     }
     
     

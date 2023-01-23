@@ -7,9 +7,9 @@
 import UIKit
 
 class BaseView: UIView {
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
-
         setupViews()
         constantViews()
         configureAppearance()
@@ -17,7 +17,7 @@ class BaseView: UIView {
 
     required init?(coder: NSCoder) {
         super.init(coder: coder)
-        
+
         setupViews()
         constantViews()
         configureAppearance()

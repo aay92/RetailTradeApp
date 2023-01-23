@@ -49,6 +49,19 @@ extension UIView {
         addSubview(view)
         view.translatesAutoresizingMaskIntoConstraints = false
     }
-
+    
+//    Set color gradient
+    func setGradient(view: UIView, firstColors:UIColor, secondColor: UIColor, x: Int, y: Int, width: Int, height: Int){
+        let layer = CAGradientLayer()
+        layer.frame = view.bounds
+        layer.startPoint = CGPoint(x: 0.0, y: 0.5)
+        layer.endPoint = CGPoint(x: 1.0, y: 0.5)
+        layer.frame = CGRect(x: x, y: y, width: width, height: height)
+        layer.colors = [firstColors.cgColor, secondColor.cgColor]
+        view.layer.addSublayer(layer)
+    }
 }
+
+
+
 
