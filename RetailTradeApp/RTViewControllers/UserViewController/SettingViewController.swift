@@ -15,6 +15,7 @@ extension SettingViewController {
     
     override func configureAppereance() {
         super.configureAppereance()
+        title = "Настройки"
         view.backgroundColor = .systemBlue
 
     }

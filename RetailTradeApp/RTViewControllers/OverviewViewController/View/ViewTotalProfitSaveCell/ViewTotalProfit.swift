@@ -84,10 +84,37 @@ class ViewTotalProfit: BaseView {
         }
         
     }
-  
+//    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+//
+//        if let touch =  touches.first{
+//            viewCloseTheMonth.setGradient(view: self, firstColors: R.Color.background, secondColor: .systemBlue.withAlphaComponent(0.5), x: 240, y: 0, width: 120, height: 120)
+//        }
+//        super.touchesBegan(touches, with: event)
+//    }
+//    
+//    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+//
+//        if let touch = touches.first{
+//            
+//            viewCloseTheMonth.viewBackground.setGradient(view: self, firstColors: .clear, secondColor: .clear, x: 240, y: 0, width: 120, height: 120)
+//        }
+//        super.touchesEnded(touches, with: event)
+//    }
+        
+    
+    @objc func didTapDate(){
+//    viewCloseTheMonth.setGradient(view: self, firstColors: R.Color.background, secondColor: .systemBlue.withAlphaComponent(0.5), x: 240, y: 0, width: 120, height: 120)
+        
+    }
     
     override func setupViews() {
         super.setupViews()
+        
+//        Жест на нажатие кнопки Сохранить месяц
+        let tapGestureDate = UITapGestureRecognizer(target: self, action: #selector(didTapDate))
+        viewCloseTheMonth.isUserInteractionEnabled = true
+        viewCloseTheMonth.addGestureRecognizer(tapGestureDate)
+        
         
         addSubview(viewProfit)
         addSubview(viewCloseTheMonth)
@@ -122,14 +149,12 @@ class ViewTotalProfit: BaseView {
     }
     override func configureAppearance() {
         super.configureAppearance()
-       
+
         backgroundColor = .clear
-        viewCloseTheMonth.layer.masksToBounds =  true
-        viewCloseTheMonth.clipsToBounds = true
-        
-   
 
         let displayLink = CADisplayLink(target: self, selector: #selector(handlerRunLoopMode))
         displayLink.add(to: .main, forMode: .default)
     }
 }
+
+

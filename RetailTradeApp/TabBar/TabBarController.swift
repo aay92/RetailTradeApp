@@ -10,6 +10,7 @@ import UIKit
 enum Tabs: Int, CaseIterable{
     case overview
     case allData
+    case allMonth
     case setting
 }
 
@@ -50,24 +51,27 @@ class TabBarController: UITabBarController {
     private func getController(for tab: Tabs) -> BaseController {
         switch tab {
         case .overview:
-//            //    Экземпляр базы данных через сингл тон
+            //    Экземпляр базы данных через сингл тон
             return OverviewViewController(managerData: DataLouder.shared)
         case .allData:
             let view = AllDataViewController()
             view.tableViewProducts.reloadData()
             return view
-//            return AllDataViewController(managerData: DataLouder.shared)
+            //   return AllDataViewController(managerData: DataLouder.shared)
+        case .allMonth:
+            return AllMonthViewController()
+            
         case .setting:
             return SettingViewController()
-
         }
+
     }
     
     private func setTabBarAppearance(){
-        let positionOnX : CGFloat = 30
+        let positionOnX : CGFloat = 5
         let positionOnY : CGFloat = 5
         let width = tabBar.bounds.width - positionOnX * 2
-        let height = tabBar.bounds.height + 16
+        let height = tabBar.bounds.height + 20
         
         let roundLayer = CAShapeLayer()
         let bezierPath = UIBezierPath(roundedRect: CGRect(x: positionOnX,
@@ -81,7 +85,7 @@ class TabBarController: UITabBarController {
         roundLayer.path = bezierPath.cgPath
         
         tabBar.layer.insertSublayer(roundLayer, at: 0)
-        tabBar.itemWidth = width / 5
+        tabBar.itemWidth = width / 5.5
         tabBar.itemPositioning = .centered
 
     }

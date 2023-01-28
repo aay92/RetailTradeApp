@@ -1,5 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="21513" systemVersion="22A400" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="ModelOverview" representedClassName=".ModelOverview" syncable="YES">
+        <attribute name="data" optional="YES" attributeType="String"/>
+        <attribute name="nameMonth" optional="YES" attributeType="String"/>
+        <attribute name="totalAmount" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="totalGross" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="totalProfit" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+    </entity>
     <entity name="ProductEntity" representedClassName=".ProductEntity" syncable="YES">
         <attribute name="data" optional="YES" attributeType="String"/>
         <attribute name="image" optional="YES" attributeType="Binary"/>

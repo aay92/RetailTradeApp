@@ -50,9 +50,13 @@ enum R {
                 return "Главный экран"
             case .allData:
                 return "Все продажи"
+            case .allMonth:
+                return "Доходы по месяца"
             case .setting:
                 return "Настройки"
+            
             }
+            
         }
     }
     
@@ -69,8 +73,9 @@ enum R {
                     return UIImage(named: "squares")
                 case .setting:
                     return UIImage(named: "gear")
+                case .allMonth:
+                    return UIImage(systemName: "calendar")?.resizeImageTo(size: CGSize(width: 20, height: 17))
                 }
-                
             }
         }
     }

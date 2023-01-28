@@ -2,7 +2,7 @@
 //  ProductEntity+CoreDataClass.swift
 //  RetailTradeApp
 //
-//  Created by Aleksey Alyonin on 06.12.2022.
+//  Created by Aleksey Alyonin on 25.01.2023.
 //
 //
 

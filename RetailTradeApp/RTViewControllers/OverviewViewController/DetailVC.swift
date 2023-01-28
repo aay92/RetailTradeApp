@@ -24,6 +24,7 @@ class DetailVC: BaseController {
         product.priceProfit = Int32(item.priceProfit)
         product.priceGross = Int32(item.priceGross)
         product.image = item.image
+        product.data = item.date
         managerData.save()
     }
     
@@ -221,7 +222,7 @@ class DetailVC: BaseController {
     private var imageFromLibrary: UIImageView = {
         let image = UIImageView()
         image.image = UIImage(systemName: "photo")
-        image.contentMode = .scaleAspectFit
+        image.contentMode = .scaleAspectFill
         image.clipsToBounds = true
         image.layer.masksToBounds = true
 
@@ -351,13 +352,16 @@ extension DetailVC {
         chooseDate.addGestureRecognizer(tapGestureDate)
 
         
+        imageFromLibrary.layer.masksToBounds = true
+        imageFromLibrary.clipsToBounds = true
+        imageFromLibrary.layer.cornerRadius = 20
+        
+        
         view.addViewWithoutTAMIC(labelTitleVC)
         view.addViewWithoutTAMIC(stack)
         view.addViewWithoutTAMIC(stackForImage)
         view.addViewWithoutTAMIC(imageFromLibrary)
-        
-//        stackForImage.addArrangedSubview(imageFromLibrary)
-        
+    
         stackForImage.addArrangedSubview(buttonSafeImage)
         stackForImage.addArrangedSubview(buttonSafeAndMakingPhoto)
         
@@ -385,6 +389,8 @@ extension DetailVC {
     
     override func constraintViews() {
         super.constraintViews()
+        
+
         NSLayoutConstraint.activate([
             
             
@@ -393,7 +399,9 @@ extension DetailVC {
             priceTextFieldProfit.heightAnchor.constraint(equalToConstant: 40),
             buttonSafeImage.heightAnchor.constraint(equalToConstant: 40),
             buttonSafeAndMakingPhoto.heightAnchor.constraint(equalToConstant: 40),
+            imageFromLibrary.widthAnchor.constraint(equalToConstant: 250),
             imageFromLibrary.heightAnchor.constraint(equalToConstant: 200),
+
 
             
             labelTitleVC.topAnchor.constraint(equalTo:view.safeAreaLayoutGuide.topAnchor),

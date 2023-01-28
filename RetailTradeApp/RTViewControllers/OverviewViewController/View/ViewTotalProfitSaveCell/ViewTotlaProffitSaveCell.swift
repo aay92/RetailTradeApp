@@ -47,7 +47,7 @@ class ViewTotalProfitSaveCell: UIView {
     private let gradientLayer = CAGradientLayer()
 
     
-    private var viewBackground: UIView = {
+     var viewBackground: UIView = {
         let view = UIView()
         view.backgroundColor = R.Color.background
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -65,16 +65,28 @@ class ViewTotalProfitSaveCell: UIView {
         button.setTitleColor(.white, for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.backgroundColor = .clear
+        button.addTarget(self, action: #selector(tappedButton), for: .touchUpInside)
         return button
     }()
     
+    private let nameLbl: UILabel = {
+        let button = UILabel()
+        button.text = "Сохранить месяц"
+        button.font = UIFont(name: "Ariel", size: 14)
+        button.font = UIFont.boldSystemFont(ofSize: 14)
+        button.numberOfLines = 0
+        button.textColor = .white
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.backgroundColor = .clear
+        return button
+    }()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         setConstraints()
         
-        
     }
+
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
@@ -82,7 +94,8 @@ class ViewTotalProfitSaveCell: UIView {
         
     }
     
-    func tappedButton(){
+    @objc func tappedButton(){
+        print("tap")
         makeSystem(buttonTapped)
     }
     
@@ -99,30 +112,32 @@ class ViewTotalProfitSaveCell: UIView {
         
     }
 
-    @objc func tapped(){
-        print("Tap")
-    }
-    
     private func setConstraints(){
         setupGradient()
-        
+    
         translatesAutoresizingMaskIntoConstraints = false
         layer.masksToBounds = true
         clipsToBounds = true
         
-        buttonTapped.addTarget(self, action: #selector(tapped), for: .touchUpInside)
-
-        
         addSubview(buttonTapped)
         NSLayoutConstraint.activate([
-           
             buttonTapped.topAnchor.constraint(equalTo: topAnchor, constant: 0),
             buttonTapped.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 0),
             buttonTapped.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 0),
             buttonTapped.bottomAnchor.constraint(equalTo: bottomAnchor, constant: 0),
             
             ])
+//        addSubview(viewBackground)
+//        NSLayoutConstraint.activate([
+//            viewBackground.topAnchor.constraint(equalTo: topAnchor, constant: 0),
+//            viewBackground.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 0),
+//            viewBackground.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 0),
+//            viewBackground.bottomAnchor.constraint(equalTo: bottomAnchor, constant: 0),
+//
+//            ])
         
+        
+       
     }
     
 }

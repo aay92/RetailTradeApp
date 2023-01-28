@@ -141,7 +141,7 @@ extension OverviewViewController {
     
     override func configureAppereance() {
         super.configureAppereance()
-        title = "Бизнес Пёс"
+        title = "Dogy 🐶 business"
         
         navigationController?.tabBarItem.title = R.TabBar.title(for: Tabs.overview)
         var nav = self.navigationController?.navigationBar
@@ -156,9 +156,6 @@ extension OverviewViewController {
         addNavButton(at: .right, with: "", image: UIImage(systemName: "plus"))
         
     }
-    
-    
-    
 }
 
 //MARK: - add Segue On DetailVC

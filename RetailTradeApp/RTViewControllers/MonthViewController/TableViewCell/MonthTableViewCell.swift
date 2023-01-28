@@ -1,15 +1,69 @@
 //
-//  TableViewCell.swift
+//  MonthTableViewCell.swift
 //  RetailTradeApp
 //
-//  Created by Aleksey Alyonin on 22.11.2022.
+//  Created by Aleksey Alyonin on 27.01.2023.
 //
 
 import UIKit
 
-class TableViewCell: UITableViewCell {
+class MonthTableViewCell: UITableViewCell {
     
     static let identifier = "TableViewCell"
+    
+    
+//    MARK: - property
+    
+    //    var nameMonth: String - Название месяца
+    private let nameMonth: UILabel = {
+        let label = UILabel()
+        return label
+    }()
+    // var totalAmount: Int32   - Общая сумма гразыми
+    private let totalAmount: UILabel = {
+        let label = UILabel()
+        return label
+    }()
+    private let totalAmountNumber: UILabel = {
+        let label = UILabel()
+        return label
+    }()
+    // var totalProfit: Int32 - Общая сумма чустой прибыли
+    private let totalProfit: UILabel = {
+        let label = UILabel()
+        return label
+    }()
+    private let totalProfitNumber: UILabel = {
+        let label = UILabel()
+        return label
+    }()
+    // var totalGross: Int32 - costPrice - Себестоимость
+    private let costPrice: UILabel = {
+        let label = UILabel()
+        return label
+    }()
+    private let costPriceNumber: UILabel = {
+        let label = UILabel()
+        return label
+    }()
+
+    
+    //    MARK: - Stacks
+    private let stack: UIStackView = {
+        let stackView = UIStackView()
+        stackView.clipsToBounds = false
+        stackView.axis = .horizontal
+        stackView.distribution  = .fill
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.backgroundColor = .clear
+        stackView.spacing = 10
+        return stackView
+    }()
+
+    
+    
+    
+    
     
     private let viewProfit: UIView = {
         let view = UIView()
@@ -38,28 +92,18 @@ class TableViewCell: UITableViewCell {
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
+
     
-    private let imageViewMain: UIImageView = {
-        let view = UIImageView()
-        view.clipsToBounds = false
-        view.layer.cornerRadius = 10
-        view.contentMode = .scaleAspectFill
-        view.layer.masksToBounds = true
-        view.clipsToBounds = true
-        view.translatesAutoresizingMaskIntoConstraints = false
-        return view
-    }()
-    
-    private let stack: UIStackView = {
-        let stackView = UIStackView()
-        stackView.clipsToBounds = false
-        stackView.axis = .horizontal
-        stackView.distribution  = .fill
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        stackView.backgroundColor = .clear
-        stackView.spacing = 10
-        return stackView
-    }()
+//    private let stack: UIStackView = {
+//        let stackView = UIStackView()
+//        stackView.clipsToBounds = false
+//        stackView.axis = .horizontal
+//        stackView.distribution  = .fill
+//        stackView.translatesAutoresizingMaskIntoConstraints = false
+//        stackView.backgroundColor = .clear
+//        stackView.spacing = 10
+//        return stackView
+//    }()
     
     private var nameLbl: UILabel = {
         let label = UILabel()
@@ -169,11 +213,9 @@ class TableViewCell: UITableViewCell {
         nameLbl.text = item.name
         priceLblGross.text = String(item.priceGross) + " ₽"
         priceLblProfit.text = String(item.priceProfit) + " ₽"
-        guard let image = item.image else { return }
-        imageViewMain.image = UIImage(data: image) ?? UIImage(systemName: "photo")
         
         print("MARK в ячейке:- \(item.data)")
-        lblData.text = item.data 
+        lblData.text = item.data
     }
     
     
@@ -188,7 +230,6 @@ class TableViewCell: UITableViewCell {
         addSubview(viewDate)
         addSubview(lblData)
         addSubview(viewProfit)
-        addSubview(imageViewMain)
         addSubview(stack)
         stack.addArrangedSubview(nameLbl)
         stack.addArrangedSubview(stackLblGross)
@@ -224,10 +265,6 @@ class TableViewCell: UITableViewCell {
             viewProfit.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -5),
             viewProfit.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -5),
             
-            imageViewMain.topAnchor.constraint(equalTo: stack.topAnchor, constant: 0),
-            imageViewMain.leadingAnchor.constraint(equalTo: stack.trailingAnchor, constant: 10),
-            imageViewMain.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10),
-            imageViewMain.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -10),
             
             stack.topAnchor.constraint(equalTo: topAnchor, constant: 15),
             stack.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10),

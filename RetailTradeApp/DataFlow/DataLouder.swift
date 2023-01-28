@@ -12,10 +12,7 @@ final class DataLouder {
 //    Create singlton
     static let shared = DataLouder()
     private init(){}
-    
-//    func safeData(){}
-//    func getData(){}
-//    func removeData(){}
+
     // MARK: - Core Data stack
 
     lazy var persistentContainer: NSPersistentContainer = {
@@ -44,16 +41,7 @@ final class DataLouder {
             }
         }
     }
-    
-//    let entityName =  NSEntityDescription.entity(forEntityName: 'Your Entity Name', in: managedContext)!
-//    let image = NSManagedObject(entity: entityName, insertInto: managedContext)
-//    image.setValue(jpegData, forKeyPath: 'Your Attribute Name')
-//    do {
-//      try managedContext.save()
-//    } catch let error as NSError {
-//      print("Could not save. \(error), \(error.userInfo)")
-//    }
-    
+
     func fetchProductData<T: NSManagedObject>(_ objectType: T.Type) -> [T] {
         let entityName = String(describing: objectType)
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: entityName)
@@ -70,42 +58,6 @@ final class DataLouder {
         context.delete(object)
         save()
     }
-    
-//    func safeData(with title: String){
-//        let appDelegete = UIApplication.shared.delegate as! AppDelegate
-//        let context = appDelegete.persistentContainer.viewContext
-//        
-//        guard let entity = NSEntityDescription.entity(forEntityName: "ProductEntity", in: context) else { return }
-//        let taskObject = ProductEntity(entity: entity, insertInto: context)
-////        taskObject.title = title
-//        
-//        do{
-//            try context.save()
-////            task.append(taskObject)
-////            tableView.reloadData()
-//            
-//        } catch let error as NSError {
-//            print(error.localizedDescription)
-//        }
-//    }
-//    
-//    func removeData(with title: String, forRowAt indexPath: IndexPath){
-//        
-//        let appDelegete = UIApplication.shared.delegate as! AppDelegate
-//        let context = appDelegete.persistentContainer.viewContext
-//        
-//        guard let entity = NSEntityDescription.entity(forEntityName: "ProductEntity", in: context) else { return }
-//        
-//        let taskObject = ProductEntity(entity: entity, insertInto: context)
-//        taskObject.name = title
-//        
-//        do{
-//            try context.deletedObjects
-////            array.removeAll()
-//            
-//        } catch let error as NSError {
-//            print(error.localizedDescription)
-        
     
 }
 
