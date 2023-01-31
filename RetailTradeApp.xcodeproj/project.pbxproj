@@ -19,6 +19,7 @@
 		5B7F8A662983BF15005A5605 /* UIimage + ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B7F8A652983BF15005A5605 /* UIimage + ext.swift */; };
 		5B7F8A692983C0BE005A5605 /* AllMonthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B7F8A682983C0BE005A5605 /* AllMonthViewController.swift */; };
 		5B7F8A6C2983C297005A5605 /* MonthTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B7F8A6B2983C297005A5605 /* MonthTableViewCell.swift */; };
+		5B7F8A6F2988FA07005A5605 /* ChartAndAllData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B7F8A6E2988FA07005A5605 /* ChartAndAllData.swift */; };
 		5B8E94EB292D5BAD00E0EB49 /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B8E94EA292D5BAD00E0EB49 /* TableViewCell.swift */; };
 		5B8E94ED292E117500E0EB49 /* DetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B8E94EC292E117500E0EB49 /* DetailVC.swift */; };
 		5BB2EC242971E94A002A6A20 /* AlertsChoisCamareOrLibrary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB2EC232971E94A002A6A20 /* AlertsChoisCamareOrLibrary.swift */; };
@@ -54,6 +55,7 @@
 		5B7F8A652983BF15005A5605 /* UIimage + ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIimage + ext.swift"; sourceTree = "<group>"; };
 		5B7F8A682983C0BE005A5605 /* AllMonthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllMonthViewController.swift; sourceTree = "<group>"; };
 		5B7F8A6B2983C297005A5605 /* MonthTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthTableViewCell.swift; sourceTree = "<group>"; };
+		5B7F8A6E2988FA07005A5605 /* ChartAndAllData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartAndAllData.swift; sourceTree = "<group>"; };
 		5B8E94EA292D5BAD00E0EB49 /* TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
 		5B8E94EC292E117500E0EB49 /* DetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailVC.swift; sourceTree = "<group>"; };
 		5BB2EC232971E94A002A6A20 /* AlertsChoisCamareOrLibrary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertsChoisCamareOrLibrary.swift; sourceTree = "<group>"; };
@@ -115,6 +117,14 @@
 			path = TableViewCell;
 			sourceTree = "<group>";
 		};
+		5B7F8A6D2988F9C7005A5605 /* ChartAndAllData */ = {
+			isa = PBXGroup;
+			children = (
+				5B7F8A6E2988FA07005A5605 /* ChartAndAllData.swift */,
+			);
+			path = ChartAndAllData;
+			sourceTree = "<group>";
+		};
 		5B8E94E9292D5B8C00E0EB49 /* TableViewCell */ = {
 			isa = PBXGroup;
 			children = (
@@ -170,6 +180,7 @@
 		5BF24F0A292AA60200BEE9AB /* OverviewViewController */ = {
 			isa = PBXGroup;
 			children = (
+				5B7F8A6D2988F9C7005A5605 /* ChartAndAllData */,
 				5BF24F21292C11FF00BEE9AB /* View */,
 				5BFD8AA9292A6DF4007A45A2 /* OverviewViewController.swift */,
 				5B8E94EC292E117500E0EB49 /* DetailVC.swift */,
@@ -367,6 +378,7 @@
 				5BF52060292FE84800BB76B7 /* ProductModelCoreData.xcdatamodeld in Sources */,
 				5BF24F20292C117900BEE9AB /* UIView + Ext.swift in Sources */,
 				5BF24F1C292B701800BEE9AB /* AllDataViewController.swift in Sources */,
+				5B7F8A6F2988FA07005A5605 /* ChartAndAllData.swift in Sources */,
 				5B7F8A6C2983C297005A5605 /* MonthTableViewCell.swift in Sources */,
 				5B7F8A5F29811B40005A5605 /* ModelOverview+CoreDataClass.swift in Sources */,
 				5B52EEAF29374EEE00E89787 /* ViewTotalProfit.swift in Sources */,

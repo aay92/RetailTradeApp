@@ -33,7 +33,30 @@ class OverviewViewController: BaseController {
         return collectionView
     }()
     
+    private let textThisMonth: UILabel = {
+        let label = UILabel()
+        label.text = "Данные за текущий месяц"
+        label.textColor = .white.withAlphaComponent(0.7)
+        label.font = UIFont(name: "Ariel", size: 13)
+        label.font = UIFont.boldSystemFont(ofSize: 13)
+        label.textAlignment = .left
+        label.numberOfLines = 0
+        return label
+    }()
+    
+    private let textAllMonths: UILabel = {
+        let label = UILabel()
+        label.text = "Данные за всё время"
+        label.textColor = .white.withAlphaComponent(0.7)
+        label.font = UIFont(name: "Ariel", size: 13)
+        label.font = UIFont.boldSystemFont(ofSize: 13)
+        label.textAlignment = .left
+        label.numberOfLines = 0
+        return label
+    }()
+    
     private let viewTotalProfit = ViewTotalProfit()
+    private let chartAndAllData = ChartAndAllData()
     
     private let imageDog: UIImageView = {
         let image = UIImageView()
@@ -102,40 +125,62 @@ extension OverviewViewController {
         
         setDelegates()
         setCollectionView()
+        
+        view.addViewWithoutTAMIC(textThisMonth)
         view.addViewWithoutTAMIC(profitCollectionView)
         view.addViewWithoutTAMIC(viewTotalProfit)
-        //        view.addViewWithoutTAMIC(imageDog)
+        view.addViewWithoutTAMIC(textAllMonths)
+        view.addViewWithoutTAMIC(chartAndAllData)
+        
         view.addViewWithoutTAMIC(imageMany)
         
         imageManyArr = createImageArray(total: 30, imagePrefix: "AnimationMany")
         
+       
     }
     
     
     override func constraintViews(){
         super.constraintViews()
+        
+        let height = UIScreen.main.bounds.size.height
+        let width = UIScreen.main.bounds.size.width
+        
         NSLayoutConstraint.activate([
-//            imageDog.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant:  420),
-//            imageDog.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant:  -60),
-//            imageDog.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant:  -120),
-//            imageDog.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 10),
-//
-//
+     
+
             imageMany.heightAnchor.constraint(equalToConstant: 200),
             imageMany.widthAnchor.constraint(equalToConstant: 200),
             imageMany.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             imageMany.centerYAnchor.constraint(equalTo: view.centerYAnchor),
 
 
+            textThisMonth.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor,constant: 0),
+            textThisMonth.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 30),
+            textThisMonth.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20 ),
+            textThisMonth.bottomAnchor.constraint(equalTo: viewTotalProfit.topAnchor),
+            
             viewTotalProfit.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor,constant: 20),
-            viewTotalProfit.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 30),
-            viewTotalProfit.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20 ),
+            viewTotalProfit.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: height / 35),
+            viewTotalProfit.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: height / -30 ),
             viewTotalProfit.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant:  -view.bounds.height / 1.32),
+            
             
             profitCollectionView.topAnchor.constraint(equalTo: viewTotalProfit.bottomAnchor, constant: 20),
             profitCollectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             profitCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
-            profitCollectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -view.bounds.height / 1.6)
+            profitCollectionView.bottomAnchor.constraint(equalTo: textAllMonths.topAnchor, constant: 10),
+            
+            textAllMonths.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            textAllMonths.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+            textAllMonths.bottomAnchor.constraint(equalTo: view.bottomAnchor,constant:  -width / 0.9),
+            
+            chartAndAllData.topAnchor.constraint(equalTo: textAllMonths.bottomAnchor, constant: 5),
+            chartAndAllData.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            chartAndAllData.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+            chartAndAllData.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -width / 4.0)
+//
+//
         ])
     }
     

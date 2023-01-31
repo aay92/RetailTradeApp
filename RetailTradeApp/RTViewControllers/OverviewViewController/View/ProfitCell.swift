@@ -55,16 +55,6 @@ class ProfitCell: UICollectionViewCell {
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
-//
-//    private var image: UIImageView = {
-//        let image = UIImageView()
-//        image.contentMode = .scaleAspectFit
-//        image.backgroundColor = .systemBlue.withAlphaComponent(0.3)
-//        image.layer.cornerRadius = 10
-//        image.image = UIImage(named: "")
-//        image.translatesAutoresizingMaskIntoConstraints = false
-//        return image
-//    }()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -85,9 +75,7 @@ class ProfitCell: UICollectionViewCell {
     private func setView(){
         layer.cornerRadius = 10
         viewProfit.backgroundColor = R.Color.active
-//        layer.shadowOpacity = 0.7
-//        layer.shadowOffset = .zero
-//        layer.shadowRadius = 5
+
         addSubview(viewProfit)
         addSubview(stack)
         stack.addArrangedSubview(nameLbl)

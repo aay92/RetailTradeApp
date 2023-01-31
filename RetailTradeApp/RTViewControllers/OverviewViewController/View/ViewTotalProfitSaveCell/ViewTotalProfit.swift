@@ -128,15 +128,17 @@ class ViewTotalProfit: BaseView {
     override func constantViews() {
         super.constantViews()
 
+        let height = UIScreen.main.bounds.size.height
+        let width = UIScreen.main.bounds.size.width
         
         NSLayoutConstraint.activate([
             viewProfit.topAnchor.constraint(equalTo: topAnchor, constant: 0),
             viewProfit.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 0),
-            viewProfit.trailingAnchor.constraint(equalTo:trailingAnchor, constant:  -110),
+            viewProfit.trailingAnchor.constraint(equalTo:trailingAnchor, constant:  -height / 7.5),
             viewProfit.bottomAnchor.constraint(equalTo: bottomAnchor, constant: 0),
             
             viewCloseTheMonth.topAnchor.constraint(equalTo: topAnchor, constant: 0),
-            viewCloseTheMonth.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 240),
+            viewCloseTheMonth.leadingAnchor.constraint(equalTo: leadingAnchor, constant: height / 3.5),
             viewCloseTheMonth.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 0),
             viewCloseTheMonth.bottomAnchor.constraint(equalTo: bottomAnchor, constant: 0),
 

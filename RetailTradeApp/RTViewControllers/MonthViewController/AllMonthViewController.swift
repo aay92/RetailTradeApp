@@ -20,7 +20,7 @@ class AllMonthViewController: BaseController {
 
     let tableViewProducts : UITableView = {
         let table = UITableView()
-        table.register(TableViewCell.self, forCellReuseIdentifier: TableViewCell.identifier)
+        table.register(MonthTableViewCell.self, forCellReuseIdentifier: MonthTableViewCell.identifier)
         return table
     }()
 }
@@ -100,18 +100,18 @@ extension AllMonthViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 90
+        return 100
     }
     
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         //        return managerData.fetchProductData(ProductEntity.self).count
-        return products.count
+        return 3
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableViewProducts.dequeueReusableCell(withIdentifier: TableViewCell.identifier, for: indexPath) as! TableViewCell
-        cell.configure(with: products[indexPath.row])
+        let cell = tableViewProducts.dequeueReusableCell(withIdentifier: MonthTableViewCell.identifier, for: indexPath) as! MonthTableViewCell
+      
         return cell
     }
     

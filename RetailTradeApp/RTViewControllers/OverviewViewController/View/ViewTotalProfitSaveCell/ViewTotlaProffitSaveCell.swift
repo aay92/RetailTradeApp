@@ -121,23 +121,12 @@ class ViewTotalProfitSaveCell: UIView {
         
         addSubview(buttonTapped)
         NSLayoutConstraint.activate([
-            buttonTapped.topAnchor.constraint(equalTo: topAnchor, constant: 0),
-            buttonTapped.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 0),
-            buttonTapped.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 0),
-            buttonTapped.bottomAnchor.constraint(equalTo: bottomAnchor, constant: 0),
+            buttonTapped.topAnchor.constraint(equalTo: topAnchor),
+            buttonTapped.leadingAnchor.constraint(equalTo: leadingAnchor),
+            buttonTapped.trailingAnchor.constraint(equalTo: trailingAnchor),
+            buttonTapped.bottomAnchor.constraint(equalTo: bottomAnchor),
             
             ])
-//        addSubview(viewBackground)
-//        NSLayoutConstraint.activate([
-//            viewBackground.topAnchor.constraint(equalTo: topAnchor, constant: 0),
-//            viewBackground.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 0),
-//            viewBackground.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 0),
-//            viewBackground.bottomAnchor.constraint(equalTo: bottomAnchor, constant: 0),
-//
-//            ])
-        
-        
-       
     }
     
 }
