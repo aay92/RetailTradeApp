@@ -104,7 +104,8 @@ extension OverviewViewController {
         profitCollectionView.reloadData()
         getTotalProfit()
         viewTotalProfit.configure(num: nawTotalProfit)
-        
+        getAllDataAddedInCatrts()
+
         if animateStart {
             UIView.animate(withDuration: 1, delay: 1) {
                 self.imageMany.alpha = 1
@@ -161,7 +162,7 @@ extension OverviewViewController {
             textThisMonth.bottomAnchor.constraint(equalTo: viewTotalProfit.topAnchor),
             
             viewTotalProfit.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor,constant: 20),
-            viewTotalProfit.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: height / 35),
+            viewTotalProfit.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: height / 29),
             viewTotalProfit.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: height / -30 ),
             viewTotalProfit.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant:  -view.bounds.height / 1.32),
             
@@ -179,19 +180,19 @@ extension OverviewViewController {
             chartAndAllData.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             chartAndAllData.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
             chartAndAllData.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -width / 4.0)
-//
-//
+
         ])
     }
     
     override func configureAppereance() {
         super.configureAppereance()
-        title = "Dogy 🐶 business"
+        title = "Doggy 🐶 business"
         
         navigationController?.tabBarItem.title = R.TabBar.title(for: Tabs.overview)
         var nav = self.navigationController?.navigationBar
         nav?.barStyle = UIBarStyle.black
         nav?.tintColor = UIColor.white
+
         
         view.backgroundColor = R.Color.background
         viewTotalProfit.layer.cornerRadius = 10
@@ -199,13 +200,18 @@ extension OverviewViewController {
         
 //        Bottom added item
         addNavButton(at: .right, with: "", image: UIImage(systemName: "plus"))
+        addNavButton(at: .left, with: "", image: UIImage(systemName: "list.clipboard.fill"))
         
     }
 }
 
-//MARK: - add Segue On DetailVC
+//MARK: - navigation methods
 extension OverviewViewController {
     
+    override func navBarLeftButtonHandler() {
+        print("saveItem")
+    }
+//MARK: - add Segue On DetailVC
     override func navBarRightButtonHandler(){
         let detailVC = DetailVC()
         detailVC.modalPresentationStyle = .fullScreen
@@ -215,10 +221,11 @@ extension OverviewViewController {
             self.animateStart = i
             
         }
-       
+        
         navigationController?.present(detailVC, animated: true)
-       
+        
     }
+   
 
 }
 
@@ -316,6 +323,7 @@ extension OverviewViewController {
             let sum = productsProfit.reduce(0) {$0 + ($1.priceProfit)}
             print("While iteration newSum: \(sum)")
             self.nawProductsProfit = Int(sum)
+            
             print("Value save: \(nawProductsProfit)")
 
         } catch {
@@ -390,5 +398,12 @@ extension OverviewViewController {
         imageView.animationDuration = 0.85
         imageView.animationRepeatCount = 5
         imageView.startAnimating()
+    }
+}
+
+//MARK: - View this charts and all data
+extension OverviewViewController {
+    func getAllDataAddedInCatrts(){
+        chartAndAllData.configure(with: nawProductsGross, Amount: nawTotalProfit, costPrice: nawProductsGross)
     }
 }
