@@ -80,7 +80,7 @@ extension AllMonthViewController {
     
     override func configureAppereance() {
         super.configureAppereance()
-        title = "Доход по месяцам"
+        title = "Общий доход по месяцам"
         tableViewProducts.backgroundColor = R.Color.background
         view.backgroundColor = R.Color.background
         let nav = self.navigationController?.navigationBar
@@ -100,7 +100,7 @@ extension AllMonthViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 100
+        return 90
     }
     
     

@@ -29,12 +29,12 @@ class MonthTableViewCell: UITableViewCell {
     private let nameMonth: UILabel = {
         let label = UILabel()
         label.text = "29 января 2023"
-        label.font = UIFont(name: "Ariel", size: 15)
-        label.font = UIFont.boldSystemFont(ofSize: 15)
-        label.textColor = .white
+        label.font = UIFont(name: "Ariel", size: 11)
+        label.font = UIFont.boldSystemFont(ofSize: 11)
+        label.textColor = .white.withAlphaComponent(0.7)
         label.textAlignment = .center
         label.numberOfLines = 0
-        label.backgroundColor = .systemRed
+        label.backgroundColor = .clear
         label.layer.masksToBounds = true
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -43,9 +43,9 @@ class MonthTableViewCell: UITableViewCell {
     private let totalAmount: UILabel = {
         let label = UILabel()
         label.text = "Общая прибыль"
-        label.font = UIFont(name: "Ariel", size: 15)
-        label.font = UIFont.boldSystemFont(ofSize: 15)
-        label.textColor = .white
+        label.font = UIFont(name: "Ariel", size: 13)
+        label.font = UIFont.boldSystemFont(ofSize: 13)
+        label.textColor = .white.withAlphaComponent(0.9)
         label.textAlignment = .center
         label.numberOfLines = 0
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -84,7 +84,7 @@ class MonthTableViewCell: UITableViewCell {
         label.font = UIFont.boldSystemFont(ofSize: 20)
         label.textColor = .white
         label.textAlignment = .center
-        label.numberOfLines = 2
+        label.numberOfLines = 0
         label.translatesAutoresizingMaskIntoConstraints = false
 
         return label
@@ -92,12 +92,12 @@ class MonthTableViewCell: UITableViewCell {
     // var totalGross: Int32 - costPrice - Себестоимость
     private let costPrice: UILabel = {
         let label = UILabel()
-        label.text = "Общая себестоимость"
-        label.font = UIFont(name: "Ariel", size: 15)
-        label.font = UIFont.boldSystemFont(ofSize: 15)
-        label.textColor = .white
+        label.text = "Себестоимость"
+        label.font = UIFont(name: "Ariel", size: 13)
+        label.font = UIFont.boldSystemFont(ofSize: 13)
+        label.textColor = .white.withAlphaComponent(0.9)
         label.textAlignment = .center
-        label.numberOfLines = 2
+        label.numberOfLines = 0
         label.translatesAutoresizingMaskIntoConstraints = false
 
         return label
@@ -109,7 +109,7 @@ class MonthTableViewCell: UITableViewCell {
         label.font = UIFont.boldSystemFont(ofSize: 20)
         label.textColor = .white
         label.textAlignment = .center
-        label.numberOfLines = 2
+        label.numberOfLines = 0
         label.translatesAutoresizingMaskIntoConstraints = false
 
         return label
@@ -125,7 +125,7 @@ class MonthTableViewCell: UITableViewCell {
         stackView.distribution  = .fillProportionally
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.backgroundColor = .clear
-        stackView.spacing = 5
+        stackView.spacing = 10
         return stackView
     }()
     
@@ -210,8 +210,7 @@ class MonthTableViewCell: UITableViewCell {
         
         stackCostPrice.addArrangedSubview(costPrice)
         stackCostPrice.addArrangedSubview(costPriceNumber)
-
-
+        
         constraintViews()
         configureAppereance()
     }
@@ -234,7 +233,17 @@ class MonthTableViewCell: UITableViewCell {
             stackMain.topAnchor.constraint(equalTo: nameMonth.bottomAnchor),
             stackMain.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 5),
             stackMain.trailingAnchor.constraint(equalTo: trailingAnchor,constant: -10),
-            stackMain.bottomAnchor.constraint(equalTo: bottomAnchor)
+            stackMain.bottomAnchor.constraint(equalTo: bottomAnchor),
+            
+            stackTotalProfit.topAnchor.constraint(equalTo: stackMain.topAnchor,constant: 5),
+            stackTotalProfit.bottomAnchor.constraint(equalTo: bottomAnchor,constant: -10),
+            
+            stackTotalAmount.topAnchor.constraint(equalTo: stackMain.topAnchor,constant: 5),
+            stackTotalAmount.bottomAnchor.constraint(equalTo: bottomAnchor,constant: -10),
+
+            stackCostPrice.topAnchor.constraint(equalTo: stackMain.topAnchor,constant: 5),
+            stackCostPrice.bottomAnchor.constraint(equalTo: bottomAnchor,constant: -10),
+
             ])
             
     }

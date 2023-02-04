@@ -23,3 +23,12 @@ struct ProfitItemInCollectionView {
     var sumGross: Int
     var sumProfit: Int
 }
+
+//MARK: - Model in allData in months
+struct itemModelOverview {
+    let nameMonth: String?
+    var totalAmount: Int32
+    var totalProfit: Int32
+    var totalGross: Int32
+    var data: String?
+}

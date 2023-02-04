@@ -11,9 +11,16 @@ import CoreData
 class OverviewViewController: BaseController {
     
     var manageObjectContext: NSManagedObjectContext!
+    
+//    data for coreDate all date
     var nawProductsProfit = 0
     var nawProductsGross = 0
     var nawTotalProfit = 0
+    
+//    data for coreDate current date
+    var currentProductsProfit = 0
+    var currentProductsGross = 0
+    var currentTotalProfit = 0
    
     
 //    image animation
@@ -405,5 +412,17 @@ extension OverviewViewController {
 extension OverviewViewController {
     func getAllDataAddedInCatrts(){
         chartAndAllData.configure(with: nawProductsGross, Amount: nawTotalProfit, costPrice: nawProductsGross)
+    }
+}
+
+//MARK: - Saving data in all month
+extension OverviewViewController {
+    func saveAllData(totalProfit : Int, Amount : Int, costPrice : Int){
+        
+        
+        let itemModelOverview = itemModelOverview(nameMonth: "29 February 2023",
+                                                  totalAmount: Int32(nawTotalProfit),
+                                                  totalProfit: Int32(nawProductsGross),
+                                                  totalGross: Int32(nawProductsGross))
     }
 }

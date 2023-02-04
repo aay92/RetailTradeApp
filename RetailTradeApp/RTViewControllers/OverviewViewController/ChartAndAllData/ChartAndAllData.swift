@@ -36,7 +36,7 @@ class ChartAndAllData: BaseView {
         label.text = "Прибыль"
         label.font = UIFont(name: "Ariel", size: 12)
         label.font = UIFont.boldSystemFont(ofSize: 12)
-        label.textColor = .white
+        label.textColor = .white.withAlphaComponent(0.7)
         label.textAlignment = .center
         label.numberOfLines = 0
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -61,7 +61,7 @@ class ChartAndAllData: BaseView {
         label.text = "Доход"
         label.font = UIFont(name: "Ariel", size: 12)
         label.font = UIFont.boldSystemFont(ofSize: 12)
-        label.textColor = .white
+        label.textColor = .white.withAlphaComponent(0.7)
         label.textAlignment = .center
         label.numberOfLines = 0
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -86,7 +86,7 @@ class ChartAndAllData: BaseView {
         label.text = "Себестоимость"
         label.font = UIFont(name: "Ariel", size: 12)
         label.font = UIFont.boldSystemFont(ofSize: 12)
-        label.textColor = .white
+        label.textColor = .white.withAlphaComponent(0.7)
         label.textAlignment = .center
         label.numberOfLines = 0
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -113,10 +113,12 @@ class ChartAndAllData: BaseView {
         let stackView = UIStackView()
         stackView.clipsToBounds = false
         stackView.axis = .horizontal
-        stackView.distribution  = .fillEqually
+        stackView.distribution  = .fillProportionally
         stackView.translatesAutoresizingMaskIntoConstraints = false
-        stackView.backgroundColor = .black
-        stackView.layer.cornerRadius = 20
+        stackView.backgroundColor = .white.withAlphaComponent(0.14)
+        stackView.layer.borderColor = UIColor.black.cgColor
+        stackView.layer.borderWidth = 2
+        stackView.layer.cornerRadius = 15
         stackView.spacing = 0
         return stackView
     }()
@@ -128,7 +130,7 @@ class ChartAndAllData: BaseView {
         stackView.axis = .vertical
         stackView.distribution  = .fillEqually
         stackView.translatesAutoresizingMaskIntoConstraints = false
-        stackView.backgroundColor = .systemRed.withAlphaComponent(0.2)
+//        stackView.backgroundColor = .white.withAlphaComponent(0.2)
         stackView.layer.cornerRadius = 20
 
         return stackView
@@ -142,7 +144,7 @@ class ChartAndAllData: BaseView {
         stackView.distribution  = .fillEqually
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.backgroundColor = .clear
-        stackView.backgroundColor = .systemRed.withAlphaComponent(0.2)
+//        stackView.backgroundColor = .white.withAlphaComponent(0.2)
         stackView.layer.cornerRadius = 20
         return stackView
     }()
@@ -155,7 +157,7 @@ class ChartAndAllData: BaseView {
         stackView.distribution  = .fillEqually
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.backgroundColor = .clear
-        stackView.backgroundColor = .systemRed.withAlphaComponent(0.2)
+//        stackView.backgroundColor = .white.withAlphaComponent(0.2)
         stackView.layer.cornerRadius = 20
         return stackView
     }()
@@ -226,7 +228,16 @@ class ChartAndAllData: BaseView {
             stackMain.bottomAnchor.constraint(equalTo: bottomAnchor,constant: -5),
             
             stackTotalProfit.leadingAnchor.constraint(equalTo: leadingAnchor, constant: height / 30),
-            stackCostPrice.trailingAnchor.constraint(equalTo: trailingAnchor,constant: -height / 30)
+            stackCostPrice.trailingAnchor.constraint(equalTo: trailingAnchor,constant: -height / 30),
+            
+            stackTotalProfit.topAnchor.constraint(equalTo: stackMain.topAnchor,constant: 2),
+            totalProfitNumber.bottomAnchor.constraint(equalTo: bottomAnchor,constant: -8),
+//
+            stackTotalAmount.topAnchor.constraint(equalTo: stackMain.topAnchor,constant: 2),
+            totalAmountNumber.bottomAnchor.constraint(equalTo: bottomAnchor,constant: -8),
+//
+            stackCostPrice.topAnchor.constraint(equalTo: stackMain.topAnchor,constant: 2),
+            costPriceNumber.bottomAnchor.constraint(equalTo: bottomAnchor,constant: -8),
         ])
     }
     override func configureAppearance() {
