@@ -11,12 +11,12 @@ import CoreData
 class AllMonthViewController: BaseController {
     
     //MARK: - dataFlowFromCoreData
-    var manageObjectContext: NSManagedObjectContext!
-    var products = [ProductEntity]()
-    
-    
 //    var manageObjectContext: NSManagedObjectContext!
-//    var month = [ModelOverview]()
+//    var products = [ProductEntity]()
+    
+    
+    var manageObjectContext: NSManagedObjectContext!
+    var month = [ModelOverview]()
 
     let tableViewProducts : UITableView = {
         let table = UITableView()
@@ -42,7 +42,7 @@ extension AllMonthViewController {
         
         
         //        products = managerData.fetchProductData(ProductEntity.self)
-        print("Количество продуктов в массиве: \(products.count)")
+        print("Количество продуктов в массиве: \(month.count)")
         setDelegate()
         view.addViewWithoutTAMIC(tableViewProducts)
         
@@ -50,21 +50,13 @@ extension AllMonthViewController {
     
     func loadSaveData()  {
         
-//        let eventRequest: NSFetchRequest<ModelOverview> = ModelOverview.fetchRequest()
-//        do {
-//            month = try manageObjectContext.fetch(eventRequest)
-//            self.tableViewProducts.reloadData()
-//        } catch {
-//            print("Could not load save data: \(error.localizedDescription)")
-//
-//        }
-        
-        let eventRequest: NSFetchRequest<ProductEntity> = ProductEntity.fetchRequest()
-        do{
-            products = try manageObjectContext.fetch(eventRequest)
+        let eventRequest: NSFetchRequest<ModelOverview> = ModelOverview.fetchRequest()
+        do {
+            month = try manageObjectContext.fetch(eventRequest)
             self.tableViewProducts.reloadData()
         } catch {
             print("Could not load save data: \(error.localizedDescription)")
+
         }
     }
     
@@ -106,12 +98,13 @@ extension AllMonthViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         //        return managerData.fetchProductData(ProductEntity.self).count
-        return 3
+        return month.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableViewProducts.dequeueReusableCell(withIdentifier: MonthTableViewCell.identifier, for: indexPath) as! MonthTableViewCell
-      
+        let mouths = month[indexPath.row]
+        cell.configure(with: mouths)
         return cell
     }
     
@@ -122,7 +115,7 @@ extension AllMonthViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         
-        let eventArrayItem = products[indexPath.row]
+        let eventArrayItem = month[indexPath.row]
         
         let remove = UIContextualAction(style: .destructive, title: "Удалить") { (action, view, completion) in
             
@@ -136,10 +129,11 @@ extension AllMonthViewController: UITableViewDelegate, UITableViewDataSource {
             self.loadSaveData()
             completion(true)
         }
+        
         let edit = UIContextualAction(style: .normal, title: "Редактировать") { (action, view, completion) in
-            let detailVC = DetailVC()
-            detailVC.editingRowValue(product: eventArrayItem)
-            self.navigationController?.present(detailVC, animated: true)
+            //            let detailVC = DetailVC()
+            //            detailVC.editingRowValue(product: eventArrayItem)
+            //            self.navigationController?.present(detailVC, animated: true)
             completion(true)
         }
         edit.backgroundColor = R.Color.active.withAlphaComponent(0.4)

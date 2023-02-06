@@ -12,17 +12,18 @@ class OverviewViewController: BaseController {
     
     var manageObjectContext: NSManagedObjectContext!
     
+    
 //    data for coreDate all date
     var nawProductsProfit = 0
     var nawProductsGross = 0
     var nawTotalProfit = 0
     
 //    data for coreDate current date
-    var currentProductsProfit = 0
-    var currentProductsGross = 0
+    var currentAmount = 0
     var currentTotalProfit = 0
+    var currentProductsCost = 0
+
    
-    
 //    image animation
     var animateStart = false
     var imageManyArr: [UIImage] = []
@@ -112,6 +113,8 @@ extension OverviewViewController {
         getTotalProfit()
         viewTotalProfit.configure(num: nawTotalProfit)
         getAllDataAddedInCatrts()
+        saveDateAllMonth()
+
 
         if animateStart {
             UIView.animate(withDuration: 1, delay: 1) {
@@ -214,9 +217,20 @@ extension OverviewViewController {
 
 //MARK: - navigation methods
 extension OverviewViewController {
+
+    //    data for coreDate current date
+    private func saveDateAllMonth(){
+        
+        currentAmount = nawProductsProfit
+        currentProductsCost = nawProductsGross
+        currentTotalProfit = nawTotalProfit
+    }
     
     override func navBarLeftButtonHandler() {
-        print("saveItem")
+        //  save data for coreDate c
+        saveAllData(Amount: currentAmount, totalProfit: currentTotalProfit, costPrice: currentProductsCost)
+        
+        print("Сохарнилась")
     }
 //MARK: - add Segue On DetailVC
     override func navBarRightButtonHandler(){
@@ -417,12 +431,33 @@ extension OverviewViewController {
 
 //MARK: - Saving data in all month
 extension OverviewViewController {
-    func saveAllData(totalProfit : Int, Amount : Int, costPrice : Int){
+    func saveAllData(Amount : Int, totalProfit : Int, costPrice : Int){
         
         
         let itemModelOverview = itemModelOverview(nameMonth: "29 February 2023",
-                                                  totalAmount: Int32(nawTotalProfit),
-                                                  totalProfit: Int32(nawProductsGross),
-                                                  totalGross: Int32(nawProductsGross))
+                                                  totalAmount: Int32(Amount),
+                                                  totalProfit: Int32(totalProfit),
+                                                  totalGross: Int32(costPrice))
+        
+        creatItem(item: itemModelOverview)
+    }
+    
+    func creatItem(item: itemModelOverview){
+        
+        let modelOverview = ModelOverview(context: managerData.context)
+        modelOverview.nameMonth = item.nameMonth
+        modelOverview.totalAmount = Int32(item.totalAmount)
+        modelOverview.totalProfit = Int32(item.totalProfit)
+        modelOverview.totalGross = Int32(item.totalGross)
+        modelOverview.data = item.data
+        
+        print("item totalAmount: \(Int32(item.totalAmount))")
+        print("item totalProfit: \(Int32(item.totalProfit))")
+        print("item totalGross: \(Int32(item.totalGross))")
+        print("item nameMonth: \(String(describing: Int32(item.nameMonth ?? "data 21.21.23")))")
+
+
+
+        managerData.save()
     }
 }

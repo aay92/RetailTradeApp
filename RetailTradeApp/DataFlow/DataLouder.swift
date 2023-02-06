@@ -14,7 +14,6 @@ final class DataLouder {
     private init(){}
 
     // MARK: - Core Data stack
-
     lazy var persistentContainer: NSPersistentContainer = {
    
         let container = NSPersistentContainer(name: "ProductModelCoreData")
@@ -29,8 +28,8 @@ final class DataLouder {
     lazy var context = persistentContainer.viewContext
 
     // MARK: - Core Data Saving support
-
     func save() {
+        
         if context.hasChanges {
             do {
                 try context.save()
@@ -43,9 +42,11 @@ final class DataLouder {
     }
 
     func fetchProductData<T: NSManagedObject>(_ objectType: T.Type) -> [T] {
+        
         let entityName = String(describing: objectType)
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: entityName)
         do {
+            
             let fetchObjects = try context.fetch(fetchRequest) as? [T]
             return fetchObjects ?? [T]()
         } catch {
