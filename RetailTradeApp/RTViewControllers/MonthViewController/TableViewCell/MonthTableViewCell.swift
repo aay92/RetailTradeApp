@@ -179,8 +179,8 @@ class MonthTableViewCell: UITableViewCell {
         totalAmountNumber.text = String(item.totalGross) + " ₽"
         costPriceNumber.text = String(item.totalAmount) + " ₽"
 
-        print("MARK в ячейке:- \(item.data)")
-        nameMonth.text = item.data
+        print("MARK в ячейке:- \(String(describing: item.nameMonth))")
+        nameMonth.text = item.nameMonth
 
     }
     

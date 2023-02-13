@@ -171,9 +171,9 @@ class TableViewCell: UITableViewCell {
         priceLblProfit.text = String(item.priceProfit) + " ₽"
         guard let image = item.image else { return }
         imageViewMain.image = UIImage(data: image) ?? UIImage(systemName: "photo")
-        
-        print("MARK в ячейке:- \(item.data)")
-        lblData.text = item.data 
+
+        print("MARK в ячейке:- \(String(describing: item.data))")
+        lblData.text = item.data
     }
     
     

@@ -94,6 +94,7 @@ class OverviewViewController: BaseController {
         var arrayCollectionView = [ProfitItemInCollectionView]()
         let profitItem = ProfitItemInCollectionView(name: "Pribl", sumGross: nawProductsGross, sumProfit: nawProductsProfit)
         
+        
         let groosItem = ProfitItemInCollectionView(name: "Extra", sumGross: nawProductsGross, sumProfit: nawProductsProfit)
         arrayCollectionView.append(profitItem)
         arrayCollectionView.append(groosItem)
@@ -109,6 +110,8 @@ extension OverviewViewController {
         super.viewWillAppear(animated)
         getSumGross()
         getSumProfit()
+        getSumProfitOnMonth()
+
         profitCollectionView.reloadData()
         getTotalProfit()
         viewTotalProfit.configure(num: nawTotalProfit)
@@ -228,10 +231,30 @@ extension OverviewViewController {
     
     override func navBarLeftButtonHandler() {
         //  save data for coreDate c
-        saveAllData(Amount: currentAmount, totalProfit: currentTotalProfit, costPrice: currentProductsCost)
-        
-        print("Сохарнилась")
-    }
+        AlertSaveNewMonth { answer in
+            if answer {
+                
+                self.alertDateForSaveMonth() {[self] int , date in
+                    let format = DateFormatter()
+                    format.timeStyle = .none
+                    format.dateStyle = .long
+//                    print("date : \(format.string(from: date))")
+        //                    timeDate = format.string(from: date)
+
+                self.saveAllData(Amount: self.currentAmount,
+                            totalProfit: self.currentTotalProfit,
+                            costPrice: self.currentProductsCost,
+                            nameMonth: format.string(from: date))
+                }
+                print("Сохарнилась")
+//                self.currentAmount = 0
+//                self.currentProductsCost = 0
+//                self.currentTotalProfit = 0
+            } else {
+                print("Не Сохарнилась")
+            }
+        }
+}
 //MARK: - add Segue On DetailVC
     override func navBarRightButtonHandler(){
         let detailVC = DetailVC()
@@ -334,7 +357,7 @@ extension OverviewViewController {
 
 //MARK: - Summa in items CollectionView and Main view
 extension OverviewViewController {
-    
+
     private func getSumProfit() {
         var productsProfit = [ProductEntity]()
         let eventRequest: NSFetchRequest<ProductEntity> = ProductEntity.fetchRequest()
@@ -344,9 +367,7 @@ extension OverviewViewController {
             let sum = productsProfit.reduce(0) {$0 + ($1.priceProfit)}
             print("While iteration newSum: \(sum)")
             self.nawProductsProfit = Int(sum)
-            
-            print("Value save: \(nawProductsProfit)")
-
+    
         } catch {
             print("Could not load save data: \(error.localizedDescription)")
         }
@@ -361,8 +382,8 @@ extension OverviewViewController {
             productsGross = try! manageObjectContext.fetch(eventRequest)
             let sum = productsGross.reduce(0) {$0 + ($1.priceGross)}
             print("While iteration newSum: \(sum)")
-            nawProductsGross = Int(sum)
-            print("Value save: \(nawProductsGross)")
+            self.nawProductsGross = Int(sum)
+          
         } catch {
             print("Could not load save data: \(error.localizedDescription)")
         }
@@ -391,12 +412,33 @@ extension OverviewViewController {
             
             nawTotalProfit = nawProductsGross - nawProductsProfit
 
-            print("Value NawTotalProfit: \(nawTotalProfit)")
-            
-            print("Value save: \(nawProductsGross)")
+//            print("Value NawTotalProfit: \(currentTotalProfit)")
+
         } catch {
             print("Could not load save data: \(error.localizedDescription)")
         }
+    }
+}
+
+//MARK: - Summa in items CollectionView
+extension OverviewViewController {
+    private func getSumProfitOnMonth() {
+        var productsProfit = [ProductEntity]()
+        let eventRequest: NSFetchRequest<ProductEntity> = ProductEntity.fetchRequest()
+        
+        do {
+            productsProfit = try! manageObjectContext.fetch(eventRequest)
+            let firstItem = productsProfit.last?.priceGross
+            print("firstItem: \(firstItem)")
+
+            let sum = productsProfit.reduce(0) {$0 + ($1.priceProfit)}
+            print("While iteration newSum: \(sum)")
+//            self.nawProductsProfit = Int(sum)
+    
+        } catch {
+            print("Could not load save data: \(error.localizedDescription)")
+        }
+        print("Summa nawProductsProfit: \(nawProductsProfit)")
     }
 }
 
@@ -431,10 +473,10 @@ extension OverviewViewController {
 
 //MARK: - Saving data in all month
 extension OverviewViewController {
-    func saveAllData(Amount : Int, totalProfit : Int, costPrice : Int){
+    func saveAllData(Amount : Int, totalProfit : Int, costPrice : Int, nameMonth: String){
         
         
-        let itemModelOverview = itemModelOverview(nameMonth: "29 February 2023",
+        let itemModelOverview = itemModelOverview(nameMonth: nameMonth,
                                                   totalAmount: Int32(Amount),
                                                   totalProfit: Int32(totalProfit),
                                                   totalGross: Int32(costPrice))
@@ -451,12 +493,11 @@ extension OverviewViewController {
         modelOverview.totalGross = Int32(item.totalGross)
         modelOverview.data = item.data
         
+        
         print("item totalAmount: \(Int32(item.totalAmount))")
         print("item totalProfit: \(Int32(item.totalProfit))")
         print("item totalGross: \(Int32(item.totalGross))")
-        print("item nameMonth: \(String(describing: Int32(item.nameMonth ?? "data 21.21.23")))")
-
-
+        print("item nameMonth: \(String(describing: item.nameMonth))))")
 
         managerData.save()
     }
