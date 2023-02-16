@@ -7,8 +7,14 @@
 
 import UIKit
 
+enum SaveBoolButton {
+    case True, False
+}
 class ViewTotalProfitSaveCell: UIView {
     
+    var tap = SaveBoolButton.False
+    var boolingProperty = false
+
     enum Point {
         case topLeading
         case leading
@@ -94,8 +100,20 @@ class ViewTotalProfitSaveCell: UIView {
         
     }
     
+    func taping(){
+        switch tap {
+        case .True:
+//            boolingProperty = false
+                        print("boolingProperty = true")
+        case .False:
+//            boolingProperty = true
+                        print("boolingProperty = false")
+        }
+    }
+    
     @objc func tappedButton(){
-        print("tap")
+//        print("tap")
+        taping()
         makeSystem(buttonTapped)
     }
     

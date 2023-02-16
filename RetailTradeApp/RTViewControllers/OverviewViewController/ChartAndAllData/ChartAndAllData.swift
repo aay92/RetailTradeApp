@@ -12,10 +12,11 @@ class ChartAndAllData: BaseView {
     static let identifier = "ChartAndAllData"
     
     
-    
     private let chartsView: UIView = {
         let chartsView = UIView()
-        chartsView.backgroundColor = .blue.withAlphaComponent(0.4)
+//        chartsView.backgroundColor = .blue.withAlphaComponent(0.4)
+        chartsView.layer.borderColor = UIColor.gray.withAlphaComponent(0.4).cgColor
+        chartsView.layer.borderWidth = 4
         chartsView.layer.masksToBounds = true
         chartsView.layer.cornerRadius = 20
         chartsView.translatesAutoresizingMaskIntoConstraints = false

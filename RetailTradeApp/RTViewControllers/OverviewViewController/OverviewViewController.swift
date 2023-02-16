@@ -8,8 +8,14 @@
 import UIKit
 import CoreData
 
+protocol GetBool{
+    func getAnswer(Bool: Bool)
+}
+
+
 class OverviewViewController: BaseController {
     
+    var temporaryVariable = true
     var manageObjectContext: NSManagedObjectContext!
     
     
@@ -117,7 +123,7 @@ extension OverviewViewController {
         viewTotalProfit.configure(num: nawTotalProfit)
         getAllDataAddedInCatrts()
         saveDateAllMonth()
-
+        
 
         if animateStart {
             UIView.animate(withDuration: 1, delay: 1) {
@@ -502,3 +508,5 @@ extension OverviewViewController {
         managerData.save()
     }
 }
+
+
