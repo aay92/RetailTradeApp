@@ -26,7 +26,7 @@ class ViewTotalProfit: BaseView {
         return view
     }()
     
-    private var viewCloseTheMonth = ViewTotalProfitSaveCell()
+//    private var viewCloseTheMonth = ViewTotalProfitSaveCell()
     
     private let stack: UIStackView = {
         let stackView = UIStackView()
@@ -111,13 +111,13 @@ class ViewTotalProfit: BaseView {
         super.setupViews()
         
 //        Жест на нажатие кнопки Сохранить месяц
-        let tapGestureDate = UITapGestureRecognizer(target: self, action: #selector(didTapDate))
-        viewCloseTheMonth.isUserInteractionEnabled = true
-        viewCloseTheMonth.addGestureRecognizer(tapGestureDate)
+//        let tapGestureDate = UITapGestureRecognizer(target: self, action: #selector(didTapDate))
+//        viewCloseTheMonth.isUserInteractionEnabled = true
+//        viewCloseTheMonth.addGestureRecognizer(tapGestureDate)
         
         
         addSubview(viewProfit)
-        addSubview(viewCloseTheMonth)
+//        addSubview(viewCloseTheMonth)
         
         addSubview(stack)
         stack.addArrangedSubview(nameLbl)
@@ -134,13 +134,13 @@ class ViewTotalProfit: BaseView {
         NSLayoutConstraint.activate([
             viewProfit.topAnchor.constraint(equalTo: topAnchor, constant: 0),
             viewProfit.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 0),
-            viewProfit.trailingAnchor.constraint(equalTo:trailingAnchor, constant:  -height / 7.5),
+            viewProfit.trailingAnchor.constraint(equalTo:trailingAnchor, constant:  height / -150),
             viewProfit.bottomAnchor.constraint(equalTo: bottomAnchor, constant: 0),
             
-            viewCloseTheMonth.topAnchor.constraint(equalTo: topAnchor, constant: 0),
-            viewCloseTheMonth.leadingAnchor.constraint(equalTo: leadingAnchor, constant: height / 3.5),
-            viewCloseTheMonth.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 0),
-            viewCloseTheMonth.bottomAnchor.constraint(equalTo: bottomAnchor, constant: 0),
+//            viewCloseTheMonth.topAnchor.constraint(equalTo: topAnchor, constant: 0),
+//            viewCloseTheMonth.leadingAnchor.constraint(equalTo: leadingAnchor, constant: height / 3.5),
+//            viewCloseTheMonth.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 0),
+//            viewCloseTheMonth.bottomAnchor.constraint(equalTo: bottomAnchor, constant: 0),
 
             
             stack.topAnchor.constraint(equalTo: topAnchor, constant:15),

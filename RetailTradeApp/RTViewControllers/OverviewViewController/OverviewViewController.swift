@@ -8,13 +8,9 @@
 import UIKit
 import CoreData
 
-protocol GetBool{
-    func getAnswer(Bool: Bool)
-}
-
 
 class OverviewViewController: BaseController {
-    
+
     var temporaryVariable = true
     var manageObjectContext: NSManagedObjectContext!
     
@@ -37,7 +33,24 @@ class OverviewViewController: BaseController {
 //    Экземпляр базы данных
     let managerData: DataLouder
     
-    //    Main collection view
+//   Кнопка сохранение месяца
+    private let buttonTapped: UIButton = {
+        let button = UIButton()
+        button.setTitle("Сохранить месяц", for: .normal)
+        button.titleLabel?.font = UIFont(name: "Ariel", size: 14)
+        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 14)
+        button.titleLabel?.numberOfLines = 0
+        button.setTitleColor(.white, for: .normal)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.layer.cornerRadius = 10
+        button.clipsToBounds = true
+        button.layer.masksToBounds = true
+        button.addTarget(self, action: #selector(tappedButton), for: .touchUpInside)
+        button.makeSystem(button)
+        return button
+    }()
+    
+//    Main collection view
     private let profitCollectionView: UICollectionView = {
         let collectionViewLayout = UICollectionViewLayout()
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: collectionViewLayout)
@@ -96,6 +109,21 @@ class OverviewViewController: BaseController {
         fatalError("init(coder:) has not been implemented")
     }
     
+    @objc func tappedButton(){
+        print("tap")
+    }
+    
+//     func setupGradient() {
+//         let gradientLayer:CAGradientLayer = CAGradientLayer()
+//             gradientLayer.frame.size = buttonTapped.frame.size
+//             gradientLayer.colors =
+//                 [UIColor.white.cgColor,UIColor.green.withAlphaComponent(1).cgColor]
+//             buttonTapped.layer.addSublayer(gradientLayer)
+//         v
+//    }
+    
+    
+    
     func setSum()->[ProfitItemInCollectionView]{
         var arrayCollectionView = [ProfitItemInCollectionView]()
         let profitItem = ProfitItemInCollectionView(name: "Pribl", sumGross: nawProductsGross, sumProfit: nawProductsProfit)
@@ -114,7 +142,8 @@ extension OverviewViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        getSumGross()
+        
+       getSumGross()
         getSumProfit()
         getSumProfitOnMonth()
 
@@ -135,11 +164,26 @@ extension OverviewViewController {
                 self.imageMany.alpha = 0
             }
         }
+    
     }
-  
+    
+//    Set gradient on button "Save month"
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        let colors = [UIColor.black.cgColor, UIColor.systemBlue.cgColor]
+        
+        let gradientLayer = CAGradientLayer()
+        gradientLayer.colors = colors
+        self.buttonTapped.layer.insertSublayer(gradientLayer, at: 0)
+        gradientLayer.transform = CATransform3DMakeRotation(270 / 180 * CGFloat.pi, 0, 0, 1)
+        gradientLayer.frame = self.buttonTapped.bounds
+        
+    }
     
     override func setupViews(){
         super.setupViews()
+    
+        self.buttonTapped.applyGradient(colours: [.red, .green], cornerRadius: 20, startPoint: CGPoint(x: 0, y: 0.5), endPoint: CGPoint(x: 1, y: 0.5))
         
         manageObjectContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
         
@@ -151,12 +195,14 @@ extension OverviewViewController {
         view.addViewWithoutTAMIC(viewTotalProfit)
         view.addViewWithoutTAMIC(textAllMonths)
         view.addViewWithoutTAMIC(chartAndAllData)
+        view.addViewWithoutTAMIC(buttonTapped)
         
         view.addViewWithoutTAMIC(imageMany)
         
         imageManyArr = createImageArray(total: 30, imagePrefix: "AnimationMany")
-        
+ 
        
+        
     }
     
     
@@ -182,9 +228,14 @@ extension OverviewViewController {
             
             viewTotalProfit.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor,constant: 20),
             viewTotalProfit.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: height / 29),
-            viewTotalProfit.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: height / -30 ),
+            viewTotalProfit.trailingAnchor.constraint(equalTo: buttonTapped.leadingAnchor, constant: 0),
             viewTotalProfit.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant:  -view.bounds.height / 1.32),
             
+            buttonTapped.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor,constant: 20),
+            buttonTapped.leadingAnchor.constraint(equalTo: viewTotalProfit.trailingAnchor),
+            buttonTapped.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: height / -30 ),
+            buttonTapped.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant:  -view.bounds.height / 1.32),
+            buttonTapped.widthAnchor.constraint(equalToConstant: width / 4),
             
             profitCollectionView.topAnchor.constraint(equalTo: viewTotalProfit.bottomAnchor, constant: 20),
             profitCollectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
@@ -221,6 +272,8 @@ extension OverviewViewController {
         addNavButton(at: .right, with: "", image: UIImage(systemName: "plus"))
         addNavButton(at: .left, with: "", image: UIImage(systemName: "list.clipboard.fill"))
         
+        
+        
     }
 }
 
@@ -236,30 +289,34 @@ extension OverviewViewController {
     }
     
     override func navBarLeftButtonHandler() {
-        //  save data for coreDate c
-        AlertSaveNewMonth { answer in
-            if answer {
-                
-                self.alertDateForSaveMonth() {[self] int , date in
-                    let format = DateFormatter()
-                    format.timeStyle = .none
-                    format.dateStyle = .long
-//                    print("date : \(format.string(from: date))")
-        //                    timeDate = format.string(from: date)
+        //  save data for coreDate
+        
+            AlertSaveNewMonth { answer in
+                if answer {
+                    
+                    self.alertDateForSaveMonth() {[self] int , date in
+                        let format = DateFormatter()
+                        format.timeStyle = .none
+                        format.dateStyle = .long
+    //                    print("date : \(format.string(from: date))")
+            //                    timeDate = format.string(from: date)
 
-                self.saveAllData(Amount: self.currentAmount,
-                            totalProfit: self.currentTotalProfit,
-                            costPrice: self.currentProductsCost,
-                            nameMonth: format.string(from: date))
+                    self.saveAllData(Amount: self.currentAmount,
+                                totalProfit: self.currentTotalProfit,
+                                costPrice: self.currentProductsCost,
+                                nameMonth: format.string(from: date))
+                    }
+                    print("Сохарнилась")
+    //                self.currentAmount = 0
+    //                self.currentProductsCost = 0
+    //                self.currentTotalProfit = 0
+                } else {
+                    print("Не Сохарнилась")
                 }
-                print("Сохарнилась")
-//                self.currentAmount = 0
-//                self.currentProductsCost = 0
-//                self.currentTotalProfit = 0
-            } else {
-                print("Не Сохарнилась")
             }
-        }
+        
+        print("nathing")
+        
 }
 //MARK: - add Segue On DetailVC
     override func navBarRightButtonHandler(){

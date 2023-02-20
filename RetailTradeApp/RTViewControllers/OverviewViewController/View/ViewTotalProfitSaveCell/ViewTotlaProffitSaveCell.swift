@@ -7,12 +7,9 @@
 
 import UIKit
 
-enum SaveBoolButton {
-    case True, False
-}
-class ViewTotalProfitSaveCell: UIView {
+
+class ViewTotalProfitSaveCell: UIButton {
     
-    var tap = SaveBoolButton.False
     var boolingProperty = false
 
     enum Point {
@@ -99,23 +96,13 @@ class ViewTotalProfitSaveCell: UIView {
         setupGradient()
         
     }
-    
-    func taping(){
-        switch tap {
-        case .True:
-//            boolingProperty = false
-                        print("boolingProperty = true")
-        case .False:
-//            boolingProperty = true
-                        print("boolingProperty = false")
-        }
-    }
+ 
     
     @objc func tappedButton(){
-//        print("tap")
-        taping()
+        boolingProperty.toggle()
         makeSystem(buttonTapped)
     }
+    
     
     override func layoutSubviews() {
         super.layoutSubviews()
