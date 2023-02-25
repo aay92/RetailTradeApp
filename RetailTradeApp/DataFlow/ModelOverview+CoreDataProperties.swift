@@ -2,7 +2,7 @@
 //  ModelOverview+CoreDataProperties.swift
 //  RetailTradeApp
 //
-//  Created by Aleksey Alyonin on 25.01.2023.
+//  Created by Aleksey Alyonin on 23.02.2023.
 //
 //
 
@@ -16,11 +16,11 @@ extension ModelOverview {
         return NSFetchRequest<ModelOverview>(entityName: "ModelOverview")
     }
 
-    @NSManaged public var data: String?
-    @NSManaged public var totalAmount: Int32
-    @NSManaged public var totalProfit: Int32
-    @NSManaged public var totalGross: Int32
+    @NSManaged public var data: Date?
     @NSManaged public var nameMonth: String?
+    @NSManaged public var totalAmount: Int32
+    @NSManaged public var totalGross: Int32
+    @NSManaged public var totalProfit: Int32
 
 }
 

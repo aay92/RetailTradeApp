@@ -2,7 +2,7 @@
 //  ModelOverview+CoreDataClass.swift
 //  RetailTradeApp
 //
-//  Created by Aleksey Alyonin on 25.01.2023.
+//  Created by Aleksey Alyonin on 23.02.2023.
 //
 //
 

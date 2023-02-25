@@ -17,17 +17,6 @@ class DetailVC: BaseController {
     var animationApear = false
     var completion: ((Bool)->())?
     
-    //    Пробное сохранение
-    func creatItem(item: ProfitModelItem){
-        let product = ProductEntity(context: managerData.context)
-        product.name = item.name
-        product.priceProfit = Int32(item.priceProfit)
-        product.priceGross = Int32(item.priceGross)
-        product.image = item.image
-        product.data = item.date
-        managerData.save()
-    }
-    
 //Title name vc
     private let labelTitleVC: UILabel = {
         let lbl = UILabel()
@@ -262,6 +251,25 @@ class DetailVC: BaseController {
         return button
     }()
     
+    //    Пробное сохранение
+    private func creatItemProductEntity(item: ProfitModelItem){
+        let product = ProductEntity(context: managerData.context)
+        product.name = item.name
+        product.priceProfit = Int32(item.priceProfit)
+        product.priceGross = Int32(item.priceGross)
+        product.image = item.image
+        product.data = item.date
+        managerData.save()
+    }
+    
+    //    Сохранение данных для текущих зачений
+    private func creatItemCurrentData(item: ProfitModelItem){
+        let product = CurrentDate(context: managerData.context)
+        product.currentProfit = Int32(item.priceProfit)
+        product.currentGross = Int32(item.priceGross)
+        managerData.save()
+    }
+    
 }
 
 //MARK: - Used camera and library for added image
@@ -393,7 +401,6 @@ extension DetailVC {
 
         NSLayoutConstraint.activate([
             
-            
             nameTextField.heightAnchor.constraint(equalToConstant: 40),
             priceTextFieldGross.heightAnchor.constraint(equalToConstant: 40),
             priceTextFieldProfit.heightAnchor.constraint(equalToConstant: 40),
@@ -401,8 +408,6 @@ extension DetailVC {
             buttonSafeAndMakingPhoto.heightAnchor.constraint(equalToConstant: 40),
             imageFromLibrary.widthAnchor.constraint(equalToConstant: 250),
             imageFromLibrary.heightAnchor.constraint(equalToConstant: 200),
-
-
             
             labelTitleVC.topAnchor.constraint(equalTo:view.safeAreaLayoutGuide.topAnchor),
             labelTitleVC.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
@@ -419,7 +424,6 @@ extension DetailVC {
             stackForImage.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             stackForImage.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant:  -20),
             stackForImage.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -400),
-            
                         
             buttonSafeImage.leadingAnchor.constraint(equalTo: stackForImage.leadingAnchor, constant: 20),
             buttonSafeImage.trailingAnchor.constraint(equalTo: stackForImage.trailingAnchor, constant: -20),
@@ -495,7 +499,8 @@ extension DetailVC {
 
         
         if !(newProduct.name == "") {
-            creatItem(item: newProduct)
+            creatItemProductEntity(item: newProduct)
+            creatItemCurrentData(item: newProduct)
             nameTextField.text = ""
             priceTextFieldGross.text = ""
             priceTextFieldProfit.text = ""
@@ -556,7 +561,8 @@ extension DetailVC {
             print("стоимость с наценкой - \(newProduct.priceProfit)")
             print("Картинка изменина")
 
-            creatItem(item: newProduct)
+            creatItemProductEntity(item: newProduct)
+            creatItemCurrentData(item: newProduct)
         }
     }
 }

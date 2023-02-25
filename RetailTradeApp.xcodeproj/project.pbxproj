@@ -12,8 +12,6 @@
 		5B5F51A3293F2C7F006DD6C1 /* UIButton + Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B5F51A2293F2C7F006DD6C1 /* UIButton + Ext.swift */; };
 		5B7F8A532975A736005A5605 /* AlertDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B7F8A522975A736005A5605 /* AlertDate.swift */; };
 		5B7F8A5C297EB876005A5605 /* ViewTotlaProffitSaveCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B7F8A5B297EB876005A5605 /* ViewTotlaProffitSaveCell.swift */; };
-		5B7F8A5F29811B40005A5605 /* ModelOverview+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B7F8A5D29811B40005A5605 /* ModelOverview+CoreDataClass.swift */; };
-		5B7F8A6029811B40005A5605 /* ModelOverview+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B7F8A5E29811B40005A5605 /* ModelOverview+CoreDataProperties.swift */; };
 		5B7F8A63298121EF005A5605 /* ProductEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B7F8A61298121EF005A5605 /* ProductEntity+CoreDataClass.swift */; };
 		5B7F8A64298121EF005A5605 /* ProductEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B7F8A62298121EF005A5605 /* ProductEntity+CoreDataProperties.swift */; };
 		5B7F8A662983BF15005A5605 /* UIimage + ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B7F8A652983BF15005A5605 /* UIimage + ext.swift */; };
@@ -21,6 +19,10 @@
 		5B7F8A6C2983C297005A5605 /* MonthTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B7F8A6B2983C297005A5605 /* MonthTableViewCell.swift */; };
 		5B7F8A6F2988FA07005A5605 /* ChartAndAllData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B7F8A6E2988FA07005A5605 /* ChartAndAllData.swift */; };
 		5B7F8A712999F724005A5605 /* AlertSaveNewMonth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B7F8A702999F724005A5605 /* AlertSaveNewMonth.swift */; };
+		5B7F8A7429A7C9D0005A5605 /* ModelOverview+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B7F8A7229A7C9D0005A5605 /* ModelOverview+CoreDataClass.swift */; };
+		5B7F8A7529A7C9D0005A5605 /* ModelOverview+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B7F8A7329A7C9D0005A5605 /* ModelOverview+CoreDataProperties.swift */; };
+		5B7F8A7829AA9CCF005A5605 /* CurrentDate+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B7F8A7629AA9CCF005A5605 /* CurrentDate+CoreDataClass.swift */; };
+		5B7F8A7929AA9CCF005A5605 /* CurrentDate+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B7F8A7729AA9CCF005A5605 /* CurrentDate+CoreDataProperties.swift */; };
 		5B8E94EB292D5BAD00E0EB49 /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B8E94EA292D5BAD00E0EB49 /* TableViewCell.swift */; };
 		5B8E94ED292E117500E0EB49 /* DetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B8E94EC292E117500E0EB49 /* DetailVC.swift */; };
 		5BB2EC242971E94A002A6A20 /* AlertsChoisCamareOrLibrary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB2EC232971E94A002A6A20 /* AlertsChoisCamareOrLibrary.swift */; };
@@ -49,8 +51,6 @@
 		5B5F51A2293F2C7F006DD6C1 /* UIButton + Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton + Ext.swift"; sourceTree = "<group>"; };
 		5B7F8A522975A736005A5605 /* AlertDate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertDate.swift; sourceTree = "<group>"; };
 		5B7F8A5B297EB876005A5605 /* ViewTotlaProffitSaveCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewTotlaProffitSaveCell.swift; sourceTree = "<group>"; };
-		5B7F8A5D29811B40005A5605 /* ModelOverview+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ModelOverview+CoreDataClass.swift"; sourceTree = "<group>"; };
-		5B7F8A5E29811B40005A5605 /* ModelOverview+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ModelOverview+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		5B7F8A61298121EF005A5605 /* ProductEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ProductEntity+CoreDataClass.swift"; sourceTree = "<group>"; };
 		5B7F8A62298121EF005A5605 /* ProductEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ProductEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		5B7F8A652983BF15005A5605 /* UIimage + ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIimage + ext.swift"; sourceTree = "<group>"; };
@@ -58,6 +58,10 @@
 		5B7F8A6B2983C297005A5605 /* MonthTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthTableViewCell.swift; sourceTree = "<group>"; };
 		5B7F8A6E2988FA07005A5605 /* ChartAndAllData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartAndAllData.swift; sourceTree = "<group>"; };
 		5B7F8A702999F724005A5605 /* AlertSaveNewMonth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertSaveNewMonth.swift; sourceTree = "<group>"; };
+		5B7F8A7229A7C9D0005A5605 /* ModelOverview+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ModelOverview+CoreDataClass.swift"; sourceTree = "<group>"; };
+		5B7F8A7329A7C9D0005A5605 /* ModelOverview+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ModelOverview+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		5B7F8A7629AA9CCF005A5605 /* CurrentDate+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CurrentDate+CoreDataClass.swift"; sourceTree = "<group>"; };
+		5B7F8A7729AA9CCF005A5605 /* CurrentDate+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CurrentDate+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		5B8E94EA292D5BAD00E0EB49 /* TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
 		5B8E94EC292E117500E0EB49 /* DetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailVC.swift; sourceTree = "<group>"; };
 		5BB2EC232971E94A002A6A20 /* AlertsChoisCamareOrLibrary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertsChoisCamareOrLibrary.swift; sourceTree = "<group>"; };
@@ -148,10 +152,12 @@
 		5BB91FFC292F655900FCF34E /* DataFlow */ = {
 			isa = PBXGroup;
 			children = (
+				5B7F8A7629AA9CCF005A5605 /* CurrentDate+CoreDataClass.swift */,
+				5B7F8A7729AA9CCF005A5605 /* CurrentDate+CoreDataProperties.swift */,
+				5B7F8A7229A7C9D0005A5605 /* ModelOverview+CoreDataClass.swift */,
+				5B7F8A7329A7C9D0005A5605 /* ModelOverview+CoreDataProperties.swift */,
 				5B7F8A61298121EF005A5605 /* ProductEntity+CoreDataClass.swift */,
 				5B7F8A62298121EF005A5605 /* ProductEntity+CoreDataProperties.swift */,
-				5B7F8A5D29811B40005A5605 /* ModelOverview+CoreDataClass.swift */,
-				5B7F8A5E29811B40005A5605 /* ModelOverview+CoreDataProperties.swift */,
 				5BB91FFD292F657800FCF34E /* DataLouder.swift */,
 			);
 			path = DataFlow;
@@ -368,15 +374,17 @@
 				5BB2EC242971E94A002A6A20 /* AlertsChoisCamareOrLibrary.swift in Sources */,
 				5BB91FFE292F657800FCF34E /* DataLouder.swift in Sources */,
 				5B5F51A3293F2C7F006DD6C1 /* UIButton + Ext.swift in Sources */,
-				5B7F8A6029811B40005A5605 /* ModelOverview+CoreDataProperties.swift in Sources */,
 				5B7F8A692983C0BE005A5605 /* AllMonthViewController.swift in Sources */,
+				5B7F8A7529A7C9D0005A5605 /* ModelOverview+CoreDataProperties.swift in Sources */,
 				5BFD8AAA292A6DF4007A45A2 /* OverviewViewController.swift in Sources */,
 				5BF24F16292B667900BEE9AB /* UIColor + Ext.swift in Sources */,
 				5BF24F23292C123100BEE9AB /* ProfitCell.swift in Sources */,
 				5BF24F11292B645600BEE9AB /* TabBarController.swift in Sources */,
 				5B7F8A712999F724005A5605 /* AlertSaveNewMonth.swift in Sources */,
+				5B7F8A7829AA9CCF005A5605 /* CurrentDate+CoreDataClass.swift in Sources */,
 				5BF24F26292D0BAE00BEE9AB /* ProfitModel.swift in Sources */,
 				5B8E94ED292E117500E0EB49 /* DetailVC.swift in Sources */,
+				5B7F8A7929AA9CCF005A5605 /* CurrentDate+CoreDataProperties.swift in Sources */,
 				5B8E94EB292D5BAD00E0EB49 /* TableViewCell.swift in Sources */,
 				5B7F8A662983BF15005A5605 /* UIimage + ext.swift in Sources */,
 				5BF52060292FE84800BB76B7 /* ProductModelCoreData.xcdatamodeld in Sources */,
@@ -384,7 +392,6 @@
 				5BF24F1C292B701800BEE9AB /* AllDataViewController.swift in Sources */,
 				5B7F8A6F2988FA07005A5605 /* ChartAndAllData.swift in Sources */,
 				5B7F8A6C2983C297005A5605 /* MonthTableViewCell.swift in Sources */,
-				5B7F8A5F29811B40005A5605 /* ModelOverview+CoreDataClass.swift in Sources */,
 				5B52EEAF29374EEE00E89787 /* ViewTotalProfit.swift in Sources */,
 				5BF24F18292B6A6300BEE9AB /* NavBarController.swift in Sources */,
 				5B7F8A532975A736005A5605 /* AlertDate.swift in Sources */,
@@ -397,6 +404,7 @@
 				5BF24F13292B663900BEE9AB /* Resources.swift in Sources */,
 				5B7F8A5C297EB876005A5605 /* ViewTotlaProffitSaveCell.swift in Sources */,
 				5BFD8AA8292A6DF4007A45A2 /* SceneDelegate.swift in Sources */,
+				5B7F8A7429A7C9D0005A5605 /* ModelOverview+CoreDataClass.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

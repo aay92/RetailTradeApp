@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="21513" systemVersion="22A400" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="CurrentDate" representedClassName=".CurrentDate" syncable="YES">
+        <attribute name="currentAmount" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="currentGross" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="currentProfit" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+    </entity>
     <entity name="ModelOverview" representedClassName=".ModelOverview" syncable="YES">
-        <attribute name="data" optional="YES" attributeType="String"/>
+        <attribute name="data" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="nameMonth" optional="YES" attributeType="String"/>
         <attribute name="totalAmount" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="totalGross" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>

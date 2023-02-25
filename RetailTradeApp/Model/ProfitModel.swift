@@ -30,5 +30,5 @@ struct itemModelOverview {
     var totalAmount: Int32
     var totalProfit: Int32
     var totalGross: Int32
-    var data: String?
+    var data: Date?
 }
