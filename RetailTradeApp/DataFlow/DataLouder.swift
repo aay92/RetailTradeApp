@@ -60,6 +60,24 @@ final class DataLouder {
         save()
     }
     
+    func deleteAllData(_ entity:String) {
+        
+        let entityName = String(describing: entity)
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: entityName)
+        
+        fetchRequest.returnsObjectsAsFaults = false
+        do {
+            let results = try context.fetch(fetchRequest)
+            for object in results {
+                guard let objectData = object as? NSManagedObject else {continue}
+                context.delete(objectData)
+                print("Detele all data in \(entity)")
+            }
+        } catch let error {
+            print("Detele all data in \(entity) error :", error)
+        }
+    }
+    
 }
 
  

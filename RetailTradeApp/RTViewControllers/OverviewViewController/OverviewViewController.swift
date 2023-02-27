@@ -13,11 +13,8 @@ class OverviewViewController: BaseController {
 
     var sum = 0
 
-    
-    
     var temporaryVariable = true
     var manageObjectContext: NSManagedObjectContext!
-    
     
 //    data for coreDate all date
     var nawProductsProfit = 0
@@ -29,7 +26,6 @@ class OverviewViewController: BaseController {
     var currentTotalProfit = 0
     var currentProductsCost = 0
 
-   
 //    image animation
     var animateStart = false
     var imageManyArr: [UIImage] = []
@@ -117,13 +113,12 @@ class OverviewViewController: BaseController {
         alertSaveNewMonth()
     }
     
-    
     func setSum()->[ProfitItemInCollectionView]{
+        
         var arrayCollectionView = [ProfitItemInCollectionView]()
-        let profitItem = ProfitItemInCollectionView(name: "Pribl", sumGross: nawProductsGross, sumProfit: nawProductsProfit)
+        let profitItem = ProfitItemInCollectionView(name: "Pribl", sumGross: currentAmount, sumProfit: currentAmount)
         
-        
-        let groosItem = ProfitItemInCollectionView(name: "Extra", sumGross: nawProductsGross, sumProfit: nawProductsProfit)
+        let groosItem = ProfitItemInCollectionView(name: "Extra", sumGross: currentProductsCost, sumProfit: currentProductsCost)
         arrayCollectionView.append(profitItem)
         arrayCollectionView.append(groosItem)
         
@@ -142,10 +137,9 @@ extension OverviewViewController {
 
         profitCollectionView.reloadData()
         getTotalProfit()
-        viewTotalProfit.configure(num: nawTotalProfit)
+        viewTotalProfit.configure(num: currentTotalProfit)
         getAllDataAddedInCatrts()
        
-        
 //        getCurrentSum()
 
         if animateStart {
@@ -178,12 +172,10 @@ extension OverviewViewController {
         super.setupViews()
         
 //        saveDateAllMonth()
-
-        
         self.buttonTapped.applyGradient(colours: [.red, .green], cornerRadius: 20, startPoint: CGPoint(x: 0, y: 0.5), endPoint: CGPoint(x: 1, y: 0.5))
         
         manageObjectContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-        
+
         
         setDelegates()
         setCollectionView()
@@ -275,15 +267,9 @@ extension OverviewViewController {
 extension OverviewViewController {
 
     //    data for coreDate current date
-    private func saveDateAllMonth(){
-        
-        currentAmount = nawProductsProfit
-        currentProductsCost = nawProductsGross
-        currentTotalProfit = nawTotalProfit
-    }
+
     
     private func alertSaveNewMonth(){
-        saveDateAllMonth()
         AlertSaveNewMonth { answer in
             if answer {
                 
@@ -300,9 +286,8 @@ extension OverviewViewController {
                             nameMonth: format.string(from: date))
                 }
                 print("Сохарнилась")
-//                self.currentAmount = 0
-//                self.currentProductsCost = 0
-//                self.currentTotalProfit = 0
+                self.currentTotalProfit = 0
+
             } else {
                 print("Не Сохарнилась")
             }
@@ -312,6 +297,10 @@ extension OverviewViewController {
     override func navBarLeftButtonHandler() {
         //  save data for coreDate
         alertSaveNewMonth()
+        
+        //  delete data entity CurrentDate for coreDate
+        managerData.deleteAllData("CurrentDate")
+
 }
 //MARK: - add Segue On DetailVC
     override func navBarRightButtonHandler(){
@@ -418,12 +407,20 @@ extension OverviewViewController {
 
     private func getSumProfit() {
         var productsProfit = [ProductEntity]()
+        var productsProfitCurrentDate = [CurrentDate]()
+
         let eventRequest: NSFetchRequest<ProductEntity> = ProductEntity.fetchRequest()
-        
+        let eventRequestCurrentDate: NSFetchRequest<CurrentDate> = CurrentDate.fetchRequest()
+
         do {
             productsProfit = try! manageObjectContext.fetch(eventRequest)
+            productsProfitCurrentDate = try! manageObjectContext.fetch(eventRequestCurrentDate)
+            
             let sum = productsProfit.reduce(0) {$0 + ($1.priceProfit)}
+            var sumCurrentProfit = productsProfitCurrentDate.reduce(0) {$0 + ($1.currentProfit)}
+
             print("While iteration newSum: \(sum)")
+            print("While iteration newSumCurrent: \(sumCurrentProfit)")
             self.nawProductsProfit = Int(sum)
     
         } catch {
@@ -434,12 +431,21 @@ extension OverviewViewController {
     
     private func getSumGross() {
         var productsGross = [ProductEntity]()
+        var productsGrossCurrentDate = [CurrentDate]()
+
         let eventRequest: NSFetchRequest<ProductEntity> = ProductEntity.fetchRequest()
-        
+        let eventRequestCurrentDate: NSFetchRequest<CurrentDate> = CurrentDate.fetchRequest()
+
         do {
             productsGross = try! manageObjectContext.fetch(eventRequest)
+            productsGrossCurrentDate = try! manageObjectContext.fetch(eventRequestCurrentDate)
+
             let sum = productsGross.reduce(0) {$0 + ($1.priceGross)}
+            var sumCurrentGross = productsGrossCurrentDate.reduce(0) {$0 + ($1.currentGross)}
+
             print("While iteration newSum: \(sum)")
+            print("While iteration newSumCurrent: \(sumCurrentGross)")
+
             self.nawProductsGross = Int(sum)
           
         } catch {
@@ -452,25 +458,43 @@ extension OverviewViewController {
         
         var productsGross = [ProductEntity]()
         var productsProfit = [ProductEntity]()
+        var productsTotalCurrentCurrentDate = [CurrentDate]()
+
 
         let eventRequest: NSFetchRequest<ProductEntity> = ProductEntity.fetchRequest()
-        
+        let eventRequestCurrentDate: NSFetchRequest<CurrentDate> = CurrentDate.fetchRequest()
+
         do {
             productsGross = try! manageObjectContext.fetch(eventRequest)
+            productsTotalCurrentCurrentDate = try! manageObjectContext.fetch(eventRequestCurrentDate)
+
             let sumGross = productsGross.reduce(0) {$0 + ($1.priceGross)}
-            
+            var sumCurrentGross = productsTotalCurrentCurrentDate.reduce(0) {$0 + ($1.currentGross)}
+
             productsProfit = try! manageObjectContext.fetch(eventRequest)
             let sumProfit = productsProfit.reduce(0) {$0 + ($1.priceProfit)}
+            var sumCurrentProfit = productsTotalCurrentCurrentDate.reduce(0) {$0 + ($1.currentProfit)}
+
             
             print("While iteration sumGross: \(sumGross)")
+            print("While iteration sumCurrentGross: \(sumCurrentGross)")
+
             nawProductsGross = Int(sumGross)
+            currentAmount = Int(sumCurrentGross)
             
             print("While iteration sumProfit: \(sumProfit)")
+            print("While iteration sumCurrentProfit: \(sumCurrentProfit)")
+
             nawProductsProfit = Int(sumProfit)
+            currentProductsCost = Int(sumCurrentProfit)
             
             nawTotalProfit = nawProductsGross - nawProductsProfit
+            currentTotalProfit = currentAmount - currentProductsCost
+            
 
-//            print("Value NawTotalProfit: \(currentTotalProfit)")
+            print("While NawTotalProfit: \(nawTotalProfit)")
+            print("While currentTotalProfit: \(currentTotalProfit)")
+
 
         } catch {
             print("Could not load save data: \(error.localizedDescription)")
@@ -528,7 +552,7 @@ extension OverviewViewController {
 //MARK: - View this charts and all data
 extension OverviewViewController {
     func getAllDataAddedInCatrts(){
-        chartAndAllData.configure(with: nawProductsGross, Amount: nawTotalProfit, costPrice: nawProductsGross)
+        chartAndAllData.configure(with: nawProductsGross, Amount: nawTotalProfit, costPrice: nawProductsProfit)
     }
 }
 
@@ -588,12 +612,5 @@ extension OverviewViewController {
         }
     }
 }
-//var productsGross = [ProductEntity]()
-//var productsProfit = [ProductEntity]()
-//
-//let eventRequest: NSFetchRequest<ProductEntity> = ProductEntity.fetchRequest()
-//
-//do {
-//    productsGross = try! manageObjectContext.fetch(eventRequest)
-//    let sumGross = productsGross.reduce(0) {$0 + ($1.priceGross)}
+
 
