@@ -11,7 +11,6 @@ class ChartAndAllData: BaseView {
     
     static let identifier = "ChartAndAllData"
     
-    
     private let chartsView: UIView = {
         let chartsView = UIView()
 //        chartsView.backgroundColor = .blue.withAlphaComponent(0.4)
@@ -177,7 +176,6 @@ class ChartAndAllData: BaseView {
         viewProfit.layer.cornerRadius = 20
         
         addSubview(chartsView)
-
         addSubview(viewProfit)
         addSubview(stackMain)
       
@@ -193,7 +191,6 @@ class ChartAndAllData: BaseView {
         
         stackCostPrice.addArrangedSubview(costPrice)
         stackCostPrice.addArrangedSubview(costPriceNumber)
-   
     }
     
     override func constantViews() {
@@ -243,11 +240,52 @@ class ChartAndAllData: BaseView {
     }
     override func configureAppearance() {
         super.configureAppearance()
-        
         backgroundColor = .clear
-        
     }
     
-    
-    
+    override func draw(_ rect: CGRect) {
+        
+        newRect(value: 20,
+                location: 1,
+                firstColor: UIColor.white.withAlphaComponent(0.1),
+                secondColor: UIColor.systemBlue.withAlphaComponent(0.3))
+        
+        newRect(value: 50,
+                location: 2,
+                firstColor: UIColor.white.withAlphaComponent(0.1),
+                secondColor: UIColor.systemBlue.withAlphaComponent(0.3))
+        
+        newRect(value: 90,
+                location: 3,
+                firstColor: UIColor.white.withAlphaComponent(0.1),
+                secondColor: UIColor.systemBlue.withAlphaComponent(0.3))
+        
+        newRect(value: 60,
+                location: 4,
+                firstColor: UIColor.white.withAlphaComponent(0.1),
+                secondColor: UIColor.systemBlue.withAlphaComponent(0.3))
+        
+        
+        
+        
+    }
+
+    private func newRect(value: Int,location: Int, firstColor: UIColor, secondColor: UIColor){
+
+        let downPoint: CGPoint = CGPoint(x: bounds.width / CGFloat((13 / location)), y: bounds.height / 1.29)
+        let polygonPath = UIBezierPath()
+        polygonPath.move(to: downPoint)
+
+        polygonPath.addLine(to: CGPoint(x: downPoint.x, y: downPoint.y - CGFloat(value)))
+        polygonPath.close()
+        
+        
+        let firstColor = firstColor
+        let secondColor = secondColor
+        firstColor.setFill()
+        secondColor.setStroke()
+        polygonPath.fill()
+        polygonPath.lineWidth = 15
+        polygonPath.stroke()
+    }
 }

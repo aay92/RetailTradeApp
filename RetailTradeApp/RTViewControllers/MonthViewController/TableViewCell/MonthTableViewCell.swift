@@ -176,8 +176,8 @@ class MonthTableViewCell: UITableViewCell {
 //
     func configure(with item: ModelOverview){
         totalProfitNumber.text = String(item.totalProfit) + " ₽"
-        totalAmountNumber.text = String(item.totalGross) + " ₽"
-        costPriceNumber.text = String(item.totalAmount) + " ₽"
+        totalAmountNumber.text = String(item.totalAmount) + " ₽"
+        costPriceNumber.text = String(item.totalGross) + " ₽"
 
         print("MARK в ячейке:- \(String(describing: item.nameMonth))")
         nameMonth.text = item.nameMonth

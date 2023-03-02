@@ -8,10 +8,7 @@
 import UIKit
 import CoreData
 
-
 class OverviewViewController: BaseController {
-
-    var sum = 0
 
     var temporaryVariable = true
     var manageObjectContext: NSManagedObjectContext!
@@ -110,7 +107,11 @@ class OverviewViewController: BaseController {
     }
     
     @objc func tappedButton(){
+        //  save data for coreDate
         alertSaveNewMonth()
+        
+        //  delete data entity CurrentDate for coreDate
+        managerData.deleteAllData("CurrentDate")
     }
     
     func setSum()->[ProfitItemInCollectionView]{
@@ -140,8 +141,6 @@ extension OverviewViewController {
         viewTotalProfit.configure(num: currentTotalProfit)
         getAllDataAddedInCatrts()
        
-//        getCurrentSum()
-
         if animateStart {
             UIView.animate(withDuration: 1, delay: 1) {
                 self.imageMany.alpha = 1
@@ -170,17 +169,14 @@ extension OverviewViewController {
     
     override func setupViews(){
         super.setupViews()
-        
-//        saveDateAllMonth()
+        //        saveDateAllMonth()
         self.buttonTapped.applyGradient(colours: [.red, .green], cornerRadius: 20, startPoint: CGPoint(x: 0, y: 0.5), endPoint: CGPoint(x: 1, y: 0.5))
         
         manageObjectContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-
         
         setDelegates()
         setCollectionView()
-        getCurrentSum()
-
+        
         view.addViewWithoutTAMIC(textThisMonth)
         view.addViewWithoutTAMIC(profitCollectionView)
         view.addViewWithoutTAMIC(viewTotalProfit)
@@ -191,9 +187,6 @@ extension OverviewViewController {
         view.addViewWithoutTAMIC(imageMany)
         
         imageManyArr = createImageArray(total: 30, imagePrefix: "AnimationMany")
- 
-       
-        
     }
     
     
@@ -209,7 +202,6 @@ extension OverviewViewController {
             imageMany.widthAnchor.constraint(equalToConstant: 200),
             imageMany.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             imageMany.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-
 
             textThisMonth.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor,constant: 0),
             textThisMonth.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 30),
@@ -240,7 +232,6 @@ extension OverviewViewController {
             chartAndAllData.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             chartAndAllData.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
             chartAndAllData.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -width / 4.0)
-
         ])
     }
     
@@ -267,31 +258,29 @@ extension OverviewViewController {
 extension OverviewViewController {
 
     //    data for coreDate current date
-
-    
     private func alertSaveNewMonth(){
         AlertSaveNewMonth { answer in
             if answer {
-                
                 self.alertDateForSaveMonth() {[self] int , date in
                     let format = DateFormatter()
                     format.timeStyle = .none
                     format.dateStyle = .long
-//                    print("date : \(format.string(from: date))")
-//                    self.timeDate = format.string(from: date)
-
-                self.saveAllData(Amount: self.currentAmount,
-                            totalProfit: self.currentTotalProfit,
-                            costPrice: self.currentProductsCost,
-                            nameMonth: format.string(from: date))
+                    //                    print("date : \(format.string(from: date))")
+                    //                    self.timeDate = format.string(from: date)
+                    
+                    self.saveAllData(Amount: self.currentAmount,
+                                     totalProfit: self.currentTotalProfit,
+                                     costPrice: self.currentProductsCost,
+                                     nameMonth: format.string(from: date))
+//                    Обнуляем Вьюху "Чистая прибыль"
+                    self.currentTotalProfit = 0
                 }
-                print("Сохарнилась")
-                self.currentTotalProfit = 0
-
+                print("Сохранился месяц")
             } else {
-                print("Не Сохарнилась")
+                print("Месяц не Сохранился")
             }
         }
+
     }
     
     override func navBarLeftButtonHandler() {
@@ -310,14 +299,9 @@ extension OverviewViewController {
             guard let self = self else { return }
             print("Bool \(i)")
             self.animateStart = i
-            
         }
-        
         navigationController?.present(detailVC, animated: true)
-        
     }
-   
-
 }
 
 //MARK: - UICollectionViewDelegate, UICollectionViewDataSource
@@ -376,7 +360,6 @@ extension OverviewViewController {
         section.supplementariesFollowContentInsets = contentInsets
         return section
     }
-    
     
     private func createProfitCollectionView()-> NSCollectionLayoutSection {
         
@@ -491,10 +474,8 @@ extension OverviewViewController {
             nawTotalProfit = nawProductsGross - nawProductsProfit
             currentTotalProfit = currentAmount - currentProductsCost
             
-
             print("While NawTotalProfit: \(nawTotalProfit)")
             print("While currentTotalProfit: \(currentTotalProfit)")
-
 
         } catch {
             print("Could not load save data: \(error.localizedDescription)")
@@ -511,14 +492,10 @@ extension OverviewViewController {
         do {
             productsProfit = try! manageObjectContext.fetch(eventRequest)
             let firstItem = productsProfit.last?.priceGross
-            print("getSumProfitOnMonth: \(firstItem)")
+            print("getSumProfitOnMonth: \(String(describing: firstItem))")
             
-//            sum += Int(firstItem!)
-            print("getSumProfitOnMonth sum \(sum)")
-
             let sum = productsProfit.reduce(0) {$0 + ($1.priceProfit)}
             print("While iteration newSum: \(sum)")
-//            self.nawProductsProfit = Int(sum)
     
         } catch {
             print("Could not load save data: \(error.localizedDescription)")
@@ -581,35 +558,6 @@ extension OverviewViewController {
         print("item nameMonth: \(String(describing: item.nameMonth))))")
 
         managerData.save()
-    }
-}
-
-extension OverviewViewController {
-    func getCurrentSum(){
-        
-        var productsProfit = [ProductEntity]()
-        var productsProfit1 = [ModelOverview]()
-
-        let request = NSFetchRequest<ModelOverview>(entityName: "ModelOverview")
-        request.sortDescriptors = [NSSortDescriptor(key: "data", ascending: false)]
-        request.fetchLimit = 1
-//        let d = request.description
-        do {
-            productsProfit1 = try! manageObjectContext.fetch(request)
-            
-            print("request \(String(describing: productsProfit1.first?.totalAmount)))")
-        }
-//        print("request \(d))")
-        
-        
-        let rrequest: NSFetchRequest<ProductEntity> = ProductEntity.fetchRequest()
-        
-        do {
-            productsProfit = try! manageObjectContext.fetch(rrequest)
-
-            print("rrequest \(String(describing: productsProfit.last?.priceGross)))")
-
-        }
     }
 }
 
