@@ -7,17 +7,18 @@
 
 import UIKit
 
+
 class DetailVC: BaseController {
     
     let managerData = DataLouder.shared
     var timeDate = ""
-
-//    var timeDate = Date()
-
+    
+    //    var timeDate = Date()
+    
     var animationApear = false
     var completion: ((Bool)->())?
     
-//Title name vc
+    //Title name vc
     private let labelTitleVC: UILabel = {
         let lbl = UILabel()
         lbl.font = UIFont(name: "Ariel", size: 19)
@@ -30,7 +31,7 @@ class DetailVC: BaseController {
     }()
     
     
-//    Stack buttom
+    //    Stack buttom
     private let stackForButton: UIStackView = {
         let stackView = UIStackView()
         stackView.clipsToBounds = false
@@ -63,7 +64,7 @@ class DetailVC: BaseController {
         return button
     }()
     
-//    Главный стек
+    //    Главный стек
     private let stack: UIStackView = {
         let stackView = UIStackView()
         stackView.clipsToBounds = false
@@ -114,7 +115,7 @@ class DetailVC: BaseController {
         return label
     }()
     
-//    Стек с двумя стеками
+    //    Стек с двумя стеками
     private let stackForTextFieldsPrices: UIStackView = {
         let stackView = UIStackView()
         stackView.clipsToBounds = false
@@ -122,7 +123,7 @@ class DetailVC: BaseController {
         stackView.distribution  = .fillEqually
         stackView.backgroundColor = .clear
         stackView.spacing = 25
-
+        
         return stackView
     }()
     
@@ -143,7 +144,7 @@ class DetailVC: BaseController {
         stackView.distribution  = .fillProportionally
         stackView.backgroundColor = .clear
         stackView.spacing = 10
-
+        
         return stackView
     }()
     
@@ -196,7 +197,7 @@ class DetailVC: BaseController {
         return label
     }()
     
-//    Стек, картинка и кнопка для загрузки картинки из библиотеки
+    //    Стек, картинка и кнопка для загрузки картинки из библиотеки
     private let stackForImage: UIStackView = {
         let stack = UIStackView()
         stack.clipsToBounds = false
@@ -214,8 +215,8 @@ class DetailVC: BaseController {
         image.contentMode = .scaleAspectFill
         image.clipsToBounds = true
         image.layer.masksToBounds = true
-
-//      image.isUserInteractionEnabled - добавляет возможность взаимодействовать с картинкой
+        
+        //      image.isUserInteractionEnabled - добавляет возможность взаимодействовать с картинкой
         image.isUserInteractionEnabled = true
         image.tintColor = .white
         image.layer.cornerRadius = image.frame.height / 2.0
@@ -270,6 +271,10 @@ class DetailVC: BaseController {
         managerData.save()
     }
     
+    deinit {
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
 }
 
 //MARK: - Used camera and library for added image
@@ -287,10 +292,10 @@ extension DetailVC {
         let vc = UIImagePickerController()
         vc.sourceType = .camera
         vc.delegate = self
-//        vc.allowsEditing = true
+        //        vc.allowsEditing = true
         present(vc, animated: true)
     }
-//    Нажатие на картинку
+    //    Нажатие на картинку
     @objc private func didTapImageView(){
         alertPhotoOrCamera { [self] source in
             chooseImagePicker(source: source)
@@ -298,14 +303,14 @@ extension DetailVC {
     }
     
     //    Нажатие на дату
-        @objc private func didTapDate(){
-            alertDate(label: chooseDate) {[self] int , date in
-                let format = DateFormatter()
-                format.timeStyle = .none
-                format.dateStyle = .long
-                timeDate = format.string(from: date)
-            }
+    @objc private func didTapDate(){
+        alertDate(label: chooseDate) {[self] int , date in
+            let format = DateFormatter()
+            format.timeStyle = .none
+            format.dateStyle = .long
+            timeDate = format.string(from: date)
         }
+    }
 }
 
 
@@ -328,7 +333,7 @@ extension DetailVC: UIImagePickerControllerDelegate, UINavigationControllerDeleg
             imageFromLibrary.image = image
         }
         picker.dismiss(animated: true)
-
+        
     }
     
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
@@ -337,7 +342,7 @@ extension DetailVC: UIImagePickerControllerDelegate, UINavigationControllerDeleg
 }
 
 extension DetailVC {
-//    Сохранить новый item
+    //    Сохранить новый item
     @objc private func savingData(){
         createProduct()
     }
@@ -345,20 +350,29 @@ extension DetailVC {
     @objc private func closedView(){
         dismiss(animated: true)
     }
-       
+    
 }
 
 extension DetailVC {
+  
     override func setupViews() {
         super.setupViews()
-//
+        
+        self.view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(hidenKayBoard)))
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShowNotification(notification: )), name: UIResponder.keyboardWillShowNotification, object: nil)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(keyBoardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+        
+        
+        
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(didTapImageView))
         imageFromLibrary.addGestureRecognizer(tapGestureRecognizer)
         
         let tapGestureDate = UITapGestureRecognizer(target: self, action: #selector(didTapDate))
         chooseDate.isUserInteractionEnabled = true
         chooseDate.addGestureRecognizer(tapGestureDate)
-
+        
         
         imageFromLibrary.layer.masksToBounds = true
         imageFromLibrary.clipsToBounds = true
@@ -369,13 +383,13 @@ extension DetailVC {
         view.addViewWithoutTAMIC(stack)
         view.addViewWithoutTAMIC(stackForImage)
         view.addViewWithoutTAMIC(imageFromLibrary)
-    
+        
         stackForImage.addArrangedSubview(buttonSafeImage)
         stackForImage.addArrangedSubview(buttonSafeAndMakingPhoto)
         
         stackForName.addArrangedSubview(nameLbl)
         stackForName.addArrangedSubview(chooseDate)
-
+        
         stack.addArrangedSubview(stackForName)
         stack.addArrangedSubview(nameTextField)
         stack.addArrangedSubview(stackForTextFieldsPrices)
@@ -385,20 +399,20 @@ extension DetailVC {
         
         stackProfit.addArrangedSubview(priceLblProfit)
         stackProfit.addArrangedSubview(priceTextFieldProfit)
-
+        
         stackGross.addArrangedSubview(priceLblGross)
         stackGross.addArrangedSubview(priceTextFieldGross)
-
+        
         view.addViewWithoutTAMIC(stackForButton)
         stackForButton.addArrangedSubview(buttonSafe)
         stackForButton.addArrangedSubview(buttonCensel)
-
+        
     }
     
     override func constraintViews() {
         super.constraintViews()
         
-
+        
         NSLayoutConstraint.activate([
             
             nameTextField.heightAnchor.constraint(equalToConstant: 40),
@@ -424,19 +438,19 @@ extension DetailVC {
             stackForImage.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             stackForImage.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant:  -20),
             stackForImage.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -400),
-                        
+            
             buttonSafeImage.leadingAnchor.constraint(equalTo: stackForImage.leadingAnchor, constant: 20),
             buttonSafeImage.trailingAnchor.constraint(equalTo: stackForImage.trailingAnchor, constant: -20),
             
             buttonSafeAndMakingPhoto.leadingAnchor.constraint(equalTo: stackForImage.leadingAnchor, constant: 20),
             buttonSafeAndMakingPhoto.trailingAnchor.constraint(equalTo: stackForImage.trailingAnchor, constant: -20),
             buttonSafeAndMakingPhoto.bottomAnchor.constraint(equalTo: stackForImage.bottomAnchor, constant:  -50),
-    
+            
             stack.topAnchor.constraint(equalTo: stackForImage.bottomAnchor,constant:  50),
             stack.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             stack.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
             stack.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant:  -165),
-
+            
             stackForButton.topAnchor.constraint(equalTo: stack.bottomAnchor, constant: 15),
             stackForButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 50),
             stackForButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -50),
@@ -446,7 +460,7 @@ extension DetailVC {
     
     override func configureAppereance() {
         super.configureAppereance()
-    
+        
         buttonCensel.addTarget(self, action: #selector(closedView), for: .touchUpInside)
         buttonSafe.addTarget(self, action: #selector(savingData), for: .touchUpInside)
         stack.backgroundColor = .clear
@@ -454,22 +468,69 @@ extension DetailVC {
         
         buttonSafeImage.addTarget(self, action: #selector(getImageFromLibrary), for: .touchUpInside)
         buttonSafeAndMakingPhoto.addTarget(self, action: #selector(getImageFromPhoneCamera), for: .touchUpInside)
-       
+        
     }
+    
+}
 
+//MARK: - Move view after show/hide keyboard
+extension DetailVC {
+    
+    @objc func hidenKayBoard(){
+        self.view.endEditing(true)
+    }
+    
+    @objc func keyboardWillShowNotification(notification: NSNotification){
+        let info: NSDictionary = notification.userInfo! as NSDictionary
+        let keyBoardSize = (info[UIResponder.keyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
+        let keyBeardY = self.view.frame.height - keyBoardSize.height
+        let editingTextField = nameTextField.convert(nameTextField.bounds, to: self.view).minY;
+        
+        let screen = UIScreen.main.bounds.height / 3.3
+        
+        if self.view.frame.minY >= 0
+        {
+            if editingTextField > keyBeardY - screen
+            {
+                UIView.animate(withDuration: 0.25,
+                               delay: 0.0,
+                               options: UIView.AnimationOptions.curveEaseIn)
+                {
+                    self.view.frame = CGRect(
+                        x: 0,
+                        y:self.view.frame.origin.y-(editingTextField-keyBeardY + screen),
+                        width: self.view.frame.width,
+                        height: self.view.bounds.height)
+                }
+            }
+        }
+    }
+    
+    @objc func keyBoardWillHide(){
+        UIView.animate(withDuration: 0.25,
+                       delay: 0.0,
+                       options: UIView.AnimationOptions.curveEaseIn)
+        {
+            self.view.frame = CGRect(
+                x: 0,
+                y: 0,
+                width: self.view.frame.width,
+                height: self.view.bounds.height)
+        }
+    }
 }
 
 extension DetailVC {
     
     func createProduct(){
-
+        
         guard let textName = nameTextField.text else {
             return print("Нет имени") }
         guard let textGross = priceTextFieldGross.text else {
             return print("Нет начальной стоимости продукта")}
         guard let textProfit = priceTextFieldProfit.text else {
             return print("Нет Нет конечной стоимости продукта")}
-       
+        
         guard let image = imageFromLibrary.image else {
             return print("Нет картинки")
         }
@@ -496,7 +557,7 @@ extension DetailVC {
         print("Cтоимость с наценкой - \(newProduct.priceProfit)")
         print("Картинка - \(String(describing: saveImage?.description))")
         print("Дата создания - \(timeDate)")
-
+        
         
         if !(newProduct.name == "") {
             creatItemProductEntity(item: newProduct)
@@ -511,7 +572,7 @@ extension DetailVC {
         } else {
             animationApear = false
             dismiss(animated: true)
-
+            
         }
     }
 }
@@ -560,7 +621,7 @@ extension DetailVC {
             print("стоимость - \(newProduct.priceGross)")
             print("стоимость с наценкой - \(newProduct.priceProfit)")
             print("Картинка изменина")
-
+            
             creatItemProductEntity(item: newProduct)
             creatItemCurrentData(item: newProduct)
         }
@@ -568,3 +629,14 @@ extension DetailVC {
 }
 
 
+extension DetailVC: UITextFieldDelegate
+{
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        nameTextField = textField
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
+}
