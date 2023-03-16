@@ -26,6 +26,7 @@ class OverviewViewController: BaseController {
 //    image animation
     var animateStart = false
     var imageManyArr: [UIImage] = []
+    var imageArrowDown: [UIImage] = []
 
 //    Экземпляр базы данных
     let managerData: DataLouder
@@ -151,7 +152,6 @@ extension OverviewViewController {
                 self.imageMany.alpha = 0
             }
         }
-    
     }
     
 //    Set gradient on button "Save month"
@@ -187,6 +187,7 @@ extension OverviewViewController {
         view.addViewWithoutTAMIC(imageMany)
         
         imageManyArr = createImageArray(total: 30, imagePrefix: "AnimationMany")
+//        imageArrowDown = createImageArray(total: 30, imagePrefix: "AnimationArrowDown")
     }
     
     
@@ -265,22 +266,23 @@ extension OverviewViewController {
                     let format = DateFormatter()
                     format.timeStyle = .none
                     format.dateStyle = .long
-                    //                    print("date : \(format.string(from: date))")
-                    //                    self.timeDate = format.string(from: date)
-                    
+
                     self.saveAllData(Amount: self.currentAmount,
                                      totalProfit: self.currentTotalProfit,
                                      costPrice: self.currentProductsCost,
                                      nameMonth: format.string(from: date))
 //                    Обнуляем Вьюху "Чистая прибыль"
                     self.currentTotalProfit = 0
+//                    Переход на вью с месецами
+//                  tabBarController?.selectedIndex = 2
+                  present(AllMonthViewController(), animated: true)
+                  
                 }
                 print("Сохранился месяц")
             } else {
                 print("Месяц не Сохранился")
             }
         }
-
     }
     
     override func navBarLeftButtonHandler() {
