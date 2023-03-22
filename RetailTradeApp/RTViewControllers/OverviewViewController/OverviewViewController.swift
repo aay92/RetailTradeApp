@@ -275,7 +275,8 @@ extension OverviewViewController {
                     self.currentTotalProfit = 0
 //                    Переход на вью с месецами
 //                  tabBarController?.selectedIndex = 2
-                  present(AllMonthViewController(), animated: true)
+                    navigationController?.pushViewController(AllMonthViewController(), animated: true)
+//                  present(AllMonthViewController(), animated: true)
                   
                 }
                 print("Сохранился месяц")

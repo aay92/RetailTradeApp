@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SwiftUI
 
 class SettingViewController: BaseController {
     
@@ -34,6 +35,21 @@ class SettingViewController: BaseController {
         return label
     }()
     
+    private let buttonSaveData: UIButton = {
+        let button = UIButton()
+        button.setTitle(" Сохранить данные ", for: .normal)
+        button.backgroundColor = .systemBlue
+        button.layer.cornerRadius = 10
+        button.addTarget(self, action: #selector(buttonSave), for: .touchUpInside)
+        button.makeSystem(button)
+        return button
+    }()
+    
+    @objc func buttonSave(){
+        let host = UIHostingController(rootView: SwiftUIView())
+        present(host, animated: true)
+    }
+    
 }
 
 extension SettingViewController {
@@ -61,18 +77,25 @@ extension SettingViewController {
             imageCatAndDog.heightAnchor.constraint(equalToConstant: 200),
             imageCatAndDog.widthAnchor.constraint(equalToConstant: 200),
             
-            imageCatAndDog.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: height / 150),
-            imageCatAndDog.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: height / -5),
+            imageCatAndDog.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: height / 9),
             imageCatAndDog.topAnchor.constraint(equalTo: view.topAnchor, constant: 20)
         ])
         
         view.addViewWithoutTAMIC(textName)
         NSLayoutConstraint.activate([
-//            textName.heightAnchor.constraint(equalToConstant: 200),
-//            textName.widthAnchor.constraint(equalToConstant: 200),
             textName.topAnchor.constraint(equalTo: view.topAnchor, constant: 20),
-            textName.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: height / 3.7),
-            textName.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0 )
+            
+            textName.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: view.frame.size.height / view.frame.size.height + 140),
+        ])
+        
+        view.addViewWithoutTAMIC(buttonSaveData)
+        NSLayoutConstraint.activate([
+            buttonSaveData.heightAnchor.constraint(equalToConstant: 40),
+            buttonSaveData.widthAnchor.constraint(equalToConstant: 200),
+            
+            buttonSaveData.topAnchor.constraint(equalTo: textName.bottomAnchor, constant: width / 2),
+            buttonSaveData.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
+            buttonSaveData.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
         ])
     }
 }
