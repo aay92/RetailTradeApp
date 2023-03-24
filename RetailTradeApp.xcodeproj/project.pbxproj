@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5B4A1C6D29CCAC4900EA09A4 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B4A1C6C29CCAC4900EA09A4 /* Persistence.swift */; };
 		5B52EEAF29374EEE00E89787 /* ViewTotalProfit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B52EEAE29374EEE00E89787 /* ViewTotalProfit.swift */; };
 		5B52EEB12937511B00E89787 /* BaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B52EEB02937511B00E89787 /* BaseView.swift */; };
 		5B5F51A3293F2C7F006DD6C1 /* UIButton + Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B5F51A2293F2C7F006DD6C1 /* UIButton + Ext.swift */; };
@@ -47,6 +48,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		5B4A1C6C29CCAC4900EA09A4 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
 		5B52EEAE29374EEE00E89787 /* ViewTotalProfit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewTotalProfit.swift; sourceTree = "<group>"; };
 		5B52EEB02937511B00E89787 /* BaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseView.swift; sourceTree = "<group>"; };
 		5B5F51A2293F2C7F006DD6C1 /* UIButton + Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton + Ext.swift"; sourceTree = "<group>"; };
@@ -137,6 +139,7 @@
 			isa = PBXGroup;
 			children = (
 				5B8BC4A129CB813B00D46EE2 /* SwiftUIView.swift */,
+				5B4A1C6C29CCAC4900EA09A4 /* Persistence.swift */,
 			);
 			path = SettingVCSwiftUI;
 			sourceTree = "<group>";
@@ -413,6 +416,7 @@
 				5BF24F1A292B6B7E00BEE9AB /* BaseController.swift in Sources */,
 				5B8BC4A229CB813B00D46EE2 /* SwiftUIView.swift in Sources */,
 				5B52EEB12937511B00E89787 /* BaseView.swift in Sources */,
+				5B4A1C6D29CCAC4900EA09A4 /* Persistence.swift in Sources */,
 				5BF24F13292B663900BEE9AB /* Resources.swift in Sources */,
 				5B7F8A5C297EB876005A5605 /* ViewTotlaProffitSaveCell.swift in Sources */,
 				5BFD8AA8292A6DF4007A45A2 /* SceneDelegate.swift in Sources */,

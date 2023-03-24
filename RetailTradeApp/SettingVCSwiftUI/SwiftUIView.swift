@@ -6,17 +6,34 @@
 //
 
 import SwiftUI
+import CoreData
+
 
 struct SwiftUIView: View {
+
+//    @FetchRequest(entity: CurrentDate.entity(), sortDescriptors: [],
+//                  animation: .easeInOut(duration: 0.3)) private var purchaseItem: FetchedResults<CurrentDate>
+    @FetchRequest(entity: CurrentDate.entity(), sortDescriptors: []) var purchaseItem: FetchedResults<CurrentDate>
+
+    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+    
+    
+    @State private var addExpanse: Bool = false
+    @State private var presentShareSheet: Bool = false
+    @State private var shareURL: URL = URL(string: "https://apple.com")!
+    @State private var presentFilePicker: Bool = false
+
+//    @Environment(\.managedObjectContext) private var context
     
     @Environment(\.colorScheme) var colorScheme
+    @Environment(\.dismiss) private var dismiss
 
     var body: some View {
         ZStack(){
         Rectangle()
             .fill(Gradient(colors: [.indigo, .purple]))
             .ignoresSafeArea()
-            VStack(){
+            VStack(spacing: 50){
                 Text("Сохранить или загрузить данные из библиотеки?")
                     .font(.callout)
                     .fontWeight(.semibold)
@@ -25,17 +42,130 @@ struct SwiftUIView: View {
                     .foregroundColor(.white)
                     .multilineTextAlignment(.center)
                 
+                HStack(){
+                    Button("Сохранить данные", action: exportCoreData)
+                        .frame(width: 180 ,height: 50)
+                        .tint(.white)
+                        .background(Color(.systemBlue))
+                        .cornerRadius(20)
+
+    
+                    Button("Загрузить данные"){
+                        presentFilePicker.toggle()
+                    }
+                        .frame(width: 180 ,height: 50)
+                        .tint(.white)
+                        .background(Color(.systemBlue))
+                        .cornerRadius(20)
+                        
+
+                }
+                .sheet(isPresented: $addExpanse) {
+//                    AddNewExpense()
+                /// Customizing sheet
+//                        .presentationDetents([.medium])
+//                        .presentationDragIndicator(.hidden)
+//                        .interactiveDismissDisabled()
+                }
+                .sheet(isPresented: $presentShareSheet) {
+                    deleteTempFile()
+                    dismiss()
+
+                } content: {
+                    CustomShareSheet(url: $shareURL)
+                }
+                ///File importer (for selecting JSON file from files app)
+                .fileImporter(isPresented: $presentFilePicker, allowedContentTypes: [.json]) { result in
+                    switch result {
+                    case .success(let success):
+                        importJSON(success)
+                        dismiss()
+                        print(success)
+                    case .failure(let failure):
+                        print(failure.localizedDescription)
+                    }
+                    
+                }
                 Spacer()
                 
             }
 
         }
     }
+    
+    ///Importing json file and adding to core data
+    func importJSON(_ url: URL){
+        do {
+            let jsonData = try Data(contentsOf: url)
+            let decoder = JSONDecoder()
+            decoder.userInfo[.context] = context
+            let item = try decoder.decode([CurrentDate].self, from: jsonData)
+            /// since it's already loaded in context, simply save the context
+            try context.save()
+            print("File Imported Successfully")
+        } catch {
+            ///Do Action
+            print(error)
+        }
+    }
+    
+    func deleteTempFile(){
+        do {
+            try FileManager.default.removeItem(at: shareURL)
+            print("Removed Temp json file")
+        } catch {
+            print(error.localizedDescription)
+        }
+    }
+    
+    func exportCoreData(){
+        do {
+///Step 1
+///Fetching all Core data Items for the Entity using Swift Way
+            if let entityName = CurrentDate.entity().name {
+                let request = NSFetchRequest<NSFetchRequestResult>(entityName: entityName)
+                let items = try context.fetch(request).compactMap {
+                    $0 as? CurrentDate ?? nil
+                }
+                ///Step 2
+                ///Converting item to json string file
+                let jsonData = try JSONEncoder().encode(items)
+                if let jsonString = String(data: jsonData, encoding: .utf8) {
+
+                    ///saving into  temporary document and sharing it via shareSheet
+                    if let tempURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first {
+                        let pathURL = tempURL.appending(component: "Export\(Date().formatted(date: .complete, time: .omitted)).json")
+                        try jsonString.write(to: pathURL, atomically: true, encoding: .utf8)
+                        ///saved successfully
+                        shareURL = pathURL
+                        presentShareSheet.toggle()
+                    }
+                }
+            }
+        } catch {
+//            DO ACTION
+            print(error.localizedDescription)
+        }
+    }
 
 }
 
-struct SwiftUIView_Previews: PreviewProvider {
-    static var previews: some View {
-        SwiftUIView()
+//struct SwiftUIView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        SwiftUIView().environment(\.managedObjectContext, context.self)
+//
+//    }
+//}
+
+struct CustomShareSheet: UIViewControllerRepresentable {
+    
+    @Binding var url: URL
+    func makeUIViewController(context: Context) -> UIActivityViewController {
+        return UIActivityViewController(activityItems: [url], applicationActivities: nil)
     }
+    
+    func updateUIViewController(_ uiViewController: UIActivityViewController, context: Context) {
+        
+    }
+    
 }

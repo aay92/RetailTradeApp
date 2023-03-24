@@ -37,7 +37,7 @@ class SettingViewController: BaseController {
     
     private let buttonSaveData: UIButton = {
         let button = UIButton()
-        button.setTitle(" Сохранить данные ", for: .normal)
+        button.setTitle(" Сохранить или загрузить данные ", for: .normal)
         button.backgroundColor = .systemBlue
         button.layer.cornerRadius = 10
         button.addTarget(self, action: #selector(buttonSave), for: .touchUpInside)
