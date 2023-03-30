@@ -27,9 +27,7 @@ extension UIViewController {
         alertController.addAction(camera)
         alertController.addAction(photoLibrary)
         alertController.addAction(cancel)
-
-        present(alertController, animated: true)
         
+        present(alertController, animated: true)
     }
-    
 }

@@ -1,29 +1,31 @@
 //
-//  AlertSaveNewMonth.swift
+//  AlertCheckOnEmpty.swift
 //  RetailTradeApp
 //
-//  Created by Aleksey Alyonin on 13.02.2023.
+//  Created by Aleksey Alyonin on 30.03.2023.
 //
 
+import Foundation
 import UIKit
 
 extension UIViewController {
-        
-    func AlertSaveNewMonth(completionHandle: @escaping(Bool)->Void){
-        let alertController = UIAlertController(title: nil, message: "Сохранить данные этого месяца", preferredStyle: .alert)
+    
+//    completionHandle: @escaping(Bool)->Void
+    func AlertCheckOnEmpty(title: String){
+        let alertController = UIAlertController(title: title, message: nil, preferredStyle: .alert)
         
         let cancel = UIAlertAction(title: "Отменить", style: .cancel){ _ in
-            completionHandle(false)
+//            completionHandle(false)
         }
-
+        
         let saveNewMonth = UIAlertAction(title: "Ok", style: .default){ _ in
-            completionHandle(true)
+//            completionHandle(true)
         }
         
         alertController.addAction(cancel)
         alertController.addAction(saveNewMonth)
-
+        
+        
         present(alertController, animated: true)
     }
-    
 }

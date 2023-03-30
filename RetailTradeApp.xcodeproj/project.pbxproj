@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		5B4A1C6D29CCAC4900EA09A4 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B4A1C6C29CCAC4900EA09A4 /* Persistence.swift */; };
+		5B4A1C6F29D57E0100EA09A4 /* AlertCheckOnEmpty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B4A1C6E29D57E0100EA09A4 /* AlertCheckOnEmpty.swift */; };
 		5B52EEAF29374EEE00E89787 /* ViewTotalProfit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B52EEAE29374EEE00E89787 /* ViewTotalProfit.swift */; };
 		5B52EEB12937511B00E89787 /* BaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B52EEB02937511B00E89787 /* BaseView.swift */; };
 		5B5F51A3293F2C7F006DD6C1 /* UIButton + Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B5F51A2293F2C7F006DD6C1 /* UIButton + Ext.swift */; };
@@ -49,6 +50,7 @@
 
 /* Begin PBXFileReference section */
 		5B4A1C6C29CCAC4900EA09A4 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
+		5B4A1C6E29D57E0100EA09A4 /* AlertCheckOnEmpty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertCheckOnEmpty.swift; sourceTree = "<group>"; };
 		5B52EEAE29374EEE00E89787 /* ViewTotalProfit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewTotalProfit.swift; sourceTree = "<group>"; };
 		5B52EEB02937511B00E89787 /* BaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseView.swift; sourceTree = "<group>"; };
 		5B5F51A2293F2C7F006DD6C1 /* UIButton + Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton + Ext.swift"; sourceTree = "<group>"; };
@@ -158,6 +160,7 @@
 				5BB2EC232971E94A002A6A20 /* AlertsChoisCamareOrLibrary.swift */,
 				5B7F8A522975A736005A5605 /* AlertDate.swift */,
 				5B7F8A702999F724005A5605 /* AlertSaveNewMonth.swift */,
+				5B4A1C6E29D57E0100EA09A4 /* AlertCheckOnEmpty.swift */,
 			);
 			path = Alerts;
 			sourceTree = "<group>";
@@ -388,6 +391,7 @@
 				5BB2EC242971E94A002A6A20 /* AlertsChoisCamareOrLibrary.swift in Sources */,
 				5BB91FFE292F657800FCF34E /* DataLouder.swift in Sources */,
 				5B5F51A3293F2C7F006DD6C1 /* UIButton + Ext.swift in Sources */,
+				5B4A1C6F29D57E0100EA09A4 /* AlertCheckOnEmpty.swift in Sources */,
 				5B7F8A692983C0BE005A5605 /* AllMonthViewController.swift in Sources */,
 				5B7F8A7529A7C9D0005A5605 /* ModelOverview+CoreDataProperties.swift in Sources */,
 				5BFD8AAA292A6DF4007A45A2 /* OverviewViewController.swift in Sources */,

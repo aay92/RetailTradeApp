@@ -14,7 +14,7 @@ public class CurrentDate: NSManagedObject, Codable {
     
     required convenience public init(from decoder: Decoder) throws {
         /// first we need to extract managed object context to initialise
-        guard let context = decoder.userInfo[.context] as? NSManagedObjectContext else {
+        guard let context = decoder.userInfo[CodingUserInfoKey.managedObjectContext] as? NSManagedObjectContext else {
             throw ContextError.NoContextFound
         }
         self.init(context: context)
@@ -42,13 +42,13 @@ public class CurrentDate: NSManagedObject, Codable {
     }
 }
 
-//extension CodingUserInfoKey {
-//    static let context = CodingUserInfoKey(rawValue: "managedObjectContext")!
-//}
-//
-//enum ContextError: Error {
-//    case NoContextFound
-//}
+extension CodingUserInfoKey {
+    static let managedObjectContext = CodingUserInfoKey(rawValue: "managedObjectContext")!
+}
+
+enum ContextError: Error {
+    case NoContextFound
+}
 
 
 

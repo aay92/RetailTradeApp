@@ -44,12 +44,12 @@ public class ProductEntity: NSManagedObject {
 //        case data, image, name, priceGross, priceProfit
 //    }
 }
-extension CodingUserInfoKey {
-    static let context = CodingUserInfoKey(rawValue: "managedObjectContext")!
-}
-
-enum ContextError: Error {
-    case NoContextFound
-}
+//extension CodingUserInfoKey {
+//    static let context = CodingUserInfoKey(rawValue: "managedObjectContext")!
+//}
+//
+//enum ContextError: Error {
+//    case NoContextFound
+//}
 
 

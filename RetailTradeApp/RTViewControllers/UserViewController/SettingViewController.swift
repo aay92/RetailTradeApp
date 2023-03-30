@@ -9,7 +9,9 @@ import UIKit
 import SwiftUI
 
 class SettingViewController: BaseController {
-    
+    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+//    @Environment(\.managedObjectContext) private var context
+
     private var imageCatAndDog: UIImageView = {
         let image = UIImageView()
         image.image = UIImage(named: "catAndDog")
@@ -46,7 +48,7 @@ class SettingViewController: BaseController {
     }()
     
     @objc func buttonSave(){
-        let host = UIHostingController(rootView: SwiftUIView())
+        let host = UIHostingController(rootView: SwiftUIView().environment(\.managedObjectContext, context))
         present(host, animated: true)
     }
     

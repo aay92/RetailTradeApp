@@ -263,7 +263,7 @@ class DetailVC: BaseController {
         managerData.save()
     }
     
-    //    Сохранение данных для текущих зачений
+    //    Сохранение данных для текущих значений
     private func creatItemCurrentData(item: ProfitModelItem){
         let product = CurrentDate(context: managerData.context)
         product.currentProfit = Int32(item.priceProfit)

@@ -11,19 +11,21 @@ import CoreData
 
 struct SwiftUIView: View {
 
-//    @FetchRequest(entity: CurrentDate.entity(), sortDescriptors: [],
-//                  animation: .easeInOut(duration: 0.3)) private var purchaseItem: FetchedResults<CurrentDate>
-    @FetchRequest(entity: CurrentDate.entity(), sortDescriptors: []) var purchaseItem: FetchedResults<CurrentDate>
+    @FetchRequest(entity: CurrentDate.entity(), sortDescriptors: [],
+                  animation: .easeInOut(duration: 0.3)) private var purchaseItem: FetchedResults<CurrentDate>
+//    @FetchRequest(entity: CurrentDate.entity(), sortDescriptors: []) var purchaseItem: FetchedResults<CurrentDate>
 
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
+    @Environment(\.managedObjectContext) var mocContext
+
     
     @State private var addExpanse: Bool = false
     @State private var presentShareSheet: Bool = false
     @State private var shareURL: URL = URL(string: "https://apple.com")!
     @State private var presentFilePicker: Bool = false
+    @State private var checkOnEmptyBool: Bool = false
 
-//    @Environment(\.managedObjectContext) private var context
     
     @Environment(\.colorScheme) var colorScheme
     @Environment(\.dismiss) private var dismiss
@@ -48,29 +50,27 @@ struct SwiftUIView: View {
                         .tint(.white)
                         .background(Color(.systemBlue))
                         .cornerRadius(20)
-
     
                     Button("Загрузить данные"){
-                        presentFilePicker.toggle()
+                        checkOnEmpty()
+//                        presentFilePicker.toggle()
                     }
-                        .frame(width: 180 ,height: 50)
-                        .tint(.white)
-                        .background(Color(.systemBlue))
-                        .cornerRadius(20)
-                        
-
-                }
-                .sheet(isPresented: $addExpanse) {
-//                    AddNewExpense()
-                /// Customizing sheet
-//                        .presentationDetents([.medium])
-//                        .presentationDragIndicator(.hidden)
-//                        .interactiveDismissDisabled()
+                    .frame(width: 180 ,height: 50)
+                    .tint(.white)
+                    .background(Color(.systemBlue))
+                    .cornerRadius(20)
+                    .alert("У Вас есть данные, сохранить перед удалением?", isPresented: $checkOnEmptyBool) {
+                        Button("Да", role: .none) {
+                                exportCoreData()
+                            }
+                        Button("Нет", role: .none) {
+                            presentFilePicker.toggle()
+                        }
+                    }
                 }
                 .sheet(isPresented: $presentShareSheet) {
                     deleteTempFile()
                     dismiss()
-
                 } content: {
                     CustomShareSheet(url: $shareURL)
                 }
@@ -84,29 +84,56 @@ struct SwiftUIView: View {
                     case .failure(let failure):
                         print(failure.localizedDescription)
                     }
-                    
                 }
                 Spacer()
-                
             }
+        }
+    }
+    ///checkOnEmpty
+    func checkOnEmpty(){
+        var isEmpty: Bool {
+            do {
+                let request = NSFetchRequest<NSFetchRequestResult>(entityName: "CurrentDate")
+                let count  = try context.count(for: request)
+                return count == 0
+            } catch {
+                return true
+            }
+        }
+        if isEmpty {
+            checkOnEmptyBool = false
+            presentFilePicker.toggle()
+
+        }
+        else {
+            checkOnEmptyBool = true
 
         }
     }
+
+
     
     ///Importing json file and adding to core data
     func importJSON(_ url: URL){
+        
         do {
             let jsonData = try Data(contentsOf: url)
             let decoder = JSONDecoder()
-            decoder.userInfo[.context] = context
+            decoder.userInfo[.managedObjectContext] = context
+
             let item = try decoder.decode([CurrentDate].self, from: jsonData)
             /// since it's already loaded in context, simply save the context
-            try context.save()
+        
             print("File Imported Successfully")
+
         } catch {
             ///Do Action
             print(error)
         }
+//        DispatchQueue.main.async {
+//           try? context.save()
+//        }
+        try? context.save()
     }
     
     func deleteTempFile(){
@@ -119,19 +146,19 @@ struct SwiftUIView: View {
     }
     
     func exportCoreData(){
+        
         do {
 ///Step 1
 ///Fetching all Core data Items for the Entity using Swift Way
             if let entityName = CurrentDate.entity().name {
                 let request = NSFetchRequest<NSFetchRequestResult>(entityName: entityName)
                 let items = try context.fetch(request).compactMap {
-                    $0 as? CurrentDate ?? nil
+                    $0 as? CurrentDate
                 }
                 ///Step 2
                 ///Converting item to json string file
                 let jsonData = try JSONEncoder().encode(items)
                 if let jsonString = String(data: jsonData, encoding: .utf8) {
-
                     ///saving into  temporary document and sharing it via shareSheet
                     if let tempURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first {
                         let pathURL = tempURL.appending(component: "Export\(Date().formatted(date: .complete, time: .omitted)).json")
@@ -152,13 +179,12 @@ struct SwiftUIView: View {
 
 //struct SwiftUIView_Previews: PreviewProvider {
 //    static var previews: some View {
-//        SwiftUIView().environment(\.managedObjectContext, context.self)
+//        SwiftUIView().environment(\.managedObjectContext, )
 //
 //    }
 //}
 
 struct CustomShareSheet: UIViewControllerRepresentable {
-    
     @Binding var url: URL
     func makeUIViewController(context: Context) -> UIActivityViewController {
         return UIActivityViewController(activityItems: [url], applicationActivities: nil)
