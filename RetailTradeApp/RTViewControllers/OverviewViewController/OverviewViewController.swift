@@ -10,6 +10,7 @@ import CoreData
 
 class OverviewViewController: BaseController {
 
+    var products = [CurrentDate]()
     var temporaryVariable = true
     var manageObjectContext: NSManagedObjectContext!
     
@@ -109,10 +110,12 @@ class OverviewViewController: BaseController {
     
     @objc func tappedButton(){
         //  save data for coreDate
-        alertSaveNewMonth()
         
-        //  delete data entity CurrentDate for coreDate
-        managerData.deleteAllData("CurrentDate")
+
+            self.alertSaveNewMonth()
+                                 
+            //  delete data entity CurrentDate for coreDate
+            self.managerData.deleteAllData("CurrentDate")
     }
     
     func setSum()->[ProfitItemInCollectionView]{
@@ -125,6 +128,24 @@ class OverviewViewController: BaseController {
         arrayCollectionView.append(groosItem)
         
         return arrayCollectionView
+    }
+    
+    func watchResultGetJSON(){
+        let eventRequest: NSFetchRequest<CurrentDate> = CurrentDate.fetchRequest()
+        do{
+            products = try manageObjectContext.fetch(eventRequest)
+            
+        } catch {
+            print("Could not load save data: \(error.localizedDescription)")
+        }
+        var num = 0
+        for i in products {
+            num += 1
+
+            print("productscurrentProfit: \(i.currentProfit)")
+            print("productscurrentProfit: \(i.currentGross)")
+            print("num: \(num)")
+        }
     }
 }
 
@@ -141,7 +162,7 @@ extension OverviewViewController {
         getTotalProfit()
         viewTotalProfit.configure(num: currentTotalProfit)
         getAllDataAddedInCatrts()
-       
+
         if animateStart {
             UIView.animate(withDuration: 1, delay: 1) {
                 self.imageMany.alpha = 1
@@ -152,6 +173,8 @@ extension OverviewViewController {
                 self.imageMany.alpha = 0
             }
         }
+        watchResultGetJSON()
+
     }
     
 //    Set gradient on button "Save month"
@@ -274,9 +297,7 @@ extension OverviewViewController {
 //                    Обнуляем Вьюху "Чистая прибыль"
                     self.currentTotalProfit = 0
 //                    Переход на вью с месецами
-//                  tabBarController?.selectedIndex = 2
                     navigationController?.pushViewController(AllMonthViewController(), animated: true)
-//                  present(AllMonthViewController(), animated: true)
                   
                 }
                 print("Сохранился месяц")

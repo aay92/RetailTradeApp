@@ -80,7 +80,6 @@ struct SwiftUIView: View {
                     case .success(let success):
                         importJSON(success)
                         dismiss()
-                        print(success)
                     case .failure(let failure):
                         print(failure.localizedDescription)
                     }
@@ -103,7 +102,6 @@ struct SwiftUIView: View {
         if isEmpty {
             checkOnEmptyBool = false
             presentFilePicker.toggle()
-
         }
         else {
             checkOnEmptyBool = true
@@ -115,25 +113,25 @@ struct SwiftUIView: View {
     
     ///Importing json file and adding to core data
     func importJSON(_ url: URL){
-        
+
+        var items = [CurrentDate]()
         do {
             let jsonData = try Data(contentsOf: url)
             let decoder = JSONDecoder()
             decoder.userInfo[.managedObjectContext] = context
-
-            let item = try decoder.decode([CurrentDate].self, from: jsonData)
+            items = try decoder.decode([CurrentDate].self, from: jsonData)
             /// since it's already loaded in context, simply save the context
-        
+            ///
             print("File Imported Successfully")
 
         } catch {
             ///Do Action
             print(error)
         }
-//        DispatchQueue.main.async {
-//           try? context.save()
-//        }
+        
         try? context.save()
+        print("File Imported Successfully: \(items.count)")
+
     }
     
     func deleteTempFile(){
