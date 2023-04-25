@@ -109,8 +109,6 @@ struct SwiftUIView: View {
         }
     }
 
-
-    
     ///Importing json file and adding to core data
     func importJSON(_ url: URL){
 

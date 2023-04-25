@@ -29,6 +29,10 @@
 		5B8E94EB292D5BAD00E0EB49 /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B8E94EA292D5BAD00E0EB49 /* TableViewCell.swift */; };
 		5B8E94ED292E117500E0EB49 /* DetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B8E94EC292E117500E0EB49 /* DetailVC.swift */; };
 		5BB2EC242971E94A002A6A20 /* AlertsChoisCamareOrLibrary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB2EC232971E94A002A6A20 /* AlertsChoisCamareOrLibrary.swift */; };
+		5BB763A829F8482A0033EE62 /* BarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB763A729F8482A0033EE62 /* BarView.swift */; };
+		5BB763AA29F848C90033EE62 /* BarsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB763A929F848C90033EE62 /* BarsView.swift */; };
+		5BB763AF29F84BA90033EE62 /* ProgressViewDataAllMonth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB763AE29F84BA90033EE62 /* ProgressViewDataAllMonth.swift */; };
+		5BB763B129F84C000033EE62 /* BaseViewInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB763B029F84C000033EE62 /* BaseViewInfo.swift */; };
 		5BB91FFE292F657800FCF34E /* DataLouder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB91FFD292F657800FCF34E /* DataLouder.swift */; };
 		5BF24F11292B645600BEE9AB /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BF24F10292B645600BEE9AB /* TabBarController.swift */; };
 		5BF24F13292B663900BEE9AB /* Resources.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BF24F12292B663900BEE9AB /* Resources.swift */; };
@@ -71,6 +75,10 @@
 		5B8E94EA292D5BAD00E0EB49 /* TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
 		5B8E94EC292E117500E0EB49 /* DetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailVC.swift; sourceTree = "<group>"; };
 		5BB2EC232971E94A002A6A20 /* AlertsChoisCamareOrLibrary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertsChoisCamareOrLibrary.swift; sourceTree = "<group>"; };
+		5BB763A729F8482A0033EE62 /* BarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarView.swift; sourceTree = "<group>"; };
+		5BB763A929F848C90033EE62 /* BarsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarsView.swift; sourceTree = "<group>"; };
+		5BB763AE29F84BA90033EE62 /* ProgressViewDataAllMonth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressViewDataAllMonth.swift; sourceTree = "<group>"; };
+		5BB763B029F84C000033EE62 /* BaseViewInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewInfo.swift; sourceTree = "<group>"; };
 		5BB91FFD292F657800FCF34E /* DataLouder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataLouder.swift; sourceTree = "<group>"; };
 		5BF24F10292B645600BEE9AB /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		5BF24F12292B663900BEE9AB /* Resources.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Resources.swift; sourceTree = "<group>"; };
@@ -133,6 +141,7 @@
 			isa = PBXGroup;
 			children = (
 				5B7F8A6E2988FA07005A5605 /* ChartAndAllData.swift */,
+				5BB763AD29F84B830033EE62 /* BarView */,
 			);
 			path = ChartAndAllData;
 			sourceTree = "<group>";
@@ -165,6 +174,16 @@
 			path = Alerts;
 			sourceTree = "<group>";
 		};
+		5BB763AD29F84B830033EE62 /* BarView */ = {
+			isa = PBXGroup;
+			children = (
+				5BB763A729F8482A0033EE62 /* BarView.swift */,
+				5BB763A929F848C90033EE62 /* BarsView.swift */,
+				5BB763AE29F84BA90033EE62 /* ProgressViewDataAllMonth.swift */,
+			);
+			path = BarView;
+			sourceTree = "<group>";
+		};
 		5BB91FFC292F655900FCF34E /* DataFlow */ = {
 			isa = PBXGroup;
 			children = (
@@ -193,6 +212,7 @@
 			isa = PBXGroup;
 			children = (
 				5BF24F19292B6B7E00BEE9AB /* BaseController.swift */,
+				5BB763B029F84C000033EE62 /* BaseViewInfo.swift */,
 				5B52EEB02937511B00E89787 /* BaseView.swift */,
 				5BF24F0A292AA60200BEE9AB /* OverviewViewController */,
 				5BF24F0B292AA60E00BEE9AB /* TableViewController */,
@@ -205,8 +225,8 @@
 		5BF24F0A292AA60200BEE9AB /* OverviewViewController */ = {
 			isa = PBXGroup;
 			children = (
-				5B7F8A6D2988F9C7005A5605 /* ChartAndAllData */,
 				5BF24F21292C11FF00BEE9AB /* View */,
+				5B7F8A6D2988F9C7005A5605 /* ChartAndAllData */,
 				5BFD8AA9292A6DF4007A45A2 /* OverviewViewController.swift */,
 				5B8E94EC292E117500E0EB49 /* DetailVC.swift */,
 			);
@@ -397,11 +417,15 @@
 				5BFD8AAA292A6DF4007A45A2 /* OverviewViewController.swift in Sources */,
 				5BF24F16292B667900BEE9AB /* UIColor + Ext.swift in Sources */,
 				5BF24F23292C123100BEE9AB /* ProfitCell.swift in Sources */,
+				5BB763A829F8482A0033EE62 /* BarView.swift in Sources */,
+				5BB763AF29F84BA90033EE62 /* ProgressViewDataAllMonth.swift in Sources */,
 				5BF24F11292B645600BEE9AB /* TabBarController.swift in Sources */,
 				5B7F8A712999F724005A5605 /* AlertSaveNewMonth.swift in Sources */,
 				5B7F8A7829AA9CCF005A5605 /* CurrentDate+CoreDataClass.swift in Sources */,
 				5BF24F26292D0BAE00BEE9AB /* ProfitModel.swift in Sources */,
+				5BB763B129F84C000033EE62 /* BaseViewInfo.swift in Sources */,
 				5B8E94ED292E117500E0EB49 /* DetailVC.swift in Sources */,
+				5BB763AA29F848C90033EE62 /* BarsView.swift in Sources */,
 				5B7F8A7929AA9CCF005A5605 /* CurrentDate+CoreDataProperties.swift in Sources */,
 				5B8E94EB292D5BAD00E0EB49 /* TableViewCell.swift in Sources */,
 				5B7F8A662983BF15005A5605 /* UIimage + ext.swift in Sources */,

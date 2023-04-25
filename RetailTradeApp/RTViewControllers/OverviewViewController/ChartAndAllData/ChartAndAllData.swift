@@ -10,7 +10,7 @@ import UIKit
 class ChartAndAllData: BaseView {
     
     static let identifier = "ChartAndAllData"
-    
+
     private let chartsView: UIView = {
         let chartsView = UIView()
 //        chartsView.backgroundColor = .blue.withAlphaComponent(0.4)
@@ -167,7 +167,7 @@ class ChartAndAllData: BaseView {
         totalAmountNumber.text = String(Amount) + " ₽"
         costPriceNumber.text = String(costPrice) + " ₽"
     }
-    
+   
     
     override func setupViews() {
         super.setupViews()

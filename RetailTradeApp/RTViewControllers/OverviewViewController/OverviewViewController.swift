@@ -82,7 +82,7 @@ class OverviewViewController: BaseController {
     }()
     
     private let viewTotalProfit = ViewTotalProfit()
-    private let chartAndAllData = ChartAndAllData()
+    private let progressViewDataAllMonth = ProgressViewDataAllMonth()
     
     private let imageDog: UIImageView = {
         let image = UIImageView()
@@ -110,8 +110,6 @@ class OverviewViewController: BaseController {
     
     @objc func tappedButton(){
         //  save data for coreDate
-        
-
             self.alertSaveNewMonth()
                                  
             //  delete data entity CurrentDate for coreDate
@@ -204,7 +202,9 @@ extension OverviewViewController {
         view.addViewWithoutTAMIC(profitCollectionView)
         view.addViewWithoutTAMIC(viewTotalProfit)
         view.addViewWithoutTAMIC(textAllMonths)
-        view.addViewWithoutTAMIC(chartAndAllData)
+//        view.addViewWithoutTAMIC(chartAndAllData)
+        view.addViewWithoutTAMIC(progressViewDataAllMonth)
+
         view.addViewWithoutTAMIC(buttonTapped)
         
         view.addViewWithoutTAMIC(imageMany)
@@ -248,14 +248,20 @@ extension OverviewViewController {
             profitCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
             profitCollectionView.bottomAnchor.constraint(equalTo: textAllMonths.topAnchor, constant: 10),
             
-            textAllMonths.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            textAllMonths.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 30),
             textAllMonths.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
             textAllMonths.bottomAnchor.constraint(equalTo: view.bottomAnchor,constant:  -width / 0.9),
             
-            chartAndAllData.topAnchor.constraint(equalTo: textAllMonths.bottomAnchor, constant: 5),
-            chartAndAllData.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-            chartAndAllData.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
-            chartAndAllData.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -width / 4.0)
+    
+            
+            progressViewDataAllMonth.topAnchor.constraint(equalTo: textAllMonths.bottomAnchor, constant: 5),
+            progressViewDataAllMonth.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            progressViewDataAllMonth.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+            progressViewDataAllMonth.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -width / 4.0)
+//            chartAndAllData.topAnchor.constraint(equalTo: textAllMonths.bottomAnchor, constant: 5),
+//            chartAndAllData.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+//            chartAndAllData.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+//            chartAndAllData.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -width / 4.0)
         ])
     }
     
@@ -271,7 +277,8 @@ extension OverviewViewController {
         view.backgroundColor = R.Color.background
         viewTotalProfit.layer.cornerRadius = 10
         viewTotalProfit.clipsToBounds = true
-        
+       
+
 //        Bottom added item
         addNavButton(at: .right, with: "", image: UIImage(systemName: "plus"))
         addNavButton(at: .left, with: "", image: UIImage(systemName: "list.clipboard.fill"))
@@ -553,7 +560,16 @@ extension OverviewViewController {
 //MARK: - View this charts and all data
 extension OverviewViewController {
     func getAllDataAddedInCatrts(){
-        chartAndAllData.configure(with: nawProductsGross, Amount: nawTotalProfit, costPrice: nawProductsProfit)
+        //        chartAndAllData.configure(with: nawProductsGross, Amount: nawTotalProfit, costPrice: nawProductsProfit)
+        
+        //    }
+        progressViewDataAllMonth.configure(with: [.init(value: "1", heightMultiplier: 0.3, title: "Mon"),
+                                                  .init(value: "2", heightMultiplier: 0.4, title: "Teu"),
+                                                  .init(value: "3", heightMultiplier: 0.6, title: "Wen"),
+                                                  .init(value: "4", heightMultiplier: 0.8, title: "Thu"),
+                                                  .init(value: "5", heightMultiplier: 1, title: "Fri"),
+                                                  .init(value: "3", heightMultiplier: 0.6, title: "Sat"),
+                                                  .init(value: "2", heightMultiplier: 0.4, title: "Sun")])
     }
 }
 
