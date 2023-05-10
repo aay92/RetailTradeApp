@@ -16,12 +16,19 @@ final class BarsView: BaseView {
         return view
     }()
 
-    func configure(with data: [BarView.Data]) {
+    func configure(with data: [BarView]) {
         data.forEach {
-            let barView = BarView(data: $0)
+            let barView = $0
             stackView.addArrangedSubview(barView)
         }
     }
+    
+//    func configure(with data: [BarView.Data]) {
+//        data.forEach {
+//            let barView = BarView(data: $0)
+//            stackView.addArrangedSubview(barView)
+//        }
+//    }
 }
 
 extension BarsView {

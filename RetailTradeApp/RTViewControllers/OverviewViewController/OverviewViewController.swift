@@ -13,6 +13,10 @@ class OverviewViewController: BaseController {
     var products = [CurrentDate]()
     var temporaryVariable = true
     var manageObjectContext: NSManagedObjectContext!
+    private let viewTotalProfit = ViewTotalProfit()
+    private let progressViewDataAllMonth = ProgressViewDataAllMonth()
+    ///Массив стобцов в графике
+    lazy var barData = [BarView]()
     
 //    data for coreDate all date
     var nawProductsProfit = 0
@@ -80,9 +84,6 @@ class OverviewViewController: BaseController {
         label.numberOfLines = 0
         return label
     }()
-    
-    private let viewTotalProfit = ViewTotalProfit()
-    private let progressViewDataAllMonth = ProgressViewDataAllMonth()
     
     private let imageDog: UIImageView = {
         let image = UIImageView()
@@ -159,7 +160,9 @@ extension OverviewViewController {
         profitCollectionView.reloadData()
         getTotalProfit()
         viewTotalProfit.configure(num: currentTotalProfit)
+        
         getAllDataAddedInCatrts()
+        
 
         if animateStart {
             UIView.animate(withDuration: 1, delay: 1) {
@@ -197,6 +200,7 @@ extension OverviewViewController {
         
         setDelegates()
         setCollectionView()
+        getAllMonthInCharts()
         
         view.addViewWithoutTAMIC(textThisMonth)
         view.addViewWithoutTAMIC(profitCollectionView)
@@ -208,9 +212,7 @@ extension OverviewViewController {
         view.addViewWithoutTAMIC(buttonTapped)
         
         view.addViewWithoutTAMIC(imageMany)
-        
         imageManyArr = createImageArray(total: 30, imagePrefix: "AnimationMany")
-//        imageArrowDown = createImageArray(total: 30, imagePrefix: "AnimationArrowDown")
     }
     
     
@@ -277,7 +279,6 @@ extension OverviewViewController {
         view.backgroundColor = R.Color.background
         viewTotalProfit.layer.cornerRadius = 10
         viewTotalProfit.clipsToBounds = true
-       
 
 //        Bottom added item
         addNavButton(at: .right, with: "", image: UIImage(systemName: "plus"))
@@ -559,22 +560,48 @@ extension OverviewViewController {
 
 //MARK: - View this charts and all data
 extension OverviewViewController {
+
     func getAllDataAddedInCatrts(){
         //        chartAndAllData.configure(with: nawProductsGross, Amount: nawTotalProfit, costPrice: nawProductsProfit)
         
         //    }
-        progressViewDataAllMonth.configure(with: [.init(value: "1", heightMultiplier: 0.3, title: "Mon"),
-                                                  .init(value: "2", heightMultiplier: 0.4, title: "Teu"),
-                                                  .init(value: "3", heightMultiplier: 0.6, title: "Wen"),
-                                                  .init(value: "4", heightMultiplier: 0.8, title: "Thu"),
-                                                  .init(value: "5", heightMultiplier: 1, title: "Fri"),
-                                                  .init(value: "3", heightMultiplier: 0.6, title: "Sat"),
-                                                  .init(value: "2", heightMultiplier: 0.4, title: "Sun")])
+        progressViewDataAllMonth.configure(with: barData )
+//        progressViewDataAllMonth.configure(with: [
+//            .init(value: "1", heightMultiplier: 0.3, title: "Mon"),
+//                .init(value: "2", heightMultiplier: 0.4, title: "Teu"),
+//                .init(value: "3", heightMultiplier: 0.6, title: "Wen"),
+//                .init(value: "4", heightMultiplier: 0.8, title: "Thu"),
+//                .init(value: "5", heightMultiplier: 1, title: "Fri"),
+//                .init(value: "3", heightMultiplier: 0.6, title: "Sat"),
+//                .init(value: "2", heightMultiplier: 0.4, title: "Sun")])
     }
 }
 
 //MARK: - Saving data in all month
 extension OverviewViewController {
+    
+    func getAllMonthInCharts(){
+        var object = [ModelOverview]()
+        let eventRequest: NSFetchRequest<ModelOverview> = ModelOverview.fetchRequest()
+
+        do {
+            object = try! manageObjectContext.fetch(eventRequest)
+            print("ModelOverview count : \(object.count)")
+            object.forEach { i in
+                guard let nameMonth = i.nameMonth else { return }
+                let value = i.totalProfit
+                let bar = BarView(data: BarView.Data(value: String(value),
+                                                     heightMultiplier: Double(value) / 10000,
+                                                     title: nameMonth))
+                barData.append(bar)
+
+            }
+        } catch {
+            print("Could not load save data: \(error.localizedDescription)")
+        }
+    }
+    
+    
     func saveAllData(Amount : Int, totalProfit : Int, costPrice : Int, nameMonth: String){
         let itemModelOverview = itemModelOverview(nameMonth: nameMonth,
                                                   totalAmount: Int32(Amount),
