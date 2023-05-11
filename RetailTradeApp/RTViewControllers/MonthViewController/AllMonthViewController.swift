@@ -7,13 +7,16 @@
 
 import UIKit
 import CoreData
+import Lottie
 
 class AllMonthViewController: BaseController {
     
     //MARK: - dataFlowFromCoreData
 //    var manageObjectContext: NSManagedObjectContext!
 //    var products = [ProductEntity]()
-    
+
+    private let animationArrowBack = LottieAnimationView(name: "arrowBack")
+     var arrowIsHidden = false
     
     var manageObjectContext: NSManagedObjectContext!
     var month = [ModelOverview]()
@@ -38,17 +41,21 @@ extension AllMonthViewController {
         super.setupViews()
         
         manageObjectContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-        self.loadSaveData()
-        
+        loadSaveData()
         
         //        products = managerData.fetchProductData(ProductEntity.self)
         print("Количество продуктов в массиве: \(month.count)")
         setDelegate()
+        
         view.addViewWithoutTAMIC(tableViewProducts)
+        view.addViewWithoutTAMIC(animationArrowBack)
+
+        animationArrowBack.isHidden = true
+        animationArrowBackAction()
         
     }
     
-    func loadSaveData()  {
+    func loadSaveData() {
         
         let eventRequest: NSFetchRequest<ModelOverview> = ModelOverview.fetchRequest()
         do {
@@ -62,11 +69,16 @@ extension AllMonthViewController {
     
     override func constraintViews() {
         super.constraintViews()
+        
         NSLayoutConstraint.activate([
             tableViewProducts.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             tableViewProducts.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             tableViewProducts.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            tableViewProducts.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+            tableViewProducts.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            
+            animationArrowBack.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            animationArrowBack.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            animationArrowBack.heightAnchor.constraint(equalToConstant: 250)
         ])
     }
     
@@ -146,5 +158,31 @@ extension AllMonthViewController: UITableViewDelegate, UITableViewDataSource {
         
     }
 }
+//MARK: - animationArrowBackAction
+extension AllMonthViewController {
+    ///animationArrowBackAction - Выводит анимацию, когда сохранили месяц и перешли на страницу с месецами
+    func animationArrowBackAction(){
+        if !arrowIsHidden {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1){
+                self.animationArrowBack.isHidden = false
+                self.animationArrowBack.loopMode = .loop
+                self.animationArrowBack.play()
+                DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
+                    self.animationArrowBack.stop()
+                    self.animationArrowBack.isHidden = true
+                    self.arrowIsHidden = false
+                }
+            }
+        }
+    }
+}
 
+//MARK: - InputDataAnimationProtocol, animation arrow
+extension AllMonthViewController: InputDataAnimationProtocol {
+    func getValueAnimationsBool(isHidden: Bool) {
+        print(" self.arrowIsHidden: \(self.arrowIsHidden)")
+        self.arrowIsHidden = isHidden
+        print(" self.arrowIsHidden: \(self.arrowIsHidden)")
+    }
+}
 

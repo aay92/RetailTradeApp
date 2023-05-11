@@ -9,12 +9,13 @@ import UIKit
 import CoreData
 
 class OverviewViewController: BaseController {
-
+    
     var products = [CurrentDate]()
     var temporaryVariable = true
     var manageObjectContext: NSManagedObjectContext!
     private let viewTotalProfit = ViewTotalProfit()
     private let progressViewDataAllMonth = ProgressViewDataAllMonth()
+    private var delegateForAllMonthView: InputDataAnimationProtocol? = nil
     ///Массив стобцов в графике
     var barData = [BarView]()
     
@@ -163,7 +164,7 @@ extension OverviewViewController {
         viewTotalProfit.configure(num: currentTotalProfit)
 
         getAllMonthInCharts()
-
+        
         if animateStart {
             UIView.animate(withDuration: 1, delay: 1) {
                 self.imageMany.alpha = 1
@@ -207,6 +208,7 @@ extension OverviewViewController {
         view.addViewWithoutTAMIC(progressViewDataAllMonth)
         view.addViewWithoutTAMIC(buttonTapped)
         view.addViewWithoutTAMIC(imageMany)
+               
         imageManyArr = createImageArray(total: 30, imagePrefix: "AnimationMany")
     }
     
@@ -249,12 +251,11 @@ extension OverviewViewController {
             textAllMonths.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
             textAllMonths.bottomAnchor.constraint(equalTo: view.bottomAnchor,constant:  -width / 0.9),
             
-    
             
             progressViewDataAllMonth.topAnchor.constraint(equalTo: textAllMonths.bottomAnchor, constant: 5),
             progressViewDataAllMonth.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             progressViewDataAllMonth.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
-            progressViewDataAllMonth.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -width / 4.0)
+            progressViewDataAllMonth.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -width / 4.0),
         ])
     }
     
@@ -296,8 +297,10 @@ extension OverviewViewController {
 //                    Обнуляем Вьюху "Чистая прибыль"
                     self.currentTotalProfit = 0
 //                    Переход на вью с месецами
-                    navigationController?.pushViewController(AllMonthViewController(), animated: true)
-                  
+                    let vc = AllMonthViewController()
+                    self.delegateForAllMonthView = vc
+                    self.delegateForAllMonthView?.getValueAnimationsBool(isHidden: true)
+                    navigationController?.pushViewController(vc, animated: true)
                 }
                 print("Сохранился месяц")
             } else {

@@ -28,6 +28,9 @@
 		5B8BC4A229CB813B00D46EE2 /* SwiftUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B8BC4A129CB813B00D46EE2 /* SwiftUIView.swift */; };
 		5B8E94EB292D5BAD00E0EB49 /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B8E94EA292D5BAD00E0EB49 /* TableViewCell.swift */; };
 		5B8E94ED292E117500E0EB49 /* DetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B8E94EC292E117500E0EB49 /* DetailVC.swift */; };
+		5B9980AD2A0D6AEB00032895 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 5B9980AC2A0D6AEB00032895 /* Lottie */; };
+		5B9980AF2A0D6D3400032895 /* arrowBack.json in Resources */ = {isa = PBXBuildFile; fileRef = 5B9980AE2A0D6D3400032895 /* arrowBack.json */; };
+		5B9980B32A0D792A00032895 /* Protocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B9980B22A0D792A00032895 /* Protocol.swift */; };
 		5BB2EC242971E94A002A6A20 /* AlertsChoisCamareOrLibrary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB2EC232971E94A002A6A20 /* AlertsChoisCamareOrLibrary.swift */; };
 		5BB763A829F8482A0033EE62 /* BarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB763A729F8482A0033EE62 /* BarView.swift */; };
 		5BB763AA29F848C90033EE62 /* BarsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB763A929F848C90033EE62 /* BarsView.swift */; };
@@ -74,6 +77,8 @@
 		5B8BC4A129CB813B00D46EE2 /* SwiftUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUIView.swift; sourceTree = "<group>"; };
 		5B8E94EA292D5BAD00E0EB49 /* TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
 		5B8E94EC292E117500E0EB49 /* DetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailVC.swift; sourceTree = "<group>"; };
+		5B9980AE2A0D6D3400032895 /* arrowBack.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = arrowBack.json; sourceTree = "<group>"; };
+		5B9980B22A0D792A00032895 /* Protocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Protocol.swift; sourceTree = "<group>"; };
 		5BB2EC232971E94A002A6A20 /* AlertsChoisCamareOrLibrary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertsChoisCamareOrLibrary.swift; sourceTree = "<group>"; };
 		5BB763A729F8482A0033EE62 /* BarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarView.swift; sourceTree = "<group>"; };
 		5BB763A929F848C90033EE62 /* BarsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarsView.swift; sourceTree = "<group>"; };
@@ -105,6 +110,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5B9980AD2A0D6AEB00032895 /* Lottie in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -161,6 +167,22 @@
 				5B8E94EA292D5BAD00E0EB49 /* TableViewCell.swift */,
 			);
 			path = TableViewCell;
+			sourceTree = "<group>";
+		};
+		5B9980B02A0D6D4E00032895 /* AnimationJSON */ = {
+			isa = PBXGroup;
+			children = (
+				5B9980AE2A0D6D3400032895 /* arrowBack.json */,
+			);
+			path = AnimationJSON;
+			sourceTree = "<group>";
+		};
+		5B9980B12A0D791A00032895 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				5B9980B22A0D792A00032895 /* Protocol.swift */,
+			);
+			path = Protocols;
 			sourceTree = "<group>";
 		};
 		5BB2EC222971E918002A6A20 /* Alerts */ = {
@@ -325,6 +347,8 @@
 		5BFD8AA4292A6DF4007A45A2 /* RetailTradeApp */ = {
 			isa = PBXGroup;
 			children = (
+				5B9980B12A0D791A00032895 /* Protocols */,
+				5B9980B02A0D6D4E00032895 /* AnimationJSON */,
 				5BF24F0D292B63C300BEE9AB /* Application */,
 				5BB91FFC292F655900FCF34E /* DataFlow */,
 				5BF24F0E292B63D900BEE9AB /* SupportingFiles */,
@@ -354,6 +378,9 @@
 			dependencies = (
 			);
 			name = RetailTradeApp;
+			packageProductDependencies = (
+				5B9980AC2A0D6AEB00032895 /* Lottie */,
+			);
 			productName = RetailTradeApp;
 			productReference = 5BFD8AA2292A6DF4007A45A2 /* Doggy business.app */;
 			productType = "com.apple.product-type.application";
@@ -382,6 +409,9 @@
 				Base,
 			);
 			mainGroup = 5BFD8A99292A6DF4007A45A2;
+			packageReferences = (
+				5B9980AB2A0D6AEB00032895 /* XCRemoteSwiftPackageReference "lottie-spm" */,
+			);
 			productRefGroup = 5BFD8AA3292A6DF4007A45A2 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -396,6 +426,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5B9980AF2A0D6D3400032895 /* arrowBack.json in Resources */,
 				5BFD8AB2292A6DF6007A45A2 /* LaunchScreen.storyboard in Resources */,
 				5BFD8AAF292A6DF6007A45A2 /* Assets.xcassets in Resources */,
 			);
@@ -425,6 +456,7 @@
 				5BF24F26292D0BAE00BEE9AB /* ProfitModel.swift in Sources */,
 				5BB763B129F84C000033EE62 /* BaseViewInfo.swift in Sources */,
 				5B8E94ED292E117500E0EB49 /* DetailVC.swift in Sources */,
+				5B9980B32A0D792A00032895 /* Protocol.swift in Sources */,
 				5BB763AA29F848C90033EE62 /* BarsView.swift in Sources */,
 				5B7F8A7929AA9CCF005A5605 /* CurrentDate+CoreDataProperties.swift in Sources */,
 				5B8E94EB292D5BAD00E0EB49 /* TableViewCell.swift in Sources */,
@@ -668,6 +700,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		5B9980AB2A0D6AEB00032895 /* XCRemoteSwiftPackageReference "lottie-spm" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/airbnb/lottie-spm.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		5B9980AC2A0D6AEB00032895 /* Lottie */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5B9980AB2A0D6AEB00032895 /* XCRemoteSwiftPackageReference "lottie-spm" */;
+			productName = Lottie;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		5BF5205E292FE84800BB76B7 /* ProductModelCoreData.xcdatamodeld */ = {
