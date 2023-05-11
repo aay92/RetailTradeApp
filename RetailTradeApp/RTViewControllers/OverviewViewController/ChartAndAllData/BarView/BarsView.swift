@@ -17,6 +17,9 @@ final class BarsView: BaseView {
     }()
 
     func configure(with data: [BarView]) {
+        stackView.subviews.forEach { (view) in
+            view.removeFromSuperview()
+        }
         data.forEach {
             let barView = $0
             stackView.addArrangedSubview(barView)

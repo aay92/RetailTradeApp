@@ -7,6 +7,12 @@
 
 import UIKit
 
+struct BarViewData {
+    let value: String
+    let heightMultiplier: Double
+    let title: String
+}
+
 extension BarView {
     struct Data {
         let value: String

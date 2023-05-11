@@ -16,7 +16,7 @@ class OverviewViewController: BaseController {
     private let viewTotalProfit = ViewTotalProfit()
     private let progressViewDataAllMonth = ProgressViewDataAllMonth()
     ///Массив стобцов в графике
-    lazy var barData = [BarView]()
+    var barData = [BarView]()
     
 //    data for coreDate all date
     var nawProductsProfit = 0
@@ -151,6 +151,7 @@ class OverviewViewController: BaseController {
 //MARK: - Set controller
 extension OverviewViewController {
     
+   
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         getSumGross()
@@ -160,9 +161,8 @@ extension OverviewViewController {
         profitCollectionView.reloadData()
         getTotalProfit()
         viewTotalProfit.configure(num: currentTotalProfit)
-        
-        getAllDataAddedInCatrts()
-        
+
+        getAllMonthInCharts()
 
         if animateStart {
             UIView.animate(withDuration: 1, delay: 1) {
@@ -193,24 +193,19 @@ extension OverviewViewController {
     
     override func setupViews(){
         super.setupViews()
-        //        saveDateAllMonth()
         self.buttonTapped.applyGradient(colours: [.red, .green], cornerRadius: 20, startPoint: CGPoint(x: 0, y: 0.5), endPoint: CGPoint(x: 1, y: 0.5))
         
         manageObjectContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
         
         setDelegates()
         setCollectionView()
-        getAllMonthInCharts()
         
         view.addViewWithoutTAMIC(textThisMonth)
         view.addViewWithoutTAMIC(profitCollectionView)
         view.addViewWithoutTAMIC(viewTotalProfit)
         view.addViewWithoutTAMIC(textAllMonths)
-//        view.addViewWithoutTAMIC(chartAndAllData)
         view.addViewWithoutTAMIC(progressViewDataAllMonth)
-
         view.addViewWithoutTAMIC(buttonTapped)
-        
         view.addViewWithoutTAMIC(imageMany)
         imageManyArr = createImageArray(total: 30, imagePrefix: "AnimationMany")
     }
@@ -260,10 +255,6 @@ extension OverviewViewController {
             progressViewDataAllMonth.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             progressViewDataAllMonth.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
             progressViewDataAllMonth.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -width / 4.0)
-//            chartAndAllData.topAnchor.constraint(equalTo: textAllMonths.bottomAnchor, constant: 5),
-//            chartAndAllData.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-//            chartAndAllData.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
-//            chartAndAllData.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -width / 4.0)
         ])
     }
     
@@ -561,44 +552,27 @@ extension OverviewViewController {
 //MARK: - View this charts and all data
 extension OverviewViewController {
 
-    func getAllDataAddedInCatrts(){
-        //        chartAndAllData.configure(with: nawProductsGross, Amount: nawTotalProfit, costPrice: nawProductsProfit)
-        
-        //    }
-        progressViewDataAllMonth.configure(with: barData )
-//        progressViewDataAllMonth.configure(with: [
-//            .init(value: "1", heightMultiplier: 0.3, title: "Mon"),
-//                .init(value: "2", heightMultiplier: 0.4, title: "Teu"),
-//                .init(value: "3", heightMultiplier: 0.6, title: "Wen"),
-//                .init(value: "4", heightMultiplier: 0.8, title: "Thu"),
-//                .init(value: "5", heightMultiplier: 1, title: "Fri"),
-//                .init(value: "3", heightMultiplier: 0.6, title: "Sat"),
-//                .init(value: "2", heightMultiplier: 0.4, title: "Sun")])
-    }
-}
-
-//MARK: - Saving data in all month
-extension OverviewViewController {
-    
+/// - Saving data in all month
     func getAllMonthInCharts(){
+        self.barData.removeAll()
+        
         var object = [ModelOverview]()
         let eventRequest: NSFetchRequest<ModelOverview> = ModelOverview.fetchRequest()
 
         do {
             object = try! manageObjectContext.fetch(eventRequest)
-            print("ModelOverview count : \(object.count)")
             object.forEach { i in
                 guard let nameMonth = i.nameMonth else { return }
                 let value = i.totalProfit
                 let bar = BarView(data: BarView.Data(value: String(value),
                                                      heightMultiplier: Double(value) / 10000,
                                                      title: nameMonth))
-                barData.append(bar)
-
+                self.barData.append(bar)
             }
         } catch {
             print("Could not load save data: \(error.localizedDescription)")
         }
+        progressViewDataAllMonth.configure(with: self.barData )
     }
     
     

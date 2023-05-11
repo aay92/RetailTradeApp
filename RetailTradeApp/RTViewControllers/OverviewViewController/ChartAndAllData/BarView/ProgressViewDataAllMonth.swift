@@ -15,6 +15,11 @@ final class ProgressViewDataAllMonth: BaseInfoView {
         barsView.configure(with: itmes)
         
     }
+//    func configure(with itmes: [BarView]) {
+//        barsView.configure(with: itmes)
+//        
+//    }
+    
 //    func configure(with itmes: [BarView.Data]) {
 //        barsView.configure(with: itmes)
 //        
