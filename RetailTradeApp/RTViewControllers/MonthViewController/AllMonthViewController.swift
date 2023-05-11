@@ -35,6 +35,8 @@ extension AllMonthViewController {
         super.viewWillAppear(animated)
         manageObjectContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
         self.loadSaveData()
+        animationArrowBackAction()
+
     }
     
     override func setupViews() {
@@ -49,10 +51,8 @@ extension AllMonthViewController {
         
         view.addViewWithoutTAMIC(tableViewProducts)
         view.addViewWithoutTAMIC(animationArrowBack)
-
         animationArrowBack.isHidden = true
-        animationArrowBackAction()
-        
+        animationArrowBack.transform = animationArrowBack.transform.rotated(by: .pi / 2)
     }
     
     func loadSaveData() {
@@ -78,7 +78,7 @@ extension AllMonthViewController {
             
             animationArrowBack.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             animationArrowBack.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-            animationArrowBack.heightAnchor.constraint(equalToConstant: 250)
+            animationArrowBack.heightAnchor.constraint(equalToConstant: 350)
         ])
     }
     
@@ -162,8 +162,8 @@ extension AllMonthViewController: UITableViewDelegate, UITableViewDataSource {
 extension AllMonthViewController {
     ///animationArrowBackAction - Выводит анимацию, когда сохранили месяц и перешли на страницу с месецами
     func animationArrowBackAction(){
-        if !arrowIsHidden {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1){
+        if arrowIsHidden {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2){
                 self.animationArrowBack.isHidden = false
                 self.animationArrowBack.loopMode = .loop
                 self.animationArrowBack.play()

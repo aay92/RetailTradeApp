@@ -300,7 +300,8 @@ extension OverviewViewController {
                     let vc = AllMonthViewController()
                     self.delegateForAllMonthView = vc
                     self.delegateForAllMonthView?.getValueAnimationsBool(isHidden: true)
-                    navigationController?.pushViewController(vc, animated: true)
+//                    self.tabBarController?.selectedViewController?.present(vc, animated: true)
+                    self.navigationController?.pushViewController(vc, animated: true)
                 }
                 print("Сохранился месяц")
             } else {
