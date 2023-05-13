@@ -569,7 +569,7 @@ extension OverviewViewController {
                 guard let nameMonth = i.nameMonth else { return }
                 let value = i.totalProfit
                 let bar = BarView(data: BarView.Data(value: String(value),
-                                                     heightMultiplier: Double(value) / 10000,
+                                                     heightMultiplier: Double(value) / 200000,
                                                      title: nameMonth))
                 self.barData.append(bar)
             }

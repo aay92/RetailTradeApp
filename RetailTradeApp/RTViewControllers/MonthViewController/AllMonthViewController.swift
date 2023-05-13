@@ -11,16 +11,17 @@ import Lottie
 
 class AllMonthViewController: BaseController {
     
-    //MARK: - dataFlowFromCoreData
-//    var manageObjectContext: NSManagedObjectContext!
-//    var products = [ProductEntity]()
+    //MARK: - blur property
+    private let animationBlurImageView = LottieAnimationView(name: "blurAnimate")
 
+    //MARK: - animation property
     private let animationArrowBack = LottieAnimationView(name: "arrowBack")
-     var arrowIsHidden = false
+    var arrowIsHidden = false
     
+    //MARK: - dataFlowFromCoreData
     var manageObjectContext: NSManagedObjectContext!
     var month = [ModelOverview]()
-
+    
     let tableViewProducts : UITableView = {
         let table = UITableView()
         table.register(MonthTableViewCell.self, forCellReuseIdentifier: MonthTableViewCell.identifier)
@@ -36,7 +37,6 @@ extension AllMonthViewController {
         manageObjectContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
         self.loadSaveData()
         animationArrowBackAction()
-
     }
     
     override func setupViews() {
@@ -45,25 +45,25 @@ extension AllMonthViewController {
         manageObjectContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
         loadSaveData()
         
-        //        products = managerData.fetchProductData(ProductEntity.self)
         print("Количество продуктов в массиве: \(month.count)")
         setDelegate()
         
         view.addViewWithoutTAMIC(tableViewProducts)
         view.addViewWithoutTAMIC(animationArrowBack)
+        view.addViewWithoutTAMIC(animationBlurImageView)
+        
+        animationBlurImageView.isHidden = true
         animationArrowBack.isHidden = true
         animationArrowBack.transform = animationArrowBack.transform.rotated(by: .pi / 2)
     }
     
     func loadSaveData() {
-        
         let eventRequest: NSFetchRequest<ModelOverview> = ModelOverview.fetchRequest()
         do {
             month = try manageObjectContext.fetch(eventRequest)
             self.tableViewProducts.reloadData()
         } catch {
             print("Could not load save data: \(error.localizedDescription)")
-
         }
     }
     
@@ -76,9 +76,14 @@ extension AllMonthViewController {
             tableViewProducts.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             tableViewProducts.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             
+            animationBlurImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            animationBlurImageView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            animationBlurImageView.heightAnchor.constraint(equalToConstant: UIScreen.main.bounds.height),
+            animationBlurImageView.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.width),
+
             animationArrowBack.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             animationArrowBack.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-            animationArrowBack.heightAnchor.constraint(equalToConstant: 350)
+            animationArrowBack.heightAnchor.constraint(equalToConstant: 700),
         ])
     }
     
@@ -91,7 +96,6 @@ extension AllMonthViewController {
         nav?.barStyle = UIBarStyle.black
         nav?.tintColor = UIColor.white
     }
-    
 }
 
 
@@ -163,7 +167,8 @@ extension AllMonthViewController {
     ///animationArrowBackAction - Выводит анимацию, когда сохранили месяц и перешли на страницу с месецами
     func animationArrowBackAction(){
         if arrowIsHidden {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 2){
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1){
+                self.startBlurBackground()
                 self.animationArrowBack.isHidden = false
                 self.animationArrowBack.loopMode = .loop
                 self.animationArrowBack.play()
@@ -186,3 +191,28 @@ extension AllMonthViewController: InputDataAnimationProtocol {
     }
 }
 
+//MARK: - blur
+extension AllMonthViewController {
+    
+    private func startBlurBackground(){
+        animationBlurImageView.isHidden = false
+        animationBlurImageView.alpha = 0.8
+        startAnimateBlurImageView()
+    }
+  
+    private func startAnimateBlurImageView() {
+        UIView.animate(withDuration: 1.5, animations: {
+            self.animationBlurImageView.frame.origin.y = -25
+        }) {_ in
+            DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+                UIView.animate(withDuration: 1.0) {
+                    self.animationBlurImageView.frame.origin.y = -1000
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                        self.animationBlurImageView.isHidden = true
+                    }
+                }
+            }
+        }
+    }
+    
+}
