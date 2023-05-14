@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		5B42844B2A0F977D0013655A /* arrow.json in Resources */ = {isa = PBXBuildFile; fileRef = 5B42844A2A0F977D0013655A /* arrow.json */; };
 		5B42844D2A1017E40013655A /* blurAnimate.json in Resources */ = {isa = PBXBuildFile; fileRef = 5B42844C2A1017E40013655A /* blurAnimate.json */; };
+		5B4284502A10DC580013655A /* RAMAnimatedTabBarController in Frameworks */ = {isa = PBXBuildFile; productRef = 5B42844F2A10DC580013655A /* RAMAnimatedTabBarController */; };
+		5B4284522A10E2480013655A /* tabBarSwiftUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B4284512A10E2480013655A /* tabBarSwiftUIView.swift */; };
+		5B4284542A1165720013655A /* dogRelax.json in Resources */ = {isa = PBXBuildFile; fileRef = 5B4284532A1165720013655A /* dogRelax.json */; };
 		5B4A1C6D29CCAC4900EA09A4 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B4A1C6C29CCAC4900EA09A4 /* Persistence.swift */; };
 		5B4A1C6F29D57E0100EA09A4 /* AlertCheckOnEmpty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B4A1C6E29D57E0100EA09A4 /* AlertCheckOnEmpty.swift */; };
 		5B52EEAF29374EEE00E89787 /* ViewTotalProfit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B52EEAE29374EEE00E89787 /* ViewTotalProfit.swift */; };
@@ -60,6 +63,8 @@
 /* Begin PBXFileReference section */
 		5B42844A2A0F977D0013655A /* arrow.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = arrow.json; sourceTree = "<group>"; };
 		5B42844C2A1017E40013655A /* blurAnimate.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = blurAnimate.json; sourceTree = "<group>"; };
+		5B4284512A10E2480013655A /* tabBarSwiftUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = tabBarSwiftUIView.swift; sourceTree = "<group>"; };
+		5B4284532A1165720013655A /* dogRelax.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = dogRelax.json; sourceTree = "<group>"; };
 		5B4A1C6C29CCAC4900EA09A4 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
 		5B4A1C6E29D57E0100EA09A4 /* AlertCheckOnEmpty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertCheckOnEmpty.swift; sourceTree = "<group>"; };
 		5B52EEAE29374EEE00E89787 /* ViewTotalProfit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewTotalProfit.swift; sourceTree = "<group>"; };
@@ -114,6 +119,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5B4284502A10DC580013655A /* RAMAnimatedTabBarController in Frameworks */,
 				5B9980AD2A0D6AEB00032895 /* Lottie in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -178,6 +184,7 @@
 			children = (
 				5B42844C2A1017E40013655A /* blurAnimate.json */,
 				5B9980AE2A0D6D3400032895 /* arrowBack.json */,
+				5B4284532A1165720013655A /* dogRelax.json */,
 				5B42844A2A0F977D0013655A /* arrow.json */,
 			);
 			path = AnimationJSON;
@@ -301,6 +308,7 @@
 			children = (
 				5BF24F10292B645600BEE9AB /* TabBarController.swift */,
 				5BF24F17292B6A6300BEE9AB /* NavBarController.swift */,
+				5B4284512A10E2480013655A /* tabBarSwiftUIView.swift */,
 			);
 			path = TabBar;
 			sourceTree = "<group>";
@@ -386,6 +394,7 @@
 			name = RetailTradeApp;
 			packageProductDependencies = (
 				5B9980AC2A0D6AEB00032895 /* Lottie */,
+				5B42844F2A10DC580013655A /* RAMAnimatedTabBarController */,
 			);
 			productName = RetailTradeApp;
 			productReference = 5BFD8AA2292A6DF4007A45A2 /* Doggy business.app */;
@@ -417,6 +426,7 @@
 			mainGroup = 5BFD8A99292A6DF4007A45A2;
 			packageReferences = (
 				5B9980AB2A0D6AEB00032895 /* XCRemoteSwiftPackageReference "lottie-spm" */,
+				5B42844E2A10DC580013655A /* XCRemoteSwiftPackageReference "animated-tab-bar" */,
 			);
 			productRefGroup = 5BFD8AA3292A6DF4007A45A2 /* Products */;
 			projectDirPath = "";
@@ -437,6 +447,7 @@
 				5BFD8AB2292A6DF6007A45A2 /* LaunchScreen.storyboard in Resources */,
 				5B42844D2A1017E40013655A /* blurAnimate.json in Resources */,
 				5BFD8AAF292A6DF6007A45A2 /* Assets.xcassets in Resources */,
+				5B4284542A1165720013655A /* dogRelax.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -450,6 +461,7 @@
 				5BB2EC242971E94A002A6A20 /* AlertsChoisCamareOrLibrary.swift in Sources */,
 				5BB91FFE292F657800FCF34E /* DataLouder.swift in Sources */,
 				5B5F51A3293F2C7F006DD6C1 /* UIButton + Ext.swift in Sources */,
+				5B4284522A10E2480013655A /* tabBarSwiftUIView.swift in Sources */,
 				5B4A1C6F29D57E0100EA09A4 /* AlertCheckOnEmpty.swift in Sources */,
 				5B7F8A692983C0BE005A5605 /* AllMonthViewController.swift in Sources */,
 				5B7F8A7529A7C9D0005A5605 /* ModelOverview+CoreDataProperties.swift in Sources */,
@@ -710,6 +722,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		5B42844E2A10DC580013655A /* XCRemoteSwiftPackageReference "animated-tab-bar" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Ramotion/animated-tab-bar";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
 		5B9980AB2A0D6AEB00032895 /* XCRemoteSwiftPackageReference "lottie-spm" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/airbnb/lottie-spm.git";
@@ -721,6 +741,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		5B42844F2A10DC580013655A /* RAMAnimatedTabBarController */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5B42844E2A10DC580013655A /* XCRemoteSwiftPackageReference "animated-tab-bar" */;
+			productName = RAMAnimatedTabBarController;
+		};
 		5B9980AC2A0D6AEB00032895 /* Lottie */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 5B9980AB2A0D6AEB00032895 /* XCRemoteSwiftPackageReference "lottie-spm" */;

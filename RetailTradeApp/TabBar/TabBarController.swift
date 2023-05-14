@@ -7,7 +7,7 @@
 
 import UIKit
 
-enum Tabs: Int, CaseIterable{
+enum Tabs: Int, CaseIterable {
     case overview
     case allData
     case allMonth
@@ -28,8 +28,6 @@ class TabBarController: UITabBarController {
         configureAppearance()
     }
     
-    
-    
     private func configureAppearance(){
         tabBar.unselectedItemTintColor = R.Color.inactive
         tabBar.tintColor = R.Color.tabBatColorActive
@@ -41,12 +39,11 @@ class TabBarController: UITabBarController {
             controller.tabBarItem = UITabBarItem(title: R.TabBar.title(for: tab),
                                                  image: R.Images.TabBar.icon(for: tab),
                                                  tag: tab.rawValue)
+
             return controller
         }
-        
         setViewControllers(controller, animated: true)
     }
-    
     
     private func getController(for tab: Tabs) -> BaseController {
         switch tab {
@@ -57,10 +54,8 @@ class TabBarController: UITabBarController {
             let view = AllDataViewController()
             view.tableViewProducts.reloadData()
             return view
-            //   return AllDataViewController(managerData: DataLouder.shared)
         case .allMonth:
             return AllMonthViewController()
-            
         case .setting:
             return SettingViewController()
         }
@@ -87,8 +82,14 @@ class TabBarController: UITabBarController {
         tabBar.layer.insertSublayer(roundLayer, at: 0)
         tabBar.itemWidth = width / 5.5
         tabBar.itemPositioning = .centered
+        UIView.animate(withDuration: 0.3,
+                       delay: 0,
+                       usingSpringWithDamping: 0.9,
+                       initialSpringVelocity: 1) {
+            self.tabBar.transform = CGAffineTransform(scaleX: 2, y: 2)
+            self.tabBar.transform = CGAffineTransform(scaleX: 1, y: 1)
+        }
 
     }
 }
-
 

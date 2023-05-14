@@ -165,7 +165,6 @@ class MonthTableViewCell: UITableViewCell {
    
     override func awakeFromNib() {
         super.awakeFromNib()
-       
     }
     
 
@@ -181,7 +180,7 @@ class MonthTableViewCell: UITableViewCell {
 
         print("MARK в ячейке:- \(String(describing: item.nameMonth))")
         nameMonth.text = item.nameMonth
-
+        
     }
     
     
@@ -245,18 +244,15 @@ class MonthTableViewCell: UITableViewCell {
             stackCostPrice.bottomAnchor.constraint(equalTo: bottomAnchor,constant: -10),
 
             ])
-            
     }
     
     func configureAppereance(){
-        
+    
         backgroundColor = .clear
         stackMain.backgroundColor = .clear
         nameMonth.layer.cornerRadius = self.bounds.size.height / 5
         viewBackground.layer.cornerRadius = self.bounds.size.height / 5
- 
-//        viewProfit.backgroundColor = R.Color.backgroundDetailVC
-        
+   
     }
     
 }

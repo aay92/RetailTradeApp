@@ -65,7 +65,7 @@ enum R {
     enum Images {
         enum TabBar {
             static func icon(for tab: Tabs) -> UIImage? {
-                
+
                 switch tab {
                 case .overview:
                     return UIImage(named: "wallet")

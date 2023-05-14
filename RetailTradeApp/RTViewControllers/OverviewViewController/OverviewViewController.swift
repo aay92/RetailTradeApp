@@ -111,10 +111,18 @@ class OverviewViewController: BaseController {
     }
     
     @objc func tappedButton(){
+        //  animating button
+        UIView.animate(withDuration: 0.3,
+                       delay: 0,
+                       usingSpringWithDamping: 0.9,
+                       initialSpringVelocity: 1) {
+            self.buttonTapped.transform = CGAffineTransform(scaleX: 2, y: 2)
+            self.buttonTapped.transform = CGAffineTransform(scaleX: 1, y: 1)
+        }
         //  save data for coreDate
             self.alertSaveNewMonth()
-                                 
-            //  delete data entity CurrentDate for coreDate
+
+        //  delete data entity CurrentDate for coreDate
             self.managerData.deleteAllData("CurrentDate")
     }
     
@@ -605,5 +613,6 @@ extension OverviewViewController {
         managerData.save()
     }
 }
+
 
 

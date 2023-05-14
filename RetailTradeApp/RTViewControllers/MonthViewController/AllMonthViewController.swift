@@ -54,7 +54,9 @@ extension AllMonthViewController {
         
         animationBlurImageView.isHidden = true
         animationArrowBack.isHidden = true
-        animationArrowBack.transform = animationArrowBack.transform.rotated(by: .pi / 2)
+//        animationArrowBack.transform = animationArrowBack.transform.rotated(by: .pi / 2)
+//        self.animationArrowBack.transform = CGAffineTransform(rotationAngle: .pi / -2)
+
     }
     
     func loadSaveData() {
@@ -84,6 +86,8 @@ extension AllMonthViewController {
             animationArrowBack.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             animationArrowBack.centerYAnchor.constraint(equalTo: view.centerYAnchor),
             animationArrowBack.heightAnchor.constraint(equalToConstant: 700),
+            
+            
         ])
     }
     
@@ -119,11 +123,11 @@ extension AllMonthViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableViewProducts.dequeueReusableCell(withIdentifier: MonthTableViewCell.identifier, for: indexPath) as! MonthTableViewCell
-        let mouths = month[indexPath.row]
+        let mouths = self.month[indexPath.row]
         cell.configure(with: mouths)
         return cell
+        
     }
-    
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print("Нажали на ячейку")
@@ -132,13 +136,10 @@ extension AllMonthViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         
         let eventArrayItem = month[indexPath.row]
-        
         let remove = UIContextualAction(style: .destructive, title: "Удалить") { (action, view, completion) in
-            
             self.manageObjectContext.delete(eventArrayItem)
             do {
                 try self.manageObjectContext.save()
-                
             } catch let error as NSError {
                 print("Error While Deleting Note: \(error.userInfo)")
             }
@@ -159,23 +160,59 @@ extension AllMonthViewController: UITableViewDelegate, UITableViewDataSource {
         config.performsFirstActionWithFullSwipe = false
         
         return config
-        
     }
+
+    
+//    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+//        cell.transform = CGAffineTransform(translationX: 0,
+//                                           y: cell.contentView.frame.height)
+//        UIView.animate(withDuration: 1.5,delay: 0.04 * Double(indexPath.row),
+//                       usingSpringWithDamping: 0.7,
+//                       initialSpringVelocity: 6,
+//                       options: .curveEaseInOut) {
+//            cell.transform = CGAffineTransform(translationX: cell.contentView.frame.width, y: cell.contentView.frame.height)
+//        }
+//    }
 }
+
 //MARK: - animationArrowBackAction
 extension AllMonthViewController {
     ///animationArrowBackAction - Выводит анимацию, когда сохранили месяц и перешли на страницу с месецами
     func animationArrowBackAction(){
+
+        self.animationArrowBack.transform = CGAffineTransform(translationX: -400, y: 0)
+
         if arrowIsHidden {
             DispatchQueue.main.asyncAfter(deadline: .now() + 1){
-                self.startBlurBackground()
-                self.animationArrowBack.isHidden = false
-                self.animationArrowBack.loopMode = .loop
-                self.animationArrowBack.play()
-                DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
-                    self.animationArrowBack.stop()
-                    self.animationArrowBack.isHidden = true
-                    self.arrowIsHidden = false
+                UIView.animate(withDuration: 1.5,
+                               delay: 0.05,
+                               usingSpringWithDamping: 0.7,
+                               initialSpringVelocity: 0.7,
+                               options: .curveEaseInOut) {
+                    self.animationArrowBack.transform = CGAffineTransform(translationX: 0, y: 0)
+                }
+                self.animationArrowBack.transform = CGAffineTransform(rotationAngle: .pi / 2)
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                    self.animationArrowBack.isHidden = false
+                    self.animationArrowBack.loopMode = .loop
+                    self.animationArrowBack.play()
+                    self.animationArrowBack.alpha = 1
+                }
+                DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+                    UIView.animate(withDuration: 1.5,
+                                   delay: 0.05,
+                                   usingSpringWithDamping: 0.7,
+                                   initialSpringVelocity: 0.8,
+                                   options: .curveEaseInOut) {
+                        self.animationArrowBack.transform = CGAffineTransform(translationX: -400, y: 0)
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                            self.animationArrowBack.alpha = 0.0
+                            self.animationArrowBack.isHidden = true
+                            self.animationArrowBack.stop()
+                            self.arrowIsHidden = false
+                            self.animationArrowBack.transform = CGAffineTransform(rotationAngle: .pi / 2)
+                        }
+                    }
                 }
             }
         }
@@ -193,13 +230,7 @@ extension AllMonthViewController: InputDataAnimationProtocol {
 
 //MARK: - blur
 extension AllMonthViewController {
-    
-    private func startBlurBackground(){
-        animationBlurImageView.isHidden = false
-        animationBlurImageView.alpha = 0.8
-        startAnimateBlurImageView()
-    }
-  
+
     private func startAnimateBlurImageView() {
         UIView.animate(withDuration: 1.5, animations: {
             self.animationBlurImageView.frame.origin.y = -25
@@ -209,10 +240,10 @@ extension AllMonthViewController {
                     self.animationBlurImageView.frame.origin.y = -1000
                     DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
                         self.animationBlurImageView.isHidden = true
+                        self.animationBlurImageView.stop()
                     }
                 }
             }
         }
     }
-    
 }

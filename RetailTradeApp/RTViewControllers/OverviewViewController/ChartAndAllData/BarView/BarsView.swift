@@ -23,15 +23,15 @@ final class BarsView: BaseView {
         data.forEach {
             let barView = $0
             stackView.addArrangedSubview(barView)
+            UIView.animate(withDuration: 0.4,
+                           delay: 0,
+                           usingSpringWithDamping: 0.5,
+                           initialSpringVelocity: 1) {
+                barView.transform = CGAffineTransform(scaleX: 1.6, y: 1.6)
+                barView.transform = CGAffineTransform(scaleX: 1, y: 1)
+            }
         }
     }
-    
-//    func configure(with data: [BarView.Data]) {
-//        data.forEach {
-//            let barView = BarView(data: $0)
-//            stackView.addArrangedSubview(barView)
-//        }
-//    }
 }
 
 extension BarsView {
