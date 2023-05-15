@@ -32,11 +32,17 @@ class AllMonthViewController: BaseController {
 
 extension AllMonthViewController {
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        animationTableViewCell()
+        
+    }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         manageObjectContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
         self.loadSaveData()
         animationArrowBackAction()
+//        animationTableViewCell()
     }
     
     override func setupViews() {
@@ -54,9 +60,6 @@ extension AllMonthViewController {
         
         animationBlurImageView.isHidden = true
         animationArrowBack.isHidden = true
-//        animationArrowBack.transform = animationArrowBack.transform.rotated(by: .pi / 2)
-//        self.animationArrowBack.transform = CGAffineTransform(rotationAngle: .pi / -2)
-
     }
     
     func loadSaveData() {
@@ -71,7 +74,6 @@ extension AllMonthViewController {
     
     override func constraintViews() {
         super.constraintViews()
-        
         NSLayoutConstraint.activate([
             tableViewProducts.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             tableViewProducts.leadingAnchor.constraint(equalTo: view.leadingAnchor),
@@ -86,8 +88,6 @@ extension AllMonthViewController {
             animationArrowBack.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             animationArrowBack.centerYAnchor.constraint(equalTo: view.centerYAnchor),
             animationArrowBack.heightAnchor.constraint(equalToConstant: 700),
-            
-            
         ])
     }
     
@@ -161,18 +161,30 @@ extension AllMonthViewController: UITableViewDelegate, UITableViewDataSource {
         
         return config
     }
+}
+//MARK: - animationTableViewCell
+extension AllMonthViewController {
+    func animationTableViewCell(){
+        
+        let cells = self.tableViewProducts.visibleCells
+        let tableViewWidth = tableViewProducts.bounds.width
+        var indexCell: Double = 0
 
-    
-//    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-//        cell.transform = CGAffineTransform(translationX: 0,
-//                                           y: cell.contentView.frame.height)
-//        UIView.animate(withDuration: 1.5,delay: 0.04 * Double(indexPath.row),
-//                       usingSpringWithDamping: 0.7,
-//                       initialSpringVelocity: 6,
-//                       options: .curveEaseInOut) {
-//            cell.transform = CGAffineTransform(translationX: cell.contentView.frame.width, y: cell.contentView.frame.height)
-//        }
-//    }
+        for cell in cells {
+            cell.transform = CGAffineTransform(translationX: tableViewWidth / 1.15, y: 0)
+
+            UIView.animate(withDuration: 1.2,
+                           delay: 0.05 * indexCell,
+                           usingSpringWithDamping: 0.6,
+                           initialSpringVelocity: 0.3,
+                           options: .curveEaseInOut) {
+                cell.transform = CGAffineTransform(translationX: tableViewWidth, y: 0)
+
+                cell.transform = CGAffineTransform.identity
+            }
+            indexCell += 1
+        }
+    }
 }
 
 //MARK: - animationArrowBackAction

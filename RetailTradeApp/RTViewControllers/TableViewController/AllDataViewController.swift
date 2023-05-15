@@ -24,6 +24,11 @@ class AllDataViewController: BaseController {
 
 extension AllDataViewController {
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        animationTableViewCell()
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         manageObjectContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
@@ -164,6 +169,29 @@ extension AllDataViewController: UITableViewDelegate, UITableViewDataSource {
 //
 //       }
     
+}
+
+//MARK: - animationTableViewCell
+private extension AllDataViewController {
+    func animationTableViewCell(){
+        let cells = self.tableViewProducts.visibleCells
+        let tableViewWidth = self.tableViewProducts.bounds.width
+        var indexCell: Double = 0
+        for cell in cells {
+            cell.transform = CGAffineTransform(translationX: tableViewWidth / 1.15, y: 0)
+
+            UIView.animate(withDuration: 1.2,
+                           delay: 0.05 * indexCell,
+                           usingSpringWithDamping: 0.6,
+                           initialSpringVelocity: 0.3,
+                           options: .curveEaseInOut) {
+                cell.transform = CGAffineTransform(translationX: tableViewWidth, y: 0)
+
+                cell.transform = CGAffineTransform.identity
+            }
+            indexCell += 1
+        }
+    }
 }
 
 
