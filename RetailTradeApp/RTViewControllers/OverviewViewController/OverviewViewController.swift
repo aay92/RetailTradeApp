@@ -16,7 +16,8 @@ class OverviewViewController: BaseController {
     private let viewTotalProfit = ViewTotalProfit()
     private let progressViewDataAllMonth = ProgressViewDataAllMonth()
     private var delegateForAllMonthView: InputDataAnimationProtocol? = nil
-    ///Массив стобцов в графике
+    
+//    Array bars in charts
     var barData = [BarView]()
     
 //    data for coreDate all date

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5B2F3E042A2A909C00486F3D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5B2F3E032A2A909C00486F3D /* LaunchScreen.storyboard */; };
 		5B42844B2A0F977D0013655A /* arrow.json in Resources */ = {isa = PBXBuildFile; fileRef = 5B42844A2A0F977D0013655A /* arrow.json */; };
 		5B42844D2A1017E40013655A /* blurAnimate.json in Resources */ = {isa = PBXBuildFile; fileRef = 5B42844C2A1017E40013655A /* blurAnimate.json */; };
 		5B4284502A10DC580013655A /* RAMAnimatedTabBarController in Frameworks */ = {isa = PBXBuildFile; productRef = 5B42844F2A10DC580013655A /* RAMAnimatedTabBarController */; };
@@ -56,10 +57,10 @@
 		5BFD8AA8292A6DF4007A45A2 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BFD8AA7292A6DF4007A45A2 /* SceneDelegate.swift */; };
 		5BFD8AAA292A6DF4007A45A2 /* OverviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BFD8AA9292A6DF4007A45A2 /* OverviewViewController.swift */; };
 		5BFD8AAF292A6DF6007A45A2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5BFD8AAE292A6DF6007A45A2 /* Assets.xcassets */; };
-		5BFD8AB2292A6DF6007A45A2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5BFD8AB0292A6DF6007A45A2 /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		5B2F3E032A2A909C00486F3D /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		5B42844A2A0F977D0013655A /* arrow.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = arrow.json; sourceTree = "<group>"; };
 		5B42844C2A1017E40013655A /* blurAnimate.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = blurAnimate.json; sourceTree = "<group>"; };
 		5B4284532A1165720013655A /* dogRelax.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = dogRelax.json; sourceTree = "<group>"; };
@@ -108,7 +109,6 @@
 		5BFD8AA7292A6DF4007A45A2 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		5BFD8AA9292A6DF4007A45A2 /* OverviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverviewViewController.swift; sourceTree = "<group>"; };
 		5BFD8AAE292A6DF6007A45A2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		5BFD8AB1292A6DF6007A45A2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		5BFD8AB3292A6DF6007A45A2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -296,7 +296,7 @@
 			isa = PBXGroup;
 			children = (
 				5BFD8AAE292A6DF6007A45A2 /* Assets.xcassets */,
-				5BFD8AB0292A6DF6007A45A2 /* LaunchScreen.storyboard */,
+				5B2F3E032A2A909C00486F3D /* LaunchScreen.storyboard */,
 			);
 			path = SupportingFiles;
 			sourceTree = "<group>";
@@ -358,9 +358,9 @@
 		5BFD8AA4292A6DF4007A45A2 /* RetailTradeApp */ = {
 			isa = PBXGroup;
 			children = (
-				5B9980B12A0D791A00032895 /* Protocols */,
-				5B9980B02A0D6D4E00032895 /* AnimationJSON */,
 				5BF24F0D292B63C300BEE9AB /* Application */,
+				5B9980B02A0D6D4E00032895 /* AnimationJSON */,
+				5B9980B12A0D791A00032895 /* Protocols */,
 				5BB91FFC292F655900FCF34E /* DataFlow */,
 				5BF24F0E292B63D900BEE9AB /* SupportingFiles */,
 				5BF24F0F292B643F00BEE9AB /* TabBar */,
@@ -441,8 +441,8 @@
 			files = (
 				5B9980AF2A0D6D3400032895 /* arrowBack.json in Resources */,
 				5B42844B2A0F977D0013655A /* arrow.json in Resources */,
-				5BFD8AB2292A6DF6007A45A2 /* LaunchScreen.storyboard in Resources */,
 				5B42844D2A1017E40013655A /* blurAnimate.json in Resources */,
+				5B2F3E042A2A909C00486F3D /* LaunchScreen.storyboard in Resources */,
 				5BFD8AAF292A6DF6007A45A2 /* Assets.xcassets in Resources */,
 				5B4284542A1165720013655A /* dogRelax.json in Resources */,
 			);
@@ -501,17 +501,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXVariantGroup section */
-		5BFD8AB0292A6DF6007A45A2 /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				5BFD8AB1292A6DF6007A45A2 /* Base */,
-			);
-			name = LaunchScreen.storyboard;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		5BFD8AB4292A6DF6007A45A2 /* Debug */ = {

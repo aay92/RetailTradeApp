@@ -33,6 +33,7 @@ class TabBarController: UITabBarController {
         tabBar.backgroundColor = .clear
         tabBar.barTintColor = .clear
         tabBar.backgroundImage = UIImage()
+        
         //Set color for tabBar
         tabBar.unselectedItemTintColor = R.Color.inactive.withAlphaComponent(0.5)
         tabBar.tintColor = R.Color.tabBatColorActive
