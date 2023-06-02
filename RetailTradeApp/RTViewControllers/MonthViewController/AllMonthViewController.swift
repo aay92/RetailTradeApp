@@ -93,7 +93,7 @@ extension AllMonthViewController {
     
     override func configureAppereance() {
         super.configureAppereance()
-        title = "Общий доход по месяцам"
+        title = "Доходы по месяцам"
         tableViewProducts.backgroundColor = R.Color.background
         view.backgroundColor = R.Color.background
         let nav = self.navigationController?.navigationBar

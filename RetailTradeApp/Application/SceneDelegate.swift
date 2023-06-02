@@ -13,7 +13,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
     var window: UIWindow?
     
-    
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         
         let tabBarController = TabBarController()
@@ -31,8 +30,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window?.windowScene = windowsScene
         window?.rootViewController = tabBarController
         window?.makeKeyAndVisible()
-//        window?.rootViewController = UIHostingController(rootView: contentView)
     }
-    
 }
 

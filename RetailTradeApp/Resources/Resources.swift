@@ -51,7 +51,7 @@ enum R {
             case .allData:
                 return "Все продажи"
             case .allMonth:
-                return "Доходы по месяца"
+                return "Доходы по месяцам"
             case .setting:
                 return "Настройки"
             

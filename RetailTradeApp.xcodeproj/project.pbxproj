@@ -10,7 +10,6 @@
 		5B42844B2A0F977D0013655A /* arrow.json in Resources */ = {isa = PBXBuildFile; fileRef = 5B42844A2A0F977D0013655A /* arrow.json */; };
 		5B42844D2A1017E40013655A /* blurAnimate.json in Resources */ = {isa = PBXBuildFile; fileRef = 5B42844C2A1017E40013655A /* blurAnimate.json */; };
 		5B4284502A10DC580013655A /* RAMAnimatedTabBarController in Frameworks */ = {isa = PBXBuildFile; productRef = 5B42844F2A10DC580013655A /* RAMAnimatedTabBarController */; };
-		5B4284522A10E2480013655A /* tabBarSwiftUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B4284512A10E2480013655A /* tabBarSwiftUIView.swift */; };
 		5B4284542A1165720013655A /* dogRelax.json in Resources */ = {isa = PBXBuildFile; fileRef = 5B4284532A1165720013655A /* dogRelax.json */; };
 		5B4A1C6D29CCAC4900EA09A4 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B4A1C6C29CCAC4900EA09A4 /* Persistence.swift */; };
 		5B4A1C6F29D57E0100EA09A4 /* AlertCheckOnEmpty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B4A1C6E29D57E0100EA09A4 /* AlertCheckOnEmpty.swift */; };
@@ -63,7 +62,6 @@
 /* Begin PBXFileReference section */
 		5B42844A2A0F977D0013655A /* arrow.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = arrow.json; sourceTree = "<group>"; };
 		5B42844C2A1017E40013655A /* blurAnimate.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = blurAnimate.json; sourceTree = "<group>"; };
-		5B4284512A10E2480013655A /* tabBarSwiftUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = tabBarSwiftUIView.swift; sourceTree = "<group>"; };
 		5B4284532A1165720013655A /* dogRelax.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = dogRelax.json; sourceTree = "<group>"; };
 		5B4A1C6C29CCAC4900EA09A4 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
 		5B4A1C6E29D57E0100EA09A4 /* AlertCheckOnEmpty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertCheckOnEmpty.swift; sourceTree = "<group>"; };
@@ -308,7 +306,6 @@
 			children = (
 				5BF24F10292B645600BEE9AB /* TabBarController.swift */,
 				5BF24F17292B6A6300BEE9AB /* NavBarController.swift */,
-				5B4284512A10E2480013655A /* tabBarSwiftUIView.swift */,
 			);
 			path = TabBar;
 			sourceTree = "<group>";
@@ -461,7 +458,6 @@
 				5BB2EC242971E94A002A6A20 /* AlertsChoisCamareOrLibrary.swift in Sources */,
 				5BB91FFE292F657800FCF34E /* DataLouder.swift in Sources */,
 				5B5F51A3293F2C7F006DD6C1 /* UIButton + Ext.swift in Sources */,
-				5B4284522A10E2480013655A /* tabBarSwiftUIView.swift in Sources */,
 				5B4A1C6F29D57E0100EA09A4 /* AlertCheckOnEmpty.swift in Sources */,
 				5B7F8A692983C0BE005A5605 /* AllMonthViewController.swift in Sources */,
 				5B7F8A7529A7C9D0005A5605 /* ModelOverview+CoreDataProperties.swift in Sources */,

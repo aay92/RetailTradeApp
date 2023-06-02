@@ -166,6 +166,7 @@ class DetailVC: BaseController {
         label.font = UIFont.boldSystemFont(ofSize: 13)
         label.textColor = .black
         label.textAlignment = .center
+        label.keyboardType = .numberPad
         label.tintColor = R.Color.backgroundDetailVC
         label.backgroundColor = .white
         label.layer.cornerRadius = 10
@@ -190,6 +191,7 @@ class DetailVC: BaseController {
         label.font = UIFont(name: "Ariel", size: 13)
         label.font = UIFont.boldSystemFont(ofSize: 13)
         label.textColor = .black
+        label.keyboardType = .numberPad
         label.textAlignment = .center
         label.tintColor = R.Color.backgroundDetailVC
         label.backgroundColor = .white

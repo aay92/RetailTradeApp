@@ -29,9 +29,13 @@ class TabBarController: UITabBarController {
     }
     
     private func configureAppearance(){
-        tabBar.unselectedItemTintColor = R.Color.inactive
+        //Clear background
+        tabBar.backgroundColor = .clear
+        tabBar.barTintColor = .clear
+        tabBar.backgroundImage = UIImage()
+        //Set color for tabBar
+        tabBar.unselectedItemTintColor = R.Color.inactive.withAlphaComponent(0.5)
         tabBar.tintColor = R.Color.tabBatColorActive
-        tabBar.barTintColor = R.Color.inactive
         tabBar.layer.masksToBounds = false
         
         let controller: [NavBarController] = Tabs.allCases.map { tab in
