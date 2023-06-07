@@ -63,7 +63,6 @@ final class BarView: BaseView {
 extension BarView {
     override func setupViews() {
         super.setupViews()
-
         addViewWithoutTAMIC(valueLabel)
         addViewWithoutTAMIC(barView)
         addViewWithoutTAMIC(titleLabel)

@@ -13,7 +13,6 @@ final class ProgressViewDataAllMonth: BaseInfoView {
 
     func configure(with itmes: [BarView]) {
         barsView.configure(with: itmes)
-        
     }
 //    func configure(with itmes: [BarView]) {
 //        barsView.configure(with: itmes)
@@ -27,10 +26,12 @@ final class ProgressViewDataAllMonth: BaseInfoView {
 }
 
 extension ProgressViewDataAllMonth {
+    
     override func setupViews() {
         super.setupViews()
         addViewWithoutTAMIC(barsView)
     }
+    
     override func constantViews() {
         super.constantViews()
   
@@ -44,9 +45,7 @@ extension ProgressViewDataAllMonth {
 
     override func configureAppearance() {
         super.configureAppearance()
-        backgroundColor = .clear
-//        self.layer.borderColor = UIColor.gray.withAlphaComponent(0.4).cgColor
-//        self.layer.borderWidth = 10
-//        self.layer.cornerRadius = 10
+        ///contentView.layer.borderColor = UIColor.clear.cgColor - цвет border во вье с графиком
+        contentView.layer.borderColor = UIColor.clear.cgColor
     }
 }

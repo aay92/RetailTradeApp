@@ -38,7 +38,7 @@ class OverviewViewController: BaseController {
 //    Экземпляр базы данных
     let managerData: DataLouder
     
-//   Кнопка сохранение месяца
+//    Кнопка сохранение месяца
     private let buttonTapped: UIButton = {
         let button = UIButton()
         button.setTitle("Сохранить месяц", for: .normal)
@@ -265,12 +265,17 @@ extension OverviewViewController {
             progressViewDataAllMonth.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             progressViewDataAllMonth.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
             progressViewDataAllMonth.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -width / 4.0),
+            
         ])
     }
     
     override func configureAppereance() {
         super.configureAppereance()
         title = "Doggy 🐶 business"
+        
+        progressViewDataAllMonth.layer.borderWidth = 2
+        progressViewDataAllMonth.layer.cornerRadius = 20
+        progressViewDataAllMonth.layer.borderColor = R.Color.active.withAlphaComponent(0.7).cgColor
         
         navigationController?.tabBarItem.title = R.TabBar.title(for: Tabs.overview)
         var nav = self.navigationController?.navigationBar
