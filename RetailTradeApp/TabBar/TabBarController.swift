@@ -20,12 +20,14 @@ class TabBarController: UITabBarController {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
         setTabBarAppearance()
         configureAppearance()
+        gestureBetweenControllers()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
         setTabBarAppearance()
         configureAppearance()
+        gestureBetweenControllers()
     }
     
     private func configureAppearance(){
@@ -94,7 +96,35 @@ class TabBarController: UITabBarController {
             self.tabBar.transform = CGAffineTransform(scaleX: 2, y: 2)
             self.tabBar.transform = CGAffineTransform(scaleX: 1, y: 1)
         }
-
+    }
+}
+//MARK: - Gesture Between Controllers
+extension TabBarController {
+    private func gestureBetweenControllers(){
+        var swipe = UISwipeGestureRecognizer(target: self, action: #selector(swipeGesture))
+        swipe.numberOfTouchesRequired = 1
+        swipe.direction = .left
+        self.view.addGestureRecognizer(swipe)
+        
+        swipe = UISwipeGestureRecognizer(target: self, action: #selector(swipeGesture))
+        swipe.numberOfTouchesRequired = 1
+        swipe.direction = .right
+        self.view.addGestureRecognizer(swipe)
+    }
+    
+    @objc private func swipeGesture(swipe: UISwipeGestureRecognizer){
+        switch swipe.direction {
+        case .right:
+            if selectedIndex > 0 {
+                self.selectedIndex = self.selectedIndex - 1
+            }
+            break
+        case .left:
+            if selectedIndex < 4 { self.selectedIndex = self.selectedIndex + 1 }
+            break
+        default:
+            break
+        }
     }
 }
 

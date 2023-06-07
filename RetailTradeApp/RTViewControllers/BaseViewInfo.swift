@@ -19,7 +19,6 @@ class BaseInfoView: BaseView {
     let contentView: UIView = {
         let view = UIView()
         view.backgroundColor = .clear
-        view.layer.borderColor = UIColor.blue.cgColor
         view.layer.borderWidth = 1
         view.layer.cornerRadius = 5
         return view
