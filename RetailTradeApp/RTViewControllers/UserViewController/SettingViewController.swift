@@ -15,21 +15,6 @@ class SettingViewController: BaseController {
     private let imageCatAndDog = LottieAnimationView(name: "dogRelax")
     
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-//    @Environment(\.managedObjectContext) private var context
-
-//    private var imageCatAndDog: UIImageView = {
-//        let image = UIImageView()
-//        image.image = UIImage(named: "catAndDog")
-//        image.contentMode = .scaleAspectFill
-//        image.clipsToBounds = true
-//        image.layer.masksToBounds = true
-//
-////      image.isUserInteractionEnabled - добавляет возможность взаимодействовать с картинкой
-////        image.isUserInteractionEnabled = true
-////        image.tintColor = .white
-////        image.layer.cornerRadius = image.frame.height / 2.0
-//        return image
-//    }()
     
     private let textName: UILabel = {
         let label = UILabel()
@@ -52,8 +37,13 @@ class SettingViewController: BaseController {
         return button
     }()
     
-    @objc func buttonSave(){
+    @objc func buttonSaveViaSwiftUI(){
         let host = UIHostingController(rootView: SwiftUIView().environment(\.managedObjectContext, context))
+        present(host, animated: true)
+    }
+    
+    @objc func buttonSave(){
+        let host = SavingAndGettingData()
         present(host, animated: true)
     }
     

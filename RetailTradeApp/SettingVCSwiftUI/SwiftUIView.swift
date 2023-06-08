@@ -13,7 +13,6 @@ struct SwiftUIView: View {
 
     @FetchRequest(entity: CurrentDate.entity(), sortDescriptors: [],
                   animation: .easeInOut(duration: 0.3)) private var purchaseItem: FetchedResults<CurrentDate>
-//    @FetchRequest(entity: CurrentDate.entity(), sortDescriptors: []) var purchaseItem: FetchedResults<CurrentDate>
 
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
@@ -53,7 +52,7 @@ struct SwiftUIView: View {
     
                     Button("Загрузить данные"){
                         checkOnEmpty()
-//                        presentFilePicker.toggle()
+//                      presentFilePicker.toggle()
                     }
                     .frame(width: 180 ,height: 50)
                     .tint(.white)
@@ -71,9 +70,7 @@ struct SwiftUIView: View {
                 .sheet(isPresented: $presentShareSheet) {
                     deleteTempFile()
                     dismiss()
-                } content: {
-                    CustomShareSheet(url: $shareURL)
-                }
+                } content: {CustomShareSheet(url: $shareURL)}
                 ///File importer (for selecting JSON file from files app)
                 .fileImporter(isPresented: $presentFilePicker, allowedContentTypes: [.json]) { result in
                     switch result {
@@ -105,13 +102,11 @@ struct SwiftUIView: View {
         }
         else {
             checkOnEmptyBool = true
-
         }
     }
 
     ///Importing json file and adding to core data
     func importJSON(_ url: URL){
-
         var items = [CurrentDate]()
         do {
             let jsonData = try Data(contentsOf: url)
@@ -119,17 +114,12 @@ struct SwiftUIView: View {
             decoder.userInfo[.managedObjectContext] = context
             items = try decoder.decode([CurrentDate].self, from: jsonData)
             /// since it's already loaded in context, simply save the context
-            ///
-            print("File Imported Successfully")
-
         } catch {
             ///Do Action
-            print(error)
+            print(error.localizedDescription)
         }
-        
         try? context.save()
-        print("File Imported Successfully: \(items.count)")
-
+        print("File Imported Successfully2: \(items.count)")
     }
     
     func deleteTempFile(){
@@ -191,3 +181,44 @@ struct CustomShareSheet: UIViewControllerRepresentable {
     }
     
 }
+
+
+/*
+class UserManager: NSObject {
+
+    let container: NSPersistentContainer
+    
+    init(inMemory: Bool = false) {
+        container = NSPersistentCloudKitContainer(name: "CurrentDate")
+        
+        if inMemory {
+            container.persistentStoreDescriptions.first!.url = URL(fileURLWithPath: "/dev/null")
+        } else {
+            let url = Bundle.main.url(forResource: "Users", withExtension: "momd")!
+            let storeDescription = NSPersistentStoreDescription(url: url)
+            container.add(storeDescription)
+        }
+        super.init()
+    }
+    
+    func loadUsersFromFile() -> [User] {
+        guard let userData = UserData.load(from: .inMemory) else { return [] }
+        return userData.users
+    }
+}
+
+extension UserManager {
+    class func load(from storeURL: URL) -> UserData? {
+        let managedObjectContext = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
+        managedObjectContext.parent = nil
+        
+        let fetchRequest = NSFetchRequest<CurrentDate>()
+        fetchRequest.entity = CurrentDate.entity()
+        
+        do {
+            guard let storeData = try CurrentDate(context: managedObjectContext).load() else { return nil }
+            return storeData
+        } catch {
+            managedObjectContext.
+        }
+*/

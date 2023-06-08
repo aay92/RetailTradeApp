@@ -375,11 +375,9 @@ extension DetailVC {
         chooseDate.isUserInteractionEnabled = true
         chooseDate.addGestureRecognizer(tapGestureDate)
         
-        
         imageFromLibrary.layer.masksToBounds = true
         imageFromLibrary.clipsToBounds = true
         imageFromLibrary.layer.cornerRadius = 20
-        
         
         view.addViewWithoutTAMIC(labelTitleVC)
         view.addViewWithoutTAMIC(stack)

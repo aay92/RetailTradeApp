@@ -439,7 +439,7 @@ extension OverviewViewController {
         do {
             productsProfit = try! manageObjectContext.fetch(eventRequest)
             productsProfitCurrentDate = try! manageObjectContext.fetch(eventRequestCurrentDate)
-            
+
             let sum = productsProfit.reduce(0) {$0 + ($1.priceProfit)}
             var sumCurrentProfit = productsProfitCurrentDate.reduce(0) {$0 + ($1.currentProfit)}
 

@@ -42,6 +42,7 @@
 		5BB763AF29F84BA90033EE62 /* ProgressViewDataAllMonth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB763AE29F84BA90033EE62 /* ProgressViewDataAllMonth.swift */; };
 		5BB763B129F84C000033EE62 /* BaseViewInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB763B029F84C000033EE62 /* BaseViewInfo.swift */; };
 		5BB91FFE292F657800FCF34E /* DataLouder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB91FFD292F657800FCF34E /* DataLouder.swift */; };
+		5BD0F58B2A325BC2008F3EB3 /* SavingAndGettingData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BD0F58A2A325BC2008F3EB3 /* SavingAndGettingData.swift */; };
 		5BF24F11292B645600BEE9AB /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BF24F10292B645600BEE9AB /* TabBarController.swift */; };
 		5BF24F13292B663900BEE9AB /* Resources.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BF24F12292B663900BEE9AB /* Resources.swift */; };
 		5BF24F16292B667900BEE9AB /* UIColor + Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BF24F15292B667900BEE9AB /* UIColor + Ext.swift */; };
@@ -93,6 +94,7 @@
 		5BB763AE29F84BA90033EE62 /* ProgressViewDataAllMonth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressViewDataAllMonth.swift; sourceTree = "<group>"; };
 		5BB763B029F84C000033EE62 /* BaseViewInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewInfo.swift; sourceTree = "<group>"; };
 		5BB91FFD292F657800FCF34E /* DataLouder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataLouder.swift; sourceTree = "<group>"; };
+		5BD0F58A2A325BC2008F3EB3 /* SavingAndGettingData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavingAndGettingData.swift; sourceTree = "<group>"; };
 		5BF24F10292B645600BEE9AB /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		5BF24F12292B663900BEE9AB /* Resources.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Resources.swift; sourceTree = "<group>"; };
 		5BF24F15292B667900BEE9AB /* UIColor + Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor + Ext.swift"; sourceTree = "<group>"; };
@@ -231,6 +233,14 @@
 			path = DataFlow;
 			sourceTree = "<group>";
 		};
+		5BD0F5892A325BB1008F3EB3 /* SavingDataVC */ = {
+			isa = PBXGroup;
+			children = (
+				5BD0F58A2A325BC2008F3EB3 /* SavingAndGettingData.swift */,
+			);
+			path = SavingDataVC;
+			sourceTree = "<group>";
+		};
 		5BF24F08292AA4CF00BEE9AB /* Resources */ = {
 			isa = PBXGroup;
 			children = (
@@ -278,6 +288,7 @@
 		5BF24F0C292AA63700BEE9AB /* UserViewController */ = {
 			isa = PBXGroup;
 			children = (
+				5BD0F5892A325BB1008F3EB3 /* SavingDataVC */,
 				5BF24F1D292B705400BEE9AB /* SettingViewController.swift */,
 			);
 			path = UserViewController;
@@ -465,6 +476,7 @@
 				5BF24F16292B667900BEE9AB /* UIColor + Ext.swift in Sources */,
 				5BF24F23292C123100BEE9AB /* ProfitCell.swift in Sources */,
 				5BB763A829F8482A0033EE62 /* BarView.swift in Sources */,
+				5BD0F58B2A325BC2008F3EB3 /* SavingAndGettingData.swift in Sources */,
 				5BB763AF29F84BA90033EE62 /* ProgressViewDataAllMonth.swift in Sources */,
 				5BF24F11292B645600BEE9AB /* TabBarController.swift in Sources */,
 				5B7F8A712999F724005A5605 /* AlertSaveNewMonth.swift in Sources */,
