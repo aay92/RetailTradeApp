@@ -72,7 +72,7 @@ struct SwiftUIView: View {
                     dismiss()
                 } content: {CustomShareSheet(url: $shareURL)}
                 ///File importer (for selecting JSON file from files app)
-                .fileImporter(isPresented: $presentFilePicker, allowedContentTypes: [.json]) { result in
+                    .fileImporter(isPresented: $presentFilePicker, allowedContentTypes: [.json]) { result in
                     switch result {
                     case .success(let success):
                         importJSON(success)
