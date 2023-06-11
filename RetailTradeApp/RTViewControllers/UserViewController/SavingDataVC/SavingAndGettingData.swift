@@ -5,16 +5,16 @@
 //  Created by Aleksey Alyonin on 08.06.2023.
 //
 
+import Foundation
 import UIKit
 import CoreData
 import MobileCoreServices
-import UniformTypeIdentifiers
 
 class SavingAndGettingData: BaseController {
     
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     private var shareURL: URL = URL(string: "https://apple.com")!
-
+    
     private lazy var savingButton: UIButton = {
         let button = UIButton()
         button.setTitle(" Сохранить данные ", for: .normal)
@@ -45,34 +45,23 @@ class SavingAndGettingData: BaseController {
     }
     
     @objc private func savingData(){
-        var getCoreDate = [CurrentDate]()
-        let eventRequestCurrentDate: NSFetchRequest<CurrentDate> = CurrentDate.fetchRequest()
         
+        let eventRequestCurrentDate: NSFetchRequest<CurrentDate> = CurrentDate.fetchRequest()
         do {
-            getCoreDate = try! context.fetch(eventRequestCurrentDate)
-            let jsonData = try JSONEncoder().encode(getCoreDate)
-            
-            if let jsonString = String(data: jsonData, encoding: .utf8) {
-                if let tempURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first {
-                    let pathURL = tempURL.appending(component: "CurrentData\(Date().formatted(date: .complete, time: .omitted)).json")
-                    try jsonString.write(to: pathURL, atomically: true, encoding: .utf8)
-                    shareURL = pathURL
-                    print("getCoreDate pathURL: \(pathURL)")
-                    let activity = UIActivityViewController(activityItems: [tempURL], applicationActivities: nil)
-                    activity.popoverPresentationController?.sourceView = self.view
-                    self.present(activity, animated: true)
-                }
-                
-                try FileManager.default.removeItem(atPath: jsonString)
-            }
+            let messageData = try context.fetch(eventRequestCurrentDate)
+            let jsonData = try JSONEncoder().encode(messageData)
+            let reqJSONStr = String(data: jsonData, encoding: .utf8)
+            let activity = UIActivityViewController(activityItems: [reqJSONStr as Any], applicationActivities: nil)
+            present(activity, animated: true, completion: nil)
         } catch {
-            print("Не сохранилась getCoreDate")
+            print("Нет данных в savingData \(error.localizedDescription)")
         }
     }
     
+    
     @objc private func loadingData(){
         
-        let documentPicker = UIDocumentPickerViewController(forOpeningContentTypes: [.json, .text])
+        let documentPicker = UIDocumentPickerViewController(forOpeningContentTypes: [.text, .json])
         documentPicker.delegate = self
         documentPicker.modalPresentationStyle = .overFullScreen
         documentPicker.allowsMultipleSelection = true
@@ -95,49 +84,41 @@ extension SavingAndGettingData {
         view.addViewWithoutTAMIC(stack)
         stack.addArrangedSubview(savingButton)
         stack.addArrangedSubview(loadingButton)
-
+        
         NSLayoutConstraint.activate([
             stack.heightAnchor.constraint(equalToConstant: 50),
             stack.topAnchor.constraint(equalTo: view.topAnchor,constant: height / 2.4),
             stack.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 5),
             stack.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -5),
         ])
-
+        
     }
     override func configureAppereance(){
         view.backgroundColor = R.Color.background
     }
 }
 extension SavingAndGettingData: UIDocumentPickerDelegate {
-    func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentAt url: URL) {
-        dismiss(animated: true)
+    
+    func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {
+        var items = [CurrentDatum]()
+        guard let documentsUrl: URL = urls.first else { return print("Нет urls")}
+        print("selected document: \(documentsUrl)")
+        guard let documentData = try? Data(contentsOf: urls.first!) else { return print("Нет urls в documentData")}
+        guard let json = try? JSONDecoder().decode([CurrentDatum].self, from: documentData) else { return print("Нет json")}
+        items = json
         
-        var items = [CurrentDate]()
-
-            guard url.startAccessingSecurityScopedResource() else {
-                return
-            }
-        
-        do {
-            let jsonData = try Data(contentsOf: url)
-//            decoder.userInfo[.managedObjectContext] = context
-            items = try JSONDecoder().decode([CurrentDate].self, from: jsonData)
-            for i in items {
-                var newItem = CurrentDate(entity: <#T##NSEntityDescription#>, insertInto: <#T##NSManagedObjectContext?#>)
-            }
-            /// since it's already loaded in context, simply save the context
-            print("File Imported Successfully2: \(items.count)")
-
-        } catch {
-            ///Do Action
-            print(error.localizedDescription)
+        items.forEach {
+            print("json: \(String(describing: $0.currentAmount))")
+            print("json: \(String(describing: $0.currentProfit))")
+            print("json: \(String(describing: $0.currentGross))")
+            
+            var newItemModel = CurrentDate(context: context)
+            newItemModel.currentProfit =  Int32(Int($0.currentProfit!))
+            newItemModel.currentGross = Int32(Int($0.currentGross!))
+            
+            do { try context.save() } catch { print("Не сохранилася context.save") }
         }
-//        try? context.save()
-        print("File Imported Successfully2: \(items.count)")
-            defer {
-                url.stopAccessingSecurityScopedResource()
-            }
+        dismiss(animated: true)
     }
 }
-
 
