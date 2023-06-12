@@ -292,7 +292,7 @@ extension OverviewViewController {
     }
 }
 
-//MARK: - navigation methods
+//MARK: - navigation methods save new month
 extension OverviewViewController {
 
     //    data for coreDate current date
@@ -483,7 +483,6 @@ extension OverviewViewController {
         var productsGross = [ProductEntity]()
         var productsProfit = [ProductEntity]()
         var productsTotalCurrentCurrentDate = [CurrentDate]()
-
 
         let eventRequest: NSFetchRequest<ProductEntity> = ProductEntity.fetchRequest()
         let eventRequestCurrentDate: NSFetchRequest<CurrentDate> = CurrentDate.fetchRequest()

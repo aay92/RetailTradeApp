@@ -14,9 +14,7 @@ public class CurrentDate: NSManagedObject, Codable {
     
     required convenience public init(from decoder: Decoder) throws {
         /// first we need to extract managed object context to initialise
-        guard let context = decoder.userInfo[CodingUserInfoKey.managedObjectContext] as? NSManagedObjectContext else {
-            throw ContextError.NoContextFound
-        }
+        guard let context = decoder.userInfo[CodingUserInfoKey.managedObjectContext] as? NSManagedObjectContext else { throw ContextError.NoContextFound }
         self.init(context: context)
         
         //        Decoding Item

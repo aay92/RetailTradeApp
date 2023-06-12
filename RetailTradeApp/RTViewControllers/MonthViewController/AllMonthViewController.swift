@@ -21,12 +21,15 @@ class AllMonthViewController: BaseController {
     //MARK: - dataFlowFromCoreData
     var manageObjectContext: NSManagedObjectContext!
     var month = [ModelOverview]()
-    
+    var monthFilter = [ModelOverview]()
+
     let tableViewProducts : UITableView = {
         let table = UITableView()
         table.register(MonthTableViewCell.self, forCellReuseIdentifier: MonthTableViewCell.identifier)
         return table
     }()
+   var dateCreated = Date()
+
 }
 
 
@@ -66,6 +69,8 @@ extension AllMonthViewController {
         let eventRequest: NSFetchRequest<ModelOverview> = ModelOverview.fetchRequest()
         do {
             month = try manageObjectContext.fetch(eventRequest)
+//            monthFilter = month.predicate [NSSortDescriptor(key: "date", ascending: true)]
+
             self.tableViewProducts.reloadData()
         } catch {
             print("Could not load save data: \(error.localizedDescription)")

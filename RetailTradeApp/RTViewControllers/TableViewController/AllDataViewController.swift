@@ -145,30 +145,6 @@ extension AllDataViewController: UITableViewDelegate, UITableViewDataSource {
         
     }
     
-//    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-//
-//        let sectionHeaderBackgroundColor = UIColor(hue: 0.921, saturation: 0.34, brightness: 0.94, alpha: 0.4)
-//
-//        let sectionHeaderLabelView = UIView()
-//        sectionHeaderLabelView.backgroundColor = sectionHeaderBackgroundColor
-//        sectionHeaderLabelView.layer.cornerRadius = 10
-        //let sectionHeaderImage = UIImage(named: sectionHeaderTitles[section])
-        //           let sectionHeaderImage = UIImage(named: "QueryDueDate")
-        //           let sectionHeaderImageView = UIImageView(image: sectionHeaderImage)
-        //           sectionHeaderImageView.frame = CGRect(x: 3, y: 10, width: 30, height: 30)
-        //           sectionHeaderLabelView.addSubview(sectionHeaderImageView)
-        //
-//        let sectionHeaderLabel = UILabel()
-////        sectionHeaderLabel.text = sectionHeaderTitles[section]
-//        sectionHeaderLabel.textColor = .white.withAlphaComponent(0.5)
-//        sectionHeaderLabel.font = UIFont.boldSystemFont(ofSize: 20.0)
-//        sectionHeaderLabel.frame = CGRect(x: 40, y: -5, width: 250, height: 40)
-//        sectionHeaderLabelView.addSubview(sectionHeaderLabel)
-//
-//        return sectionHeaderLabelView
-//
-//       }
-    
 }
 
 //MARK: - animationTableViewCell
