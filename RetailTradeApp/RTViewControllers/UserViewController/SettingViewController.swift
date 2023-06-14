@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import SwiftUI
 import Lottie
 
 class SettingViewController: BaseController {
@@ -36,11 +35,6 @@ class SettingViewController: BaseController {
         button.makeSystem(button)
         return button
     }()
-    
-    @objc func buttonSaveViaSwiftUI(){
-        let host = UIHostingController(rootView: SwiftUIView().environment(\.managedObjectContext, context))
-        present(host, animated: true)
-    }
     
     @objc func buttonSave(){
         let host = SavingAndGettingData()

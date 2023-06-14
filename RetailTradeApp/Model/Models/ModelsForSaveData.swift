@@ -8,29 +8,29 @@
 import Foundation
 
 // MARK: - CurrentDatum модель для сохранения данных на устройство
-struct CurrentDatum: Codable {
+struct ObjectCurrentData: Codable {
     let date: JSONNull?
     let currentGross, currentAmount, currentProfit: Int?
 }
-typealias CurrentData = [CurrentDatum]
+typealias CurrentDataTypealias = [ObjectCurrentData]
 
 // MARK: - CurrentDatumProductEntity модель для сохранения данных на устройство
-struct CurrentDatumProductEntity: Codable {
+struct ObjectProductEntity: Codable {
     let date: JSONNull?
     let data: String?
     let image: Data?
     let name: String?
     let priceGross, priceProfit: Int?
 }
-typealias Product = [CurrentDatumProductEntity]
+typealias ProductEntityTypealias = [ObjectProductEntity]
 
 // MARK: - CurrentDatumProductEntity модель для сохранения данных на устройство
-struct CurrentDatumModelOverview: Codable {
+struct ObjectModelOverview: Codable {
     let data: JSONNull?
     let nameMonth: String?
     let totalAmount, totalGross, totalProfit: Int?
 }
-typealias ModelData = [CurrentDatumModelOverview]
+typealias ModelOverviewTypealias = [ObjectModelOverview]
 
 
 

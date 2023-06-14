@@ -9,15 +9,19 @@ import Foundation
 import UIKit
 import CoreData
 import MobileCoreServices
+import Lottie
 
 enum CaseChooseData: String, CaseIterable {
     case currentDateEnum = "Текущий месяц";
     case productEntityEnum = "Все продажи";
-    case modelOverviewEnum = "Все масяца";
+    case modelOverviewEnum = "Все месяца";
 }
 
 class SavingAndGettingData: BaseController {
     
+    let spinner = UIActivityIndicatorView(style: .large)
+    var isOpenSpinner = false
+    private let imageBackgruandBlurAnimate = LottieAnimationView(name: "blurAnimate")
     var caseChoose = CaseChooseData.currentDateEnum
     
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
@@ -62,18 +66,8 @@ class SavingAndGettingData: BaseController {
         return UIMenu(title: "", children: [modelOverviewEnum, productEntityEnum, currentDateEnum])
     }
     
-    private func deleteTempFile(tempURL: URL){
-        do {
-            try FileManager.default.removeItem(at: tempURL)
-            print("Removed Temp json file")
-        } catch {
-            print(error.localizedDescription)
-        }
-    }
-   
-    
     @objc private func savingData(){
-        
+        spinner.isHidden = false
         let eventRequestCurrentDate: NSFetchRequest<CurrentDate> = CurrentDate.fetchRequest()
         let eventRequestProductEntity: NSFetchRequest<ProductEntity> = ProductEntity.fetchRequest()
         let eventRequestModelOverview: NSFetchRequest<ModelOverview> = ModelOverview.fetchRequest()
@@ -94,7 +88,6 @@ class SavingAndGettingData: BaseController {
             let messageDataModelOverview = try context.fetch(eventRequestModelOverview)
             let jsonDataModelOverview = try JSONEncoder().encode(messageDataModelOverview)
             let reqJSONStrModelOverview = String(data: jsonDataModelOverview, encoding: .utf8)
-
             let activity = UIActivityViewController(activityItems: [
                 reqJSONStrCurrentDate as Any,
                 reqJSONStrProductEntity as Any,
@@ -103,6 +96,10 @@ class SavingAndGettingData: BaseController {
             activity.popoverPresentationController?.sourceView = self.view
             activity.popoverPresentationController?.sourceRect = self.view.frame
             present(activity, animated: true, completion: nil)
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                self.spinner.stopAnimating()
+                self.spinner.hidesWhenStopped = true
+            }
         } catch {
             print("Нет данных в savingData \(error.localizedDescription)")
         }
@@ -118,8 +115,22 @@ class SavingAndGettingData: BaseController {
 }
 
 extension SavingAndGettingData {
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.imageBackgruandBlurAnimate.loopMode = .loop
+        self.imageBackgruandBlurAnimate.play()
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        self.imageBackgruandBlurAnimate.loopMode = .loop
+        self.imageBackgruandBlurAnimate.stop()
+    }
+    
     override func setupViews(){
-        
+        spinner.startAnimating()
+        spinner.isHidden = true
     }
     override func constraintViews(){
         
@@ -129,27 +140,47 @@ extension SavingAndGettingData {
         let stack = UIStackView()
         stack.spacing = 10
         stack.distribution = .fillEqually
+        spinner.color = .white
+        
+        view.addViewWithoutTAMIC(imageBackgruandBlurAnimate)
+        imageBackgruandBlurAnimate.contentMode = .scaleToFill
         view.addViewWithoutTAMIC(stack)
         stack.addArrangedSubview(savingButton)
         stack.addArrangedSubview(loadingButton)
+        view.addViewWithoutTAMIC(spinner)
         
+        NSLayoutConstraint.activate([
+            imageBackgruandBlurAnimate.heightAnchor.constraint(equalToConstant: height),
+            imageBackgruandBlurAnimate.widthAnchor.constraint(equalToConstant: width),
+
+            imageBackgruandBlurAnimate.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            imageBackgruandBlurAnimate.topAnchor.constraint(equalTo: view.topAnchor)
+        ])
+
         NSLayoutConstraint.activate([
             stack.heightAnchor.constraint(equalToConstant: 50),
             stack.topAnchor.constraint(equalTo: view.topAnchor,constant: height / 2.4),
             stack.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 5),
             stack.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -5),
         ])
+        
+        NSLayoutConstraint.activate([
+//            indicator.heightAnchor.constraint(equalToConstant: 50),
+            spinner.topAnchor.constraint(equalTo: view.topAnchor, constant:  20),
+            spinner.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+
+])
     }
     
     override func configureAppereance(){
         view.backgroundColor = R.Color.background
+        
     }
 }
 //MARK: - UIDocumentPickerDelegate
 extension SavingAndGettingData: UIDocumentPickerDelegate {
     
     func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {
-        
         switch caseChoose {
         case .currentDateEnum:
             getDataCurrentDatum(urls: urls)
@@ -174,13 +205,8 @@ extension SavingAndGettingData {
     func getDataProductEntity(urls: [URL]) {
         guard let documentsUrl: URL = urls.first else { return print("Нет urls") }
         guard let documentData = try? Data(contentsOf: urls.first!) else { return print("Нет urls в documentData") }
-        guard let json = try? JSONDecoder().decode([CurrentDatumProductEntity].self, from: documentData) else { return print("Нет json") }
+        guard let json = try? JSONDecoder().decode([ObjectProductEntity].self, from: documentData) else { return print("Нет json") }
         json.forEach {
-//            print("json: \(String(describing: $0.priceGross))")
-//            print("json: \(String(describing: $0.priceProfit))")
-//            print("json: \(String(describing: $0.data))")
-//            print("json: \(String(describing: $0.image))")
-
             let newItemModel = ProductEntity(context: context)
             newItemModel.name = $0.name
             newItemModel.priceGross =  Int32(Int($0.priceGross!))
@@ -195,7 +221,7 @@ extension SavingAndGettingData {
     func getDataCurrentDatum(urls: [URL]) {
         guard let documentsUrl: URL = urls.first else { return print("Нет urls") }
         guard let documentData = try? Data(contentsOf: urls.first!) else { return print("Нет urls в documentData") }
-        guard let json = try? JSONDecoder().decode([CurrentDatum].self, from: documentData) else { return print("Нет json") }
+        guard let json = try? JSONDecoder().decode([ObjectCurrentData].self, from: documentData) else { return print("Нет json") }
         json.forEach {
             print("json: \(String(describing: $0.currentAmount))")
             print("json: \(String(describing: $0.currentProfit))")
@@ -212,7 +238,7 @@ extension SavingAndGettingData {
     func getDataModelOverview(urls: [URL]){
         guard let documentsUrl: URL = urls.first else { return print("Нет urls") }
         guard let documentData = try? Data(contentsOf: urls.first!) else { return print("Нет urls в documentData") }
-        guard let json = try? JSONDecoder().decode([CurrentDatumModelOverview].self, from: documentData) else { return print("Нет json") }
+        guard let json = try? JSONDecoder().decode([ObjectModelOverview].self, from: documentData) else { return print("Нет json") }
         json.forEach {
             print("json: \(String(describing: $0.nameMonth))")
             print("json: \(String(describing: $0.totalGross))")
@@ -224,7 +250,6 @@ extension SavingAndGettingData {
             newItemModel.totalGross = Int32(Int($0.totalGross!))
             newItemModel.totalProfit = Int32(Int($0.totalProfit!))
             newItemModel.nameMonth = String($0.nameMonth!)
-            
         }
         do { try context.save() } catch { print("Не сохранилася context.save в ModelOverview") }
         dismiss(animated: true)

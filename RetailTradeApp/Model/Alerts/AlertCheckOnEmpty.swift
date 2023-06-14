@@ -24,8 +24,8 @@ extension UIViewController {
         
         alertController.addAction(cancel)
         alertController.addAction(saveNewMonth)
-        
-        
         present(alertController, animated: true)
     }
 }
+
+

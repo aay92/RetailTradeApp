@@ -154,9 +154,9 @@ private extension AllDataViewController {
         let tableViewWidth = self.tableViewProducts.bounds.width
         var indexCell: Double = 0
         for cell in cells {
-            cell.transform = CGAffineTransform(translationX: tableViewWidth / 1.15, y: 0)
+            cell.transform = CGAffineTransform(translationX: tableViewWidth / 0.85, y: 0)
 
-            UIView.animate(withDuration: 1.2,
+            UIView.animate(withDuration: 1.7 ,
                            delay: 0.05 * indexCell,
                            usingSpringWithDamping: 0.6,
                            initialSpringVelocity: 0.3,

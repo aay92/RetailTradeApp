@@ -44,6 +44,8 @@
 		5BB91FFE292F657800FCF34E /* DataLouder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB91FFD292F657800FCF34E /* DataLouder.swift */; };
 		5BD0F58B2A325BC2008F3EB3 /* SavingAndGettingData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BD0F58A2A325BC2008F3EB3 /* SavingAndGettingData.swift */; };
 		5BD0F5922A363C69008F3EB3 /* ModelsForSaveData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BD0F5912A363C69008F3EB3 /* ModelsForSaveData.swift */; };
+		5BD0F5942A3A1FAA008F3EB3 /* AlertCheckInputText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BD0F5932A3A1FAA008F3EB3 /* AlertCheckInputText.swift */; };
+		5BD0F5962A3A21C8008F3EB3 /* String + Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BD0F5952A3A21C8008F3EB3 /* String + Ext.swift */; };
 		5BF24F11292B645600BEE9AB /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BF24F10292B645600BEE9AB /* TabBarController.swift */; };
 		5BF24F13292B663900BEE9AB /* Resources.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BF24F12292B663900BEE9AB /* Resources.swift */; };
 		5BF24F16292B667900BEE9AB /* UIColor + Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BF24F15292B667900BEE9AB /* UIColor + Ext.swift */; };
@@ -97,6 +99,8 @@
 		5BB91FFD292F657800FCF34E /* DataLouder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataLouder.swift; sourceTree = "<group>"; };
 		5BD0F58A2A325BC2008F3EB3 /* SavingAndGettingData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavingAndGettingData.swift; sourceTree = "<group>"; };
 		5BD0F5912A363C69008F3EB3 /* ModelsForSaveData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelsForSaveData.swift; sourceTree = "<group>"; };
+		5BD0F5932A3A1FAA008F3EB3 /* AlertCheckInputText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertCheckInputText.swift; sourceTree = "<group>"; };
+		5BD0F5952A3A21C8008F3EB3 /* String + Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String + Ext.swift"; sourceTree = "<group>"; };
 		5BF24F10292B645600BEE9AB /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		5BF24F12292B663900BEE9AB /* Resources.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Resources.swift; sourceTree = "<group>"; };
 		5BF24F15292B667900BEE9AB /* UIColor + Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor + Ext.swift"; sourceTree = "<group>"; };
@@ -207,6 +211,7 @@
 				5B7F8A522975A736005A5605 /* AlertDate.swift */,
 				5B7F8A702999F724005A5605 /* AlertSaveNewMonth.swift */,
 				5B4A1C6E29D57E0100EA09A4 /* AlertCheckOnEmpty.swift */,
+				5BD0F5932A3A1FAA008F3EB3 /* AlertCheckInputText.swift */,
 			);
 			path = Alerts;
 			sourceTree = "<group>";
@@ -339,6 +344,7 @@
 				5BF24F1F292C117900BEE9AB /* UIView + Ext.swift */,
 				5B5F51A2293F2C7F006DD6C1 /* UIButton + Ext.swift */,
 				5B7F8A652983BF15005A5605 /* UIimage + ext.swift */,
+				5BD0F5952A3A21C8008F3EB3 /* String + Ext.swift */,
 			);
 			path = Extansion;
 			sourceTree = "<group>";
@@ -507,6 +513,7 @@
 				5B7F8A6F2988FA07005A5605 /* ChartAndAllData.swift in Sources */,
 				5B7F8A6C2983C297005A5605 /* MonthTableViewCell.swift in Sources */,
 				5B52EEAF29374EEE00E89787 /* ViewTotalProfit.swift in Sources */,
+				5BD0F5962A3A21C8008F3EB3 /* String + Ext.swift in Sources */,
 				5BF24F18292B6A6300BEE9AB /* NavBarController.swift in Sources */,
 				5B7F8A532975A736005A5605 /* AlertDate.swift in Sources */,
 				5B7F8A63298121EF005A5605 /* ProductEntity+CoreDataClass.swift in Sources */,
@@ -521,6 +528,7 @@
 				5B7F8A5C297EB876005A5605 /* ViewTotlaProffitSaveCell.swift in Sources */,
 				5BFD8AA8292A6DF4007A45A2 /* SceneDelegate.swift in Sources */,
 				5B7F8A7429A7C9D0005A5605 /* ModelOverview+CoreDataClass.swift in Sources */,
+				5BD0F5942A3A1FAA008F3EB3 /* AlertCheckInputText.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -170,7 +170,6 @@ class DetailVC: BaseController {
         label.tintColor = R.Color.backgroundDetailVC
         label.backgroundColor = .white
         label.layer.cornerRadius = 10
-        
         return label
     }()
     
@@ -217,7 +216,6 @@ class DetailVC: BaseController {
         image.contentMode = .scaleAspectFill
         image.clipsToBounds = true
         image.layer.masksToBounds = true
-        
         //      image.isUserInteractionEnabled - добавляет возможность взаимодействовать с картинкой
         image.isUserInteractionEnabled = true
         image.tintColor = .white
@@ -537,10 +535,16 @@ extension DetailVC {
         let saveImage = image.pngData()
         
         if textName.isEmpty || textGross.isEmpty && textProfit.isEmpty {
-            print("Введите данные")
+            AlertCheckInputText(title: "Введите данные")
+            return
+        } else if !textProfit.isInt {
+            AlertCheckInputText(title: "Введите числа")
+            return
+        } else if !textGross.isInt {
+            AlertCheckInputText(title: "Введите числа")
             return
         }
-        
+    
         print("MARK сохранаяем:- \(timeDate)")
         
         let newProduct = ProfitModelItem(name: textName,
