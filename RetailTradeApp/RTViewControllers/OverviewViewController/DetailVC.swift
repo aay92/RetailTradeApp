@@ -12,9 +12,7 @@ class DetailVC: BaseController {
     
     let managerData = DataLouder.shared
     var timeDate = ""
-    
-    //    var timeDate = Date()
-    
+
     var animationApear = false
     var completion: ((Bool)->())?
     

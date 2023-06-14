@@ -16,7 +16,6 @@ class ProfitCell: UICollectionViewCell {
         view.clipsToBounds = false
         view.layer.cornerRadius = 10
         view.translatesAutoresizingMaskIntoConstraints = false
-//        view.backgroundColor = .white
         return view
     }()
     
@@ -29,7 +28,6 @@ class ProfitCell: UICollectionViewCell {
         stackView.backgroundColor = .clear
         return stackView
     }()
-    
     
     private var nameLbl: UILabel = {
         let label = UILabel()
@@ -71,7 +69,6 @@ class ProfitCell: UICollectionViewCell {
     let animationDurration = 1.0
     let animationStartData = Date()
     
-    
     private func setView(){
         layer.cornerRadius = 10
         viewProfit.backgroundColor = R.Color.active
@@ -85,7 +82,6 @@ class ProfitCell: UICollectionViewCell {
         displayLink.add(to: .main, forMode: .default)
     }
     
-    
     func setUp(category: ProfitItemInCollectionView){
         
         if category.name == "Pribl" {
@@ -98,15 +94,11 @@ class ProfitCell: UICollectionViewCell {
             endValue = Double(category.sumProfit)
             priceLbl.text = String("\(endValue) ₽")
         }
-//        image.image = UIImage(named: "\(String(describing: category.image))")
-//        categoryImageView.kf.setImage(with: category.image?.asUrl)
     }
     
 //    Animation numbers
     @objc func handlerRunLoopMode(){
-       
         let now = Date()
-        
         let elapsedTime = now.timeIntervalSince(animationStartData)
         if elapsedTime > animationDurration {
             self.priceLbl.text = String(format: "%.0f", endValue)
@@ -115,7 +107,6 @@ class ProfitCell: UICollectionViewCell {
             let value = startValue + percenteg * (endValue - startValue)
             self.priceLbl.text = String(format: "%.0f", value)
         }
-        
     }
     
     private func setConsrtaints(){

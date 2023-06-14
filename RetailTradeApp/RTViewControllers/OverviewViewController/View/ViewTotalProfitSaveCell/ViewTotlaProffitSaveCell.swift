@@ -90,26 +90,21 @@ class ViewTotalProfitSaveCell: UIButton {
         
     }
 
-    
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         setupGradient()
         
     }
  
-    
     @objc func tappedButton(){
         boolingProperty.toggle()
         makeSystem(buttonTapped)
     }
     
-    
     override func layoutSubviews() {
         super.layoutSubviews()
         buttonTapped.frame = CGRect(x: 0, y: 0, width: self.bounds.width, height: self.bounds.height)
     }
-    
-    
     
     private func setupGradient() {
         self.layer.addSublayer(gradientLayer)

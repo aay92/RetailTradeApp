@@ -16,12 +16,8 @@ enum R {
         static let separator = UIColor(hexString: "#48494E")
         static let tabBatColor = UIColor(hexString: "#12141A")
         static let tabBatColorActive = UIColor(hexString: "#aa70ff")
-
-        
         static let backgroundDetailVC = UIColor(hexString: "#9462DF")
         static let background = UIColor(hexString: "#101116")
-        //        static let secondary = UIColor(hexString: "#F0F3FF")
-        //        static let subTitleGray = UIColor(hexString: "#9BA4B0")
     }
     
     //MARK: - All strings in app
@@ -54,14 +50,11 @@ enum R {
                 return "Доходы по месяцам"
             case .setting:
                 return "Настройки"
-            
             }
-            
         }
     }
     
-    //MARK: - All images in app
-    
+    //MARK: - images in app tabbar
     enum Images {
         enum TabBar {
             static func icon(for tab: Tabs) -> UIImage? {
