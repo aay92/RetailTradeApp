@@ -40,7 +40,6 @@ class SettingViewController: BaseController {
         let host = SavingAndGettingData()
         present(host, animated: true)
     }
-    
 }
 
 extension SettingViewController {
@@ -81,15 +80,14 @@ extension SettingViewController {
             imageCatAndDog.heightAnchor.constraint(equalToConstant: 200),
             imageCatAndDog.widthAnchor.constraint(equalToConstant: 200),
             
-            imageCatAndDog.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: height / 9),
+            imageCatAndDog.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             imageCatAndDog.topAnchor.constraint(equalTo: view.topAnchor, constant: 20)
         ])
         
         view.addViewWithoutTAMIC(textName)
         NSLayoutConstraint.activate([
             textName.topAnchor.constraint(equalTo: view.topAnchor, constant: 20),
-            
-            textName.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: view.frame.size.height / view.frame.size.height + 140),
+            textName.centerXAnchor.constraint(equalTo: view.centerXAnchor),
         ])
         
         view.addViewWithoutTAMIC(buttonSaveData)

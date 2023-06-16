@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 
 class DetailVC: BaseController {
@@ -82,7 +83,7 @@ class DetailVC: BaseController {
     
     private var chooseDate: UILabel = {
         let label = UILabel()
-        label.text = "Выбирите дату"
+        label.text = "Выберите дату"
         label.font = UIFont(name: "Ariel", size: 15)
         label.textAlignment = .right
         label.font = UIFont.boldSystemFont(ofSize: 15)
@@ -530,7 +531,7 @@ extension DetailVC {
         guard let image = imageFromLibrary.image else {
             return print("Нет картинки")
         }
-        let saveImage = image.pngData()
+        let saveImage = image.resizedTo1MB()?.pngData()
         
         if textName.isEmpty || textGross.isEmpty && textProfit.isEmpty {
             AlertCheckInputText(title: "Введите данные")

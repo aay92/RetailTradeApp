@@ -87,8 +87,8 @@ class TableViewCell: UITableViewCell {
     private var priceLblGross: UILabel = {
         let label = UILabel()
         label.text = "Стоимость"
-        label.font = UIFont(name: "Ariel", size: 18)
-        label.font = UIFont.boldSystemFont(ofSize: 18)
+        label.font = UIFont(name: "Ariel", size: 15)
+        label.font = UIFont.boldSystemFont(ofSize: 15)
         label.textColor = .white
         label.textAlignment = .left
         label.numberOfLines = 0
@@ -99,8 +99,8 @@ class TableViewCell: UITableViewCell {
     private var priceLblGrossDescription: UILabel = {
         let label = UILabel()
         label.text = "Стоимость с наценкой"
-        label.font = UIFont(name: "Ariel", size: 13)
-        label.font = UIFont.boldSystemFont(ofSize: 13)
+        label.font = UIFont(name: "Ariel", size: 12)
+        label.font = UIFont.boldSystemFont(ofSize: 12)
         label.textColor = .white.withAlphaComponent(0.6)
         label.textAlignment = .left
         label.numberOfLines = 0
@@ -121,8 +121,8 @@ class TableViewCell: UITableViewCell {
     private var priceLblProfit: UILabel = {
         let label = UILabel()
         label.text = "Стоимость"
-        label.font = UIFont(name: "Ariel", size: 18)
-        label.font = UIFont.boldSystemFont(ofSize: 18)
+        label.font = UIFont(name: "Ariel", size: 15)
+        label.font = UIFont.boldSystemFont(ofSize: 15)
         label.textColor = .white
         label.textAlignment = .left
         label.numberOfLines = 0
@@ -132,9 +132,9 @@ class TableViewCell: UITableViewCell {
     
     private var priceLblProfitDescription: UILabel = {
         let label = UILabel()
-        label.text = "Себeстоимость"
-        label.font = UIFont(name: "Ariel", size: 13)
-        label.font = UIFont.boldSystemFont(ofSize: 13)
+        label.text = "Себестоимость позиции"
+        label.font = UIFont(name: "Ariel", size: 12)
+        label.font = UIFont.boldSystemFont(ofSize: 12)
         label.textColor = .white.withAlphaComponent(0.6)
         label.textAlignment = .left
         label.numberOfLines = 0
@@ -212,12 +212,10 @@ class TableViewCell: UITableViewCell {
             viewDate.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -5),
             viewDate.bottomAnchor.constraint(equalTo: bottomAnchor, constant: frame.height / -10.5),
             
-            
             lblData.topAnchor.constraint(equalTo: topAnchor),
             lblData.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 15),
             lblData.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -5),
             lblData.bottomAnchor.constraint(equalTo: viewProfit.topAnchor, constant: 0),
-            
             
             viewProfit.topAnchor.constraint(equalTo: topAnchor, constant: 13),
             viewProfit.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 5),

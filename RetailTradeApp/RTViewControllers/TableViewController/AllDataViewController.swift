@@ -110,7 +110,14 @@ extension AllDataViewController: UITableViewDelegate, UITableViewDataSource {
    
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print("Нажали на ячейку")
+        
+        let vc = DetailAllDataViewController()
+        vc.configure(name: products[indexPath.row].name ?? "",
+                     imageItem: products[indexPath.row].image,
+                     costPositionPrf: Int(products[indexPath.row].priceProfit),
+                     costPriceGrs: Int(products[indexPath.row].priceGross),
+                     total: Int(products[indexPath.row].priceGross) - Int(products[indexPath.row].priceProfit))
+        present(vc, animated: true)
     }
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {

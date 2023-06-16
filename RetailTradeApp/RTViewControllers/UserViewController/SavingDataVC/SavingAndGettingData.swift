@@ -132,6 +132,7 @@ extension SavingAndGettingData {
         spinner.startAnimating()
         spinner.isHidden = true
     }
+    
     override func constraintViews(){
         
         let height = UIScreen.main.bounds.height
@@ -140,7 +141,8 @@ extension SavingAndGettingData {
         let stack = UIStackView()
         stack.spacing = 10
         stack.distribution = .fillEqually
-        spinner.color = .white
+        spinner.style = .large
+        spinner.color = .black
         
         view.addViewWithoutTAMIC(imageBackgruandBlurAnimate)
         imageBackgruandBlurAnimate.contentMode = .scaleToFill
@@ -185,11 +187,12 @@ extension SavingAndGettingData: UIDocumentPickerDelegate {
         case .currentDateEnum:
             getDataCurrentDatum(urls: urls)
             break
-        case .modelOverviewEnum:
-            getDataModelOverview(urls: urls)
-            break
         case .productEntityEnum:
             getDataProductEntity(urls: urls)
+            break
+        case .modelOverviewEnum:
+            getDataModelOverview(urls: urls)
+            print("Нет urls\(urls.first)")
             break
         }
     }
@@ -202,25 +205,9 @@ extension SavingAndGettingData: UIDocumentPickerDelegate {
 //MARK: - getDataProductEntity, getDataCurrentDatum, getDataModelOverview
 extension SavingAndGettingData {
     
-    func getDataProductEntity(urls: [URL]) {
-        guard let documentsUrl: URL = urls.first else { return print("Нет urls") }
-        guard let documentData = try? Data(contentsOf: urls.first!) else { return print("Нет urls в documentData") }
-        guard let json = try? JSONDecoder().decode([ObjectProductEntity].self, from: documentData) else { return print("Нет json") }
-        json.forEach {
-            let newItemModel = ProductEntity(context: context)
-            newItemModel.name = $0.name
-            newItemModel.priceGross =  Int32(Int($0.priceGross!))
-            newItemModel.priceProfit = Int32(Int($0.priceProfit!))
-            newItemModel.data = $0.data
-            newItemModel.image = $0.image
-        }
-        do { try context.save() } catch { print("Не сохранилася context.save в CurrentDate") }
-        dismiss(animated: true)
-    }
-    
     func getDataCurrentDatum(urls: [URL]) {
         guard let documentsUrl: URL = urls.first else { return print("Нет urls") }
-        guard let documentData = try? Data(contentsOf: urls.first!) else { return print("Нет urls в documentData") }
+        guard let documentData = try? Data(contentsOf: urls.first!) else { return print("Нет urls в documentData CurrentDate") }
         guard let json = try? JSONDecoder().decode([ObjectCurrentData].self, from: documentData) else { return print("Нет json") }
         json.forEach {
             print("json: \(String(describing: $0.currentAmount))")
@@ -235,9 +222,25 @@ extension SavingAndGettingData {
         dismiss(animated: true)
     }
     
+    func getDataProductEntity(urls: [URL]) {
+        guard let documentsUrl: URL = urls.first else { return print("Нет urls") }
+        guard let documentData = try? Data(contentsOf: urls.first!) else { return print("Нет urls в documentData ProductEntity") }
+        guard let json = try? JSONDecoder().decode([ObjectProductEntity].self, from: documentData) else { return print("Нет json") }
+        json.forEach {
+            let newItemModel = ProductEntity(context: context)
+            newItemModel.name = $0.name
+            newItemModel.priceGross =  Int32(Int($0.priceGross!))
+            newItemModel.priceProfit = Int32(Int($0.priceProfit!))
+            newItemModel.data = $0.data
+            newItemModel.image = $0.image
+        }
+        do { try context.save() } catch { print("Не сохранилася context.save в ProductEntity") }
+        dismiss(animated: true)
+    }
+    
     func getDataModelOverview(urls: [URL]){
         guard let documentsUrl: URL = urls.first else { return print("Нет urls") }
-        guard let documentData = try? Data(contentsOf: urls.first!) else { return print("Нет urls в documentData") }
+        guard let documentData = try? Data(contentsOf: urls.first!) else { return print("Нет urls в documentData ModelOverview") }
         guard let json = try? JSONDecoder().decode([ObjectModelOverview].self, from: documentData) else { return print("Нет json") }
         json.forEach {
             print("json: \(String(describing: $0.nameMonth))")

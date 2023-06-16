@@ -44,6 +44,8 @@
 		5BD0F5922A363C69008F3EB3 /* ModelsForSaveData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BD0F5912A363C69008F3EB3 /* ModelsForSaveData.swift */; };
 		5BD0F5942A3A1FAA008F3EB3 /* AlertCheckInputText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BD0F5932A3A1FAA008F3EB3 /* AlertCheckInputText.swift */; };
 		5BD0F5962A3A21C8008F3EB3 /* String + Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BD0F5952A3A21C8008F3EB3 /* String + Ext.swift */; };
+		5BD0F5992A3A3569008F3EB3 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 5BD0F5982A3A3569008F3EB3 /* Kingfisher */; };
+		5BD0F59B2A3A3BA8008F3EB3 /* DetailAllDataViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BD0F59A2A3A3BA8008F3EB3 /* DetailAllDataViewController.swift */; };
 		5BF24F11292B645600BEE9AB /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BF24F10292B645600BEE9AB /* TabBarController.swift */; };
 		5BF24F13292B663900BEE9AB /* Resources.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BF24F12292B663900BEE9AB /* Resources.swift */; };
 		5BF24F16292B667900BEE9AB /* UIColor + Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BF24F15292B667900BEE9AB /* UIColor + Ext.swift */; };
@@ -97,6 +99,7 @@
 		5BD0F5912A363C69008F3EB3 /* ModelsForSaveData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelsForSaveData.swift; sourceTree = "<group>"; };
 		5BD0F5932A3A1FAA008F3EB3 /* AlertCheckInputText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertCheckInputText.swift; sourceTree = "<group>"; };
 		5BD0F5952A3A21C8008F3EB3 /* String + Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String + Ext.swift"; sourceTree = "<group>"; };
+		5BD0F59A2A3A3BA8008F3EB3 /* DetailAllDataViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailAllDataViewController.swift; sourceTree = "<group>"; };
 		5BF24F10292B645600BEE9AB /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		5BF24F12292B663900BEE9AB /* Resources.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Resources.swift; sourceTree = "<group>"; };
 		5BF24F15292B667900BEE9AB /* UIColor + Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor + Ext.swift"; sourceTree = "<group>"; };
@@ -121,6 +124,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5BD0F5992A3A3569008F3EB3 /* Kingfisher in Frameworks */,
 				5B4284502A10DC580013655A /* RAMAnimatedTabBarController in Frameworks */,
 				5B9980AD2A0D6AEB00032895 /* Lottie in Frameworks */,
 			);
@@ -168,6 +172,7 @@
 			isa = PBXGroup;
 			children = (
 				5B8E94EA292D5BAD00E0EB49 /* TableViewCell.swift */,
+				5BD0F59A2A3A3BA8008F3EB3 /* DetailAllDataViewController.swift */,
 			);
 			path = TableViewCell;
 			sourceTree = "<group>";
@@ -406,6 +411,7 @@
 			packageProductDependencies = (
 				5B9980AC2A0D6AEB00032895 /* Lottie */,
 				5B42844F2A10DC580013655A /* RAMAnimatedTabBarController */,
+				5BD0F5982A3A3569008F3EB3 /* Kingfisher */,
 			);
 			productName = RetailTradeApp;
 			productReference = 5BFD8AA2292A6DF4007A45A2 /* Doggy business.app */;
@@ -438,6 +444,7 @@
 			packageReferences = (
 				5B9980AB2A0D6AEB00032895 /* XCRemoteSwiftPackageReference "lottie-spm" */,
 				5B42844E2A10DC580013655A /* XCRemoteSwiftPackageReference "animated-tab-bar" */,
+				5BD0F5972A3A3569008F3EB3 /* XCRemoteSwiftPackageReference "Kingfisher" */,
 			);
 			productRefGroup = 5BFD8AA3292A6DF4007A45A2 /* Products */;
 			projectDirPath = "";
@@ -477,6 +484,7 @@
 				5B7F8A7529A7C9D0005A5605 /* ModelOverview+CoreDataProperties.swift in Sources */,
 				5BFD8AAA292A6DF4007A45A2 /* OverviewViewController.swift in Sources */,
 				5BF24F16292B667900BEE9AB /* UIColor + Ext.swift in Sources */,
+				5BD0F59B2A3A3BA8008F3EB3 /* DetailAllDataViewController.swift in Sources */,
 				5BF24F23292C123100BEE9AB /* ProfitCell.swift in Sources */,
 				5BB763A829F8482A0033EE62 /* BarView.swift in Sources */,
 				5BD0F58B2A325BC2008F3EB3 /* SavingAndGettingData.swift in Sources */,
@@ -739,6 +747,14 @@
 				minimumVersion = 4.0.0;
 			};
 		};
+		5BD0F5972A3A3569008F3EB3 /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/onevcat/Kingfisher.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 7.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -751,6 +767,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 5B9980AB2A0D6AEB00032895 /* XCRemoteSwiftPackageReference "lottie-spm" */;
 			productName = Lottie;
+		};
+		5BD0F5982A3A3569008F3EB3 /* Kingfisher */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5BD0F5972A3A3569008F3EB3 /* XCRemoteSwiftPackageReference "Kingfisher" */;
+			productName = Kingfisher;
 		};
 /* End XCSwiftPackageProductDependency section */
 
